@@ -34,7 +34,10 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale}>
+    <html
+      lang={locale}
+      className='no-touch'
+    >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
