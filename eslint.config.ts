@@ -11,7 +11,7 @@ const compat = new FlatCompat({
   recommendedConfig: js.configs.recommended,
 })
 
-export default [
+const eslintConfig = [
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
@@ -29,3 +29,5 @@ export default [
     },
   },
 ]
+
+export default eslintConfig
