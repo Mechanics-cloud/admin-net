@@ -1,0 +1,7 @@
+{
+  "HomePage": {
+    "title": "Привет, мир!",
+    "label": "Выбери язык",
+    "locale": "{locale, select, ru {Русский} en {English} other {Неизвестно}}"
+  }
+}
