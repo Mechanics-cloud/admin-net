@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.13.4",
+    "car-robots-library": "^0.1.31",
     "next": "15.2.2",
     "next-intl": "^4.0.2",
     "react": "^19.0.0",
