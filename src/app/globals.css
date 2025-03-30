@@ -1,6 +1,4 @@
-@tailwind components;
-@tailwind utilities;
-@tailwind base;
+@import 'tailwindcss';
 
 :root {
   --header-height: 3.75rem;
