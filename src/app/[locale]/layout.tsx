@@ -6,6 +6,7 @@ import type { Metadata } from 'next'
 import '../globals.css'
 import 'car-robots-library/dist/style.css'
 import { routing } from '@/src/i18n/routing'
+import { ClientProviders } from '@/src/shared/components/clientProvider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -43,7 +44,7 @@ export default async function LocaleLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider locale={locale}>
-          {children}
+          <ClientProviders>{children}</ClientProviders>
         </NextIntlClientProvider>
       </body>
     </html>
