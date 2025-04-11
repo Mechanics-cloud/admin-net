@@ -1,40 +1,65 @@
 'use client'
 
-// import { useEffect } from 'react';
-// import { useRouter } from 'next/navigation';
-// import { useMutation } from '@apollo/client';
-// import { CHECK_AUTH_QUERY } from '@/src/apolloClient/request';
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useMutation } from '@apollo/client'
+import { CHECK_AUTH_QUERY } from '@/src/apolloClient/request'
+import LoginPage from './page'
 
-const AuthChecker = () => {
-  // const router = useRouter();
-  // const [checkAuth, { data, error }] = useMutation(CHECK_AUTH_QUERY)
-  // console.log('AuthChecker')
-  // console.log('data', data)
-  // useEffect(() => {
-  //   const authData = typeof window !== 'undefined' ? sessionStorage.getItem('authData') : null;
-  //   if (authData) {
-  //     try {
-  //       // Декодируем base64
-  //       const decodedData = atob(authData).split(':')
-  //       console.log('decodedData', decodedData)
-  //       checkAuth({ variables: { email: decodedData[0], password: decodedData[1] } }).then((res:any)=>{
-  //         console.log(res)
-  //         if (res.loginAdmin.logged) {
-  //             console.log('router.push(/adminPanel)')
-  //             router.push('/')
-  //         } else {
-  //           sessionStorage.removeItem('authData')
-  //           router.push('/auth')
-  //         }
-  //       })
-  //     } catch (error) {
-  //       ///sessionStorage.removeItem('authData');
-  //     }
-  //   } else {
-  //     router.push('/auth')
-  //   }
-  // }, [checkAuth, router]);
-  // return null
+export type AuthState = 'checking' | 'authorized' | 'unauthorized'
+
+const AuthChecker = ({ children }: { children: React.ReactNode }) => {
+  const [authState, setAuthState] = useState<AuthState>('checking')
+  const [checkAuth] = useMutation(CHECK_AUTH_QUERY)
+  const router = useRouter()
+
+  useEffect(() => {
+    const verifyAuth = async () => {
+      const authData = sessionStorage.getItem('authData')
+
+      if (!authData) {
+        setAuthState('unauthorized')
+        router.push('/')
+        return
+      }
+
+      try {
+        const [email, password] = atob(authData).split(':')
+        const { data } = await checkAuth({
+          variables: { email, password },
+        })
+
+        if (data?.loginAdmin.logged) {
+          setAuthState('authorized')
+        } else {
+          sessionStorage.removeItem('authData')
+          setAuthState('unauthorized')
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error)
+        sessionStorage.removeItem('authData')
+        setAuthState('unauthorized')
+      }
+    }
+
+    verifyAuth()
+    console.log('verifyAuth()')
+  }, [checkAuth, router]) // если добавить pathname то проверка будет при переходе на каждую страницу
+
+  if (authState === 'unauthorized') {
+    return <LoginPage setState={setAuthState} />
+  }
+
+  if (authState === 'checking') {
+    return <div>Checking authorization...</div>
+  }
+
+  if (authState === 'authorized') {
+    return <>{children}</>
+  }
+
+  // При unauthorized будет редирект через useEffect
+  return null
 }
 
 export default AuthChecker

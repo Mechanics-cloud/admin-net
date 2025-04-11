@@ -41,7 +41,7 @@ export default async function LocaleLayout({
       className='no-touch'
     >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-dark-700`}
       >
         <NextIntlClientProvider locale={locale}>
           <ClientProviders>{children}</ClientProviders>
