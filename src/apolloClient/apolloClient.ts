@@ -7,9 +7,7 @@ const httpLink = createHttpLink({
   uri: 'https://inctagram.work/api/v1/graphql',
 })
 
-const authLink = setContext((_, { headers, token }) => {
-  console.log('context token', token)
-
+const authLink = setContext((_, { headers }) => {
   const authToken =
     typeof window !== 'undefined' ? sessionStorage.getItem('authData') : null
 

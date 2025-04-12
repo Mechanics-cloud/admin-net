@@ -1,11 +1,8 @@
-// import { Button, Card, Typography, useTranslation } from '@/common'
-// import { FormTextField } from '@/common/form'
-// import { FormTextField } from './form/FormTextField'
 import { Button, Card, Typography } from 'car-robots-library'
 import { useSignIn } from './useSignIn'
-import { FormTextField } from './form/FormTextField'
-import { AuthState } from '../authChecker '
-// import { useSignIn } from './useSignIn'
+import { AuthState } from '@/src/common'
+import { FormTextField } from '@/src/shared/components'
+
 // import { useTranslations } from 'next-intl'
 
 type Props = {
@@ -51,16 +48,18 @@ const SignIn = ({ setState }: Props) => {
             // placeholder={t.signIn.placeholderPassword}
             placeholder={'password'}
             type={'password'}
-            className={'pb-4'}
           />
+          <div className={'flex mt-4'}>
+            <Button
+              className={'flex-1'}
+              disabled={!isValid || isLoading}
+              type={'submit'}
+            >
+              {/* {t.signIn.title} */}
+              Вход
+            </Button>
+          </div>
 
-          <Button
-            disabled={!isValid || isLoading}
-            type={'submit'}
-          >
-            {/* {t.signIn.title} */}
-            Вход
-          </Button>
           <div className={'pb-6'}></div>
         </form>
       </Card>

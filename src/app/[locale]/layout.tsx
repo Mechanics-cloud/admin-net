@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 import '../globals.css'
 import 'car-robots-library/dist/style.css'
 import { routing } from '@/src/i18n/routing'
-import { ClientProviders } from '@/src/shared/components/clientProvider'
+import { ClientProviders } from '@/src/app/[locale]/_clientProvider/clientProvider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

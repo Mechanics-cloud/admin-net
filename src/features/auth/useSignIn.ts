@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SignInFields, signInSchema } from './singInSchema'
 import { useMutation } from '@apollo/client'
 import { CHECK_AUTH_QUERY } from '@/src/apolloClient/request'
-import { AuthState } from '../authChecker '
+import { AuthState } from '@/src/common'
 
 export const useSignIn = (setState: (state: AuthState) => void) => {
   const {
@@ -26,7 +26,7 @@ export const useSignIn = (setState: (state: AuthState) => void) => {
     const { data: requestData } = await login({ variables: data })
 
     if (error) {
-      //вызвать тост, произошла ошибка запроса
+      //TODO вызвать тост, произошла ошибка запроса
     }
 
     if (requestData?.loginAdmin.logged) {

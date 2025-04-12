@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client'
 import { CHECK_AUTH_QUERY } from '@/src/apolloClient/request'
-import LoginPage from './page'
+import SignInWrapper from '@/src/features/auth/SignInWrapper'
 
 export type AuthState = 'checking' | 'authorized' | 'unauthorized'
 
@@ -36,20 +36,19 @@ const AuthChecker = ({ children }: { children: React.ReactNode }) => {
           setAuthState('unauthorized')
         }
       } catch (error) {
-        console.error('Auth check failed:', error)
         sessionStorage.removeItem('authData')
         setAuthState('unauthorized')
       }
     }
 
     verifyAuth()
-    console.log('verifyAuth()')
   }, [checkAuth, router]) // если добавить pathname то проверка будет при переходе на каждую страницу
 
   if (authState === 'unauthorized') {
-    return <LoginPage setState={setAuthState} />
+    return <SignInWrapper setState={setAuthState} />
   }
 
+  // TODO добавить loader
   if (authState === 'checking') {
     return <div>Checking authorization...</div>
   }
@@ -58,7 +57,6 @@ const AuthChecker = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>
   }
 
-  // При unauthorized будет редирект через useEffect
   return null
 }
 
