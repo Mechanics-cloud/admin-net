@@ -39,7 +39,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
 
   const cls = {
     container: cn('flex flex-col relative', className),
-    error: 'text-danger-500 absolute top-[100%] leading-2',
+    error: 'text-danger-500 absolute top-[100%] pt-1',
     input: getInputClasses(Boolean(error), type),
     inputContainer: 'relative',
     label: disabled ? 'text-dark-100 mb-1' : 'text-light-900 mb-1',

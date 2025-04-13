@@ -1,7 +1,6 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-// import LocaleSwitcher from '@/src/shared/components/localeSwither/LocaleSwitcher'
 import { Card, Typography } from 'car-robots-library'
 import LocaleSwitcher from '@/src/shared/components/localeSwither/LocaleSwitcher'
 

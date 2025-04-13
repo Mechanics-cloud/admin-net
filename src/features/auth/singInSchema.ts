@@ -1,14 +1,16 @@
+import { TranslationKeyFn } from '@/src/i18n/global'
 import { z } from 'zod'
 
-export const signInSchema = () => {
+export const signInSchema = (t: TranslationKeyFn) => {
   return z.object({
-    email: z.string({ required_error: 't.validation.email.required' }).email({
-      message: 't.validation.email.composition',
-    }),
+    email: z
+      .string({ required_error: t('SignInPage.signIn.errorResponse') })
+      .email({
+        message: t('SignInPage.validation.email.composition'),
+      }),
     password: z
       .string()
-      .min(3, { message: 't.validation.password.minChar' })
-      .max(20, { message: 't.validation.password.maxChar' }),
+      .max(20, { message: t('SignInPage.validation.password.maxChar') }),
   })
 }
 

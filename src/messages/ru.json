@@ -3,5 +3,27 @@
     "title": "Привет, мир!",
     "label": "Выбери язык",
     "locale": "{locale, select, ru {Русский} en {English} other {Неизвестно}}"
+  },
+
+  "SignInPage": {
+    "signIn": {
+      "errorResponse": "Указан неверный адрес электронной почты или пароль.",
+      "labelEmail": "Электронная почта",
+      "labelPassword": "Пароль",
+      "placeholderPassword": "Введите пароль",
+      "title": "Вход"
+    },
+    "placeholders": {
+      "email": "Введите почту",
+      "password": "Введите пароль"
+    },
+    "validation": {
+      "email": {
+        "composition": "Электронное письмо должно соответствовать формату example@example.com."
+      },
+      "password": {
+        "maxChar": "Максимальное количество символов 20"
+      }
+    }
   }
 }

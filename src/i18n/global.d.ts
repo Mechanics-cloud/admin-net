@@ -7,3 +7,18 @@ declare module 'next-intl' {
     Messages: typeof messages
   }
 }
+
+type DeepKeys<T> = T extends object
+  ? {
+      [K in keyof T]: K extends string
+        ? `${K}` | `${K}.${DeepKeys<T[K]>}`
+        : never
+    }[keyof T]
+  : never
+
+type TranslationPaths = DeepKeys<typeof messages>
+
+export type TranslationKeyFn = {
+  (key: TranslationPaths): string
+  (key: TranslationPaths, values: Record<string, unknown>): string
+}

@@ -2,16 +2,19 @@ import { Button, Card, Typography } from 'car-robots-library'
 import { useSignIn } from './useSignIn'
 import { AuthState } from '@/src/common'
 import { FormTextField } from '@/src/shared/components'
-
-// import { useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
+import { TranslationKeyFn } from '@/src/i18n/global'
 
 type Props = {
   setState: (state: AuthState) => void
 }
 
 const SignIn = ({ setState }: Props) => {
-  // const t = useTranslations('HomePage')
-  const { control, onSubmit, isValid, isLoading } = useSignIn(setState)
+  const t = useTranslations()
+  const { control, onSubmit, isValid, isLoading } = useSignIn(
+    setState,
+    t as TranslationKeyFn
+  )
 
   return (
     <div
@@ -24,8 +27,7 @@ const SignIn = ({ setState }: Props) => {
           className={'text-center pb-9 pt-4'}
           variant={'h1'}
         >
-          {/* {t.signIn.title} */}
-          Вход
+          {t('SignInPage.signIn.title')}
         </Typography>
         <form
           className={'flex flex-col w-full h-full'}
@@ -35,7 +37,7 @@ const SignIn = ({ setState }: Props) => {
           <FormTextField
             control={control}
             disabled={isLoading}
-            label={'Email'}
+            label={t('SignInPage.signIn.labelEmail')}
             name={'email'}
             placeholder={'epam@epam.com'}
             type={'email'}
@@ -43,10 +45,9 @@ const SignIn = ({ setState }: Props) => {
           <FormTextField
             control={control}
             disabled={isLoading}
-            label={'Password'}
+            label={t('SignInPage.signIn.labelPassword')}
             name={'password'}
-            // placeholder={t.signIn.placeholderPassword}
-            placeholder={'password'}
+            placeholder={t('SignInPage.signIn.placeholderPassword')}
             type={'password'}
           />
           <div className={'flex mt-4'}>
@@ -55,8 +56,7 @@ const SignIn = ({ setState }: Props) => {
               disabled={!isValid || isLoading}
               type={'submit'}
             >
-              {/* {t.signIn.title} */}
-              Вход
+              {t('SignInPage.signIn.title')}
             </Button>
           </div>
 
