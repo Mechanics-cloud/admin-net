@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SignInFields, signInSchema } from './singInSchema'
 import { useMutation } from '@apollo/client'
 import { CHECK_AUTH_QUERY } from '@/src/apolloClient/request'
-import { AuthState } from '@/src/common'
+import { AuthState, responseErrorHandler } from '@/src/common'
 import { TranslationKeyFn } from '@/src/i18n/global'
 
 export const useSignIn = (
@@ -23,14 +23,14 @@ export const useSignIn = (
 
   const [login, { error, loading: isLoading }] = useMutation(CHECK_AUTH_QUERY)
 
+  if (error) {
+    responseErrorHandler(error)
+  }
+
   const onSubmit = handleSubmit(async (data: SignInFields) => {
     data.email = data.email.toLowerCase()
 
     const { data: requestData } = await login({ variables: data })
-
-    if (error) {
-      //TODO вызвать тост, произошла ошибка запроса
-    }
 
     if (requestData?.loginAdmin.logged) {
       const authData = btoa(`${data.email}:${data.password}`)

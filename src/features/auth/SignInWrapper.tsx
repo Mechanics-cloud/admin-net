@@ -1,5 +1,3 @@
-'use client'
-
 import { AuthState } from '@/src/common'
 import SignIn from './SignInForm'
 

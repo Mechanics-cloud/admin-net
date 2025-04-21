@@ -22,7 +22,9 @@ const SignIn = ({ setState }: Props) => {
         'md:mt-[36px] mt-4 md:w-[378px] mx-auto box-border border-transparent'
       }
     >
-      <Card className={'contents md:block pb-9'}>
+      <Card
+        className={`contents md:block pb-9 ${isLoading ? 'animate-pulse' : ''}`}
+      >
         <Typography
           className={'text-center pb-9 pt-4'}
           variant={'h1'}
@@ -52,7 +54,7 @@ const SignIn = ({ setState }: Props) => {
           />
           <div className={'flex mt-4'}>
             <Button
-              className={'flex-1'}
+              className={`flex-1 ${isLoading ? 'animate-pulse' : ''}`}
               disabled={!isValid || isLoading}
               type={'submit'}
             >

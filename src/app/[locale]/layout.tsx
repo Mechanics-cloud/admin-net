@@ -1,12 +1,14 @@
+import 'car-robots-library/dist/style.css'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
 import React from 'react'
 import { Geist, Geist_Mono } from 'next/font/google'
 import type { Metadata } from 'next'
-import '../globals.css'
-import 'car-robots-library/dist/style.css'
 import { routing } from '@/src/i18n/routing'
 import { ClientProviders } from '@/src/app/[locale]/_clientProvider/clientProvider'
+import { ToastContainer } from '@/src/shared/components/toast'
+import { Header } from '@/src/shared/components/headers/Header'
+import '../globals.css'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -44,7 +46,9 @@ export default async function LocaleLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-dark-700`}
       >
         <NextIntlClientProvider locale={locale}>
+          <Header />
           <ClientProviders>{children}</ClientProviders>
+          <ToastContainer />
         </NextIntlClientProvider>
       </body>
     </html>
