@@ -1,4 +1,5 @@
 import 'car-robots-library/dist/style.css'
+import '../globals.css'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
 import React from 'react'

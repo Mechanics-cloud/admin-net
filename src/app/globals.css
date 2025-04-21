@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import './theme.css';
 
 :root {
   --header-height: 3.75rem;
@@ -7,15 +8,6 @@
   font-family: Inter, sans-serif;
   color-scheme: dark;
   background-color: rgb(13 13 13);
-}
-
-@theme {
-  --color-dark-100: #4c4c4c;
-  --color-dark-300: #333333;
-  --color-dark-400: #212121;
-  --color-dark-500: #171717;
-  --color-dark-700: #0d0d0d;
-  --color-dark-900: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
