@@ -2,8 +2,6 @@ import { Select } from 'car-robots-library'
 import React, { ComponentPropsWithoutRef } from 'react'
 import { Control, FieldValues, Path, useController } from 'react-hook-form'
 
-// import { Select } from '@/common'
-
 type Props<T extends FieldValues> = {
   children: React.ReactNode
   control: Control<T>

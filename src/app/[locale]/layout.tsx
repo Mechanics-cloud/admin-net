@@ -9,7 +9,6 @@ import { routing } from '@/src/i18n/routing'
 import { ClientProviders } from '@/src/app/[locale]/_clientProvider/clientProvider'
 import { ToastContainer } from '@/src/shared/components/toast'
 import { Header } from '@/src/shared/components/headers/Header'
-import '../globals.css'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
