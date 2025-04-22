@@ -1,6 +1,6 @@
 'use client'
 import { Link } from '@/src/i18n/navigation'
-import { LangSelect } from './LangSelect'
+import { LangSelect } from '../langSelect'
 import { Typography } from 'car-robots-library'
 
 export const Header = () => {
