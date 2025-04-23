@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <div
       className={
-        'h-[var(--header-height)] fixed bg-dark-700 border-b border-b-dark-300 top-0 w-full flex gap-3 justify-between items-center px-15 max-sm:px-5'
+        'h-[var(--header-height)] fixed bg-dark-700 border-b border-dark-300 top-0 w-full flex gap-3 justify-between items-center px-15 max-sm:px-5'
       }
     >
       <Link href={'/'}>
