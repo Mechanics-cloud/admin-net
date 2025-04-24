@@ -1,4 +1,4 @@
-import { TranslationKeyFn } from '@/src/i18n/global'
+import { TranslationKeyFn } from '@/src/appLayer/translate/i18n/global'
 import { z } from 'zod'
 
 export const signInSchema = (t: TranslationKeyFn) => {

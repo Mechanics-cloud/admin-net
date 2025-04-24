@@ -4,7 +4,7 @@ const config: CodegenConfig = {
   schema: 'https://inctagram.work/api/v1/graphql',
   documents: ['src/**/*.ts?(x)'],
   generates: {
-    './src/apolloClient/__generated__/': {
+    './src/appLayer/apolloClient/__generated__/': {
       preset: 'client',
       plugins: [],
       presetConfig: {

@@ -1,4 +1,4 @@
-import { gql } from './__generated__'
+import { gql } from '@/src/appLayer/apolloClient/__generated__'
 
 export const CHECK_AUTH_QUERY = gql(`
   mutation Login($email: String!, $password: String!) {
@@ -6,13 +6,4 @@ export const CHECK_AUTH_QUERY = gql(`
       logged
     }
   }
-`)
-
-export const CHECK_QUERY = gql(`
-  query getUser($Id:Int!) {
-    getUser(userId:$Id){
-      email
-      userName   
-  }
-}
 `)

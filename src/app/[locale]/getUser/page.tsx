@@ -1,11 +1,11 @@
 'use client'
 
-import { CHECK_QUERY } from '@/src/apolloClient/request'
 import { useQuery } from '@apollo/client'
 import '@/src/app/globals.css'
 import { useTranslations } from 'next-intl'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'
+import { CHECK_QUERY } from './api/request'
 
 //TODO тестовая страница (смотрел запросы)
 export default function GetUser() {

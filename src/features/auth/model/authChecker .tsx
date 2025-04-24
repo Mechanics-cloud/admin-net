@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { CHECK_AUTH_QUERY } from '@/src/apolloClient/request'
-import { useRouter } from '@/src/i18n/navigation'
-import SignInWrapper from '@/src/features/auth/SignInWrapper'
-import { responseErrorHandler } from './responseErrorHandler'
+import { useRouter } from '@/src/appLayer/translate/i18n/navigation'
+import SignInWrapper from '@/src/features/auth/ui/SignInWrapper'
+import { responseErrorHandler } from '../../../shared/utils/responseErrorHandler'
+import { CHECK_AUTH_QUERY } from '../api/request'
 
 export type AuthState = 'checking' | 'authorized' | 'unauthorized'
 

@@ -1,4 +1,4 @@
-import { AuthState } from '@/src/common'
+import { AuthState } from '@/src/shared'
 import SignIn from './SignInForm'
 
 type Props = {

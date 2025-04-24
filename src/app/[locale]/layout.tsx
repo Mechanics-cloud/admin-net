@@ -5,10 +5,10 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
 import React from 'react'
 import type { Metadata } from 'next'
-import { routing } from '@/src/i18n/routing'
+import { routing } from '@/src/appLayer/translate/i18n/routing'
 import { ClientProviders } from '@/src/app/[locale]/_clientProvider/clientProvider'
 import { ToastContainer } from '@/src/shared/components/toast'
-import { Header } from '@/src/shared/components/headers'
+import { Header } from '@/src/widgets/headers'
 
 const inter = Inter({
   subsets: ['latin'],

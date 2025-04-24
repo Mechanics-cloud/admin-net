@@ -1,6 +1,5 @@
 import React, { ElementType, forwardRef, useState } from 'react'
 import { PolymorphicRef, TextFieldProps } from './TextField.types'
-import { cn } from '@/src/common/utils/cn'
 import { getInputClasses } from './helper'
 import {
   EyeOffOutline,
@@ -9,6 +8,7 @@ import {
   Tooltip,
   Typography,
 } from 'car-robots-library'
+import { cn } from '@/src/shared/utils'
 
 const TextFieldTemplate = <T extends ElementType = 'input'>(
   props: TextFieldProps,
