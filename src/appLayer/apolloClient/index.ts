@@ -1,2 +1,2 @@
 export * from './apolloClient'
-export * from './request'
+export * from './__generated__'
