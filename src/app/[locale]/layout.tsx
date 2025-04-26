@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 import type { Metadata } from 'next'
 import { routing } from '@/src/appLayer/translate/i18n/routing'
-import { ClientProviders } from '@/src/app/[locale]/_clientProvider/clientProvider'
+import { ClientProviders } from '@/src/app/_providers/clientProvider'
 import { ToastContainer } from '@/src/shared/components/toast'
 import { Header } from '@/src/widgets/headers'
 
