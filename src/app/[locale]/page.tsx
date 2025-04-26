@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { Button, Card, Typography } from 'car-robots-library'
 import LocaleSwitcher from '@/src/shared/components/localeSwither/LocaleSwitcher'
-import { Link } from '@/src/appLayer/translate/i18n/navigation'
+import { Link } from '@/src/shared/translate/i18n/navigation'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')

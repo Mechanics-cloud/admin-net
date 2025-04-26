@@ -1,7 +1,7 @@
 'use client'
 
 import { ApolloProvider } from '@apollo/client'
-import client from '@/src/appLayer/apolloClient/apolloClient'
+import client from '@/src/shared/apolloClient/apolloClient'
 import React from 'React'
 import AuthChecker from '@/src/features/auth/model/authChecker'
 

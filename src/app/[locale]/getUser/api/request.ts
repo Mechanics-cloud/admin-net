@@ -1,4 +1,4 @@
-import { gql } from '@/src/appLayer/apolloClient/__generated__'
+import { gql } from '@/src/shared/apolloClient/__generated__'
 
 export const CHECK_QUERY = gql(`
   query getUser($Id:Int!) {

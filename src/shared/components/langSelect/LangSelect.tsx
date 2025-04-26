@@ -1,8 +1,5 @@
 'use client'
-import {
-  usePathname,
-  useRouter,
-} from '@/src/appLayer/translate/i18n/navigation'
+import { usePathname, useRouter } from '@/src/shared/translate/i18n/navigation'
 import {
   FlagRussia,
   FlagUnitedKingdom,

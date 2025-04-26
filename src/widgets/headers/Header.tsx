@@ -1,5 +1,5 @@
 'use client'
-import { Link } from '@/src/appLayer/translate/i18n/navigation'
+import { Link } from '@/src/shared/translate/i18n/navigation'
 import { LangSelect } from '../../shared/components/langSelect'
 import { Typography } from 'car-robots-library'
 

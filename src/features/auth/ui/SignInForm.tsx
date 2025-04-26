@@ -2,7 +2,7 @@ import { Button, Card, Typography } from 'car-robots-library'
 import { useSignIn } from '../model/useSignIn'
 import { FormTextField } from '@/src/shared/components'
 import { useTranslations } from 'next-intl'
-import { TranslationKeyFn } from '@/src/appLayer/translate/i18n/global'
+import { TranslationKeyFn } from '@/src/shared/translate/i18n/global'
 import { AuthState } from '../model/authChecker'
 
 type Props = {
