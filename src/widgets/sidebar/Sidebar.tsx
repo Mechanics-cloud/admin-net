@@ -1,6 +1,6 @@
 'use client'
 
-import { Link, usePathname } from '@/src/appLayer/translate/i18n/navigation'
+import { Link, usePathname } from '@/src/shared/translate/i18n/navigation'
 import {
   Person,
   CreditCard,
