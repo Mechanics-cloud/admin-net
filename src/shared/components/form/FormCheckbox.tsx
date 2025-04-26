@@ -1,3 +1,5 @@
+'use client'
+
 import { Checkbox } from 'car-robots-library'
 import * as React from 'react'
 import { ComponentPropsWithoutRef } from 'react'

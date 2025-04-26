@@ -3,9 +3,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SignInFields, signInSchema } from './singInSchema'
 import { useMutation } from '@apollo/client'
 import { responseErrorHandler } from '@/src/shared'
-import { TranslationKeyFn } from '@/src/appLayer/translate/i18n/global'
+import { TranslationKeyFn } from '@/src/shared/translate/i18n/global'
 import { CHECK_AUTH_QUERY } from '../api/request'
-import { AuthState } from './authChecker '
+import { AuthState } from './authChecker'
 
 export const useSignIn = (
   setState: (state: AuthState) => void,

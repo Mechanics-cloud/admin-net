@@ -1,3 +1,5 @@
+'use client'
+
 import { Select } from 'car-robots-library'
 import React, { ComponentPropsWithoutRef } from 'react'
 import { Control, FieldValues, Path, useController } from 'react-hook-form'

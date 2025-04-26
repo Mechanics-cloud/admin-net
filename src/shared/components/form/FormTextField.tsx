@@ -1,3 +1,5 @@
+'use client'
+
 import { ComponentPropsWithoutRef } from 'react'
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form'
 import { TextField } from '../textfield'

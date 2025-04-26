@@ -16,6 +16,6 @@ const nextConfig: NextConfig = {
 }
 
 const withNextIntl = createNextIntlPlugin(
-  './src/appLayer/translate/i18n/request.ts'
+  './src/shared/translate/i18n/request.ts'
 )
 export default withNextIntl(nextConfig)
