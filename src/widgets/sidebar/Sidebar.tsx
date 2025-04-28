@@ -1,5 +1,6 @@
 'use client'
 
+import { MainPaths } from '@/src/shared'
 import { Link, usePathname } from '@/src/shared/translate/i18n/navigation'
 import {
   Person,
@@ -14,10 +15,10 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
   const navLinks = [
-    { path: '/', label: 'Users list', icon: Person },
-    { path: '/statistics', label: 'Statistics', icon: TrendingUp },
-    { path: '/paymentsList', label: 'Payments list', icon: CreditCard },
-    { path: '/postsList', label: 'Posts list', icon: Image },
+    { path: MainPaths.usersList, label: 'Users list', icon: Person },
+    { path: MainPaths.statistics, label: 'Statistics', icon: TrendingUp },
+    { path: MainPaths.paymentsList, label: 'Payments list', icon: CreditCard },
+    { path: MainPaths.postsList, label: 'Posts list', icon: Image },
   ]
   return (
     <>
