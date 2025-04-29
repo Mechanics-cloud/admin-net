@@ -347,13 +347,14 @@ export type UsersPaginationModel = {
   users: Array<User>
 }
 
-export type GetUserQueryVariables = Exact<{
-  Id: Scalars['Int']['input']
-}>
+export type GetUsersQueryVariables = Exact<{ [key: string]: never }>
 
-export type GetUserQuery = {
+export type GetUsersQuery = {
   __typename?: 'Query'
-  getUser: { __typename?: 'User'; email: string; userName: string }
+  getUsers: {
+    __typename?: 'UsersPaginationModel'
+    users: Array<{ __typename?: 'User'; createdAt: any }>
+  }
 }
 
 export type LoginMutationVariables = Exact<{
@@ -366,44 +367,42 @@ export type LoginMutation = {
   loginAdmin: { __typename?: 'LoginAdmin'; logged: boolean }
 }
 
-export const GetUserDocument = {
+export const GetUsersDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'getUser' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'Id' } },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-          },
-        },
-      ],
+      name: { kind: 'Name', value: 'getUsers' },
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'getUser' },
+            name: { kind: 'Name', value: 'getUsers' },
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'userId' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'Id' },
-                },
+                name: { kind: 'Name', value: 'pageSize' },
+                value: { kind: 'IntValue', value: '100' },
               },
             ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'userName' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'users' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'createdAt' },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -411,7 +410,7 @@ export const GetUserDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>
+} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>
 export const LoginDocument = {
   kind: 'Document',
   definitions: [

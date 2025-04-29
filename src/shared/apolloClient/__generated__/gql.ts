@@ -14,12 +14,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-  '\n  query getUser($Id:Int!) {\n    getUser(userId:$Id){\n      email\n      userName   \n  }\n}\n': typeof types.GetUserDocument
+  '\n  query getUsers {\n    getUsers(pageSize: 100){\n      users{\n        createdAt\n      }\n    }\n  }\n': typeof types.GetUsersDocument
   '\n  mutation Login($email: String!, $password: String!) {\n    loginAdmin(email: $email, password: $password) {\n      logged\n    }\n  }\n': typeof types.LoginDocument
 }
 const documents: Documents = {
-  '\n  query getUser($Id:Int!) {\n    getUser(userId:$Id){\n      email\n      userName   \n  }\n}\n':
-    types.GetUserDocument,
+  '\n  query getUsers {\n    getUsers(pageSize: 100){\n      users{\n        createdAt\n      }\n    }\n  }\n':
+    types.GetUsersDocument,
   '\n  mutation Login($email: String!, $password: String!) {\n    loginAdmin(email: $email, password: $password) {\n      logged\n    }\n  }\n':
     types.LoginDocument,
 }
@@ -42,8 +42,8 @@ export function gql(source: string): unknown
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n  query getUser($Id:Int!) {\n    getUser(userId:$Id){\n      email\n      userName   \n  }\n}\n'
-): (typeof documents)['\n  query getUser($Id:Int!) {\n    getUser(userId:$Id){\n      email\n      userName   \n  }\n}\n']
+  source: '\n  query getUsers {\n    getUsers(pageSize: 100){\n      users{\n        createdAt\n      }\n    }\n  }\n'
+): (typeof documents)['\n  query getUsers {\n    getUsers(pageSize: 100){\n      users{\n        createdAt\n      }\n    }\n  }\n']
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
