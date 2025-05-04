@@ -15,11 +15,17 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
   '\n  query getUsers {\n    getUsers(pageSize: 100){\n      users{\n        createdAt\n      }\n    }\n  }\n': typeof types.GetUsersDocument
+  '\n  query getPayments {\n    getPayments(pageSize:100){\n      items {\n        createdAt\n      }   \n    }\n  }\n': typeof types.GetPaymentsDocument
+  '\n  query getPosts {\n    getPosts(pageSize:600, endCursorPostId:0 ){\n      items {\n        createdAt\n        images {\n          fileSize\n        }\n      }\n    }\n  }\n': typeof types.GetPostsDocument
   '\n  mutation Login($email: String!, $password: String!) {\n    loginAdmin(email: $email, password: $password) {\n      logged\n    }\n  }\n': typeof types.LoginDocument
 }
 const documents: Documents = {
   '\n  query getUsers {\n    getUsers(pageSize: 100){\n      users{\n        createdAt\n      }\n    }\n  }\n':
     types.GetUsersDocument,
+  '\n  query getPayments {\n    getPayments(pageSize:100){\n      items {\n        createdAt\n      }   \n    }\n  }\n':
+    types.GetPaymentsDocument,
+  '\n  query getPosts {\n    getPosts(pageSize:600, endCursorPostId:0 ){\n      items {\n        createdAt\n        images {\n          fileSize\n        }\n      }\n    }\n  }\n':
+    types.GetPostsDocument,
   '\n  mutation Login($email: String!, $password: String!) {\n    loginAdmin(email: $email, password: $password) {\n      logged\n    }\n  }\n':
     types.LoginDocument,
 }
@@ -44,6 +50,18 @@ export function gql(source: string): unknown
 export function gql(
   source: '\n  query getUsers {\n    getUsers(pageSize: 100){\n      users{\n        createdAt\n      }\n    }\n  }\n'
 ): (typeof documents)['\n  query getUsers {\n    getUsers(pageSize: 100){\n      users{\n        createdAt\n      }\n    }\n  }\n']
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n  query getPayments {\n    getPayments(pageSize:100){\n      items {\n        createdAt\n      }   \n    }\n  }\n'
+): (typeof documents)['\n  query getPayments {\n    getPayments(pageSize:100){\n      items {\n        createdAt\n      }   \n    }\n  }\n']
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n  query getPosts {\n    getPosts(pageSize:600, endCursorPostId:0 ){\n      items {\n        createdAt\n        images {\n          fileSize\n        }\n      }\n    }\n  }\n'
+): (typeof documents)['\n  query getPosts {\n    getPosts(pageSize:600, endCursorPostId:0 ){\n      items {\n        createdAt\n        images {\n          fileSize\n        }\n      }\n    }\n  }\n']
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

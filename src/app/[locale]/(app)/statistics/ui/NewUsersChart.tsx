@@ -1,21 +1,44 @@
-// components/NewUsersChart.tsx
 'use client'
 
 import { useEffect, useRef } from 'react'
 import Chart from 'chart.js/auto'
-import { Typography } from 'car-robots-library'
+import { DatePickerWithRange, Typography } from 'car-robots-library'
+
+type variant = 'newUsers' | 'paidAccounts' | 'uploadedPhotos'
 
 export type MonthStats = {
   number: string[]
   currentMonth: number[]
   prevMonth: number[]
+  variant: variant
 }
 
-export default function NewUsersChart(newData: MonthStats) {
+export const variantsChart = {
+  newUsers: {
+    title: 'New users',
+    colorPrevMonth: ['bg-accent-900', '#234E99'],
+    colorCurrentMonth: ['bg-accent-100', '#73A5FF'],
+  },
+  paidAccounts: {
+    title: 'Paid accounts',
+    colorPrevMonth: ['bg-warning-900', '#664400'],
+    colorCurrentMonth: ['bg-warning-100', '#FFD073'],
+  },
+  uploadedPhotos: {
+    title: 'Uploaded photos',
+    colorPrevMonth: ['bg-success-900', '#0A6638'],
+    colorCurrentMonth: ['bg-success-100', '#80FFBF'],
+  },
+}
+
+export default function NewUsersChart({
+  number,
+  currentMonth,
+  prevMonth,
+  variant,
+}: MonthStats) {
   const chartRef = useRef<HTMLCanvasElement>(null)
   const chartInstance = useRef<Chart>(null)
-
-  console.log(newData)
 
   Chart.defaults.color = '#fff'
   Chart.defaults.font.size = 14
@@ -23,7 +46,6 @@ export default function NewUsersChart(newData: MonthStats) {
 
   useEffect(() => {
     if (chartRef.current) {
-      // Уничтожаем предыдущий график если существует
       if (chartInstance.current) {
         chartInstance.current.destroy()
       }
@@ -34,27 +56,20 @@ export default function NewUsersChart(newData: MonthStats) {
           type: 'line',
 
           data: {
-            // labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '32'], //данные по x (числа)
-            labels: newData.number, //данные по оси x (числа)
+            labels: number,
             datasets: [
               {
-                // label: 'Number of New Users',
-                data: newData.currentMonth,
-                // data: [
-                //   2000, 2500, 1900, 2300, 500, 2000, 2700, 1900, 2300, 500, // поставлю кол-во юзеров
-                // ],
+                data: currentMonth,
                 pointRadius: 0,
                 tension: 0.4,
-                borderColor: '#1294eb',
+                borderColor: variantsChart[variant].colorCurrentMonth[1],
                 borderWidth: 2,
               },
               {
-                // label: 'Number of New Users',
-                data: newData.prevMonth,
-                // data: [500, 2000, 1500, 2300, 200, 500, 2000, 1500, 2300, 1500],
+                data: prevMonth,
                 pointRadius: 0,
                 tension: 0.4,
-                borderColor: '#68f1c1',
+                borderColor: variantsChart[variant].colorPrevMonth[1],
                 borderWidth: 2,
               },
             ],
@@ -67,24 +82,19 @@ export default function NewUsersChart(newData: MonthStats) {
               },
             },
             scales: {
-              ///
-
-              ///
               y: {
-                ///
-
                 afterUpdate(axis) {
-                  console.log(axis)
                   axis.paddingTop = 0
                 },
-                ///
                 offset: true,
                 beginAtZero: true,
                 ticks: {
                   padding: 20,
                   callback: function (value) {
+                    if (variant === 'uploadedPhotos') {
+                      return `${value} Mb`
+                    }
                     return value
-                    // return value + ' ' + 'xxx'
                   },
                 },
               },
@@ -95,10 +105,6 @@ export default function NewUsersChart(newData: MonthStats) {
                   color: '#4C4C4C',
                   z: 1,
                 },
-                // offset: true, // Добавляет отступ по краям
-                // grid: {
-                //   offset: true // Отступ для линий сетки
-                // },
                 min: 1,
                 ticks: {
                   callback: function (value) {
@@ -111,41 +117,50 @@ export default function NewUsersChart(newData: MonthStats) {
                 },
               },
             },
-            // layout: {
-            //   padding: {
-            //     left: 20 // Дополнительный отступ слева для всего графика
-            //   }
-            // }
+            layout: {
+              padding: {
+                bottom: 50,
+              },
+            },
           },
         })
       }
     }
 
-    // Очистка при размонтировании
     return () => {
       if (chartInstance.current) {
         chartInstance.current.destroy()
       }
     }
-  }, [newData])
+  }, [number, currentMonth, prevMonth, variant])
 
   return (
-    <div className='p-6'>
+    <div className=''>
       <div className='max-w-240 '>
         <div className={'flex place-content-between items-center'}>
-          <Typography variant={'h1'}>New users</Typography>
-          <div className='flex gap-23'>
-            <div className='flex gap-3'>
+          <Typography variant={'h1'}>{variantsChart[variant].title}</Typography>
+          <div className='flex gap-23 relative'>
+            <div className='flex gap-5'>
               <div className='flex gap-2 items-center'>
-                <div className='w-3 h-3 rounded-full bg-accent-700'></div>
+                <div
+                  className={`w-3 h-3 rounded-full ${variantsChart[variant].colorPrevMonth[0]}`}
+                ></div>
                 <Typography variant={'reg14'}>Last month</Typography>
               </div>
               <div className='flex gap-2 items-center'>
-                <div className='w-3 h-3 rounded-full bg-accent-100'></div>
+                <div
+                  className={`w-3 h-3 rounded-full ${variantsChart[variant].colorCurrentMonth[0]}`}
+                ></div>
                 <Typography variant={'reg14'}>Current month</Typography>
               </div>
             </div>
-            <div className='w-66 h-9 border border-amber-50'>календарь</div>
+            <div className='relative bottom-3'>
+              <DatePickerWithRange
+                label='Date range'
+                disabled={false}
+                mode='range'
+              />
+            </div>
           </div>
         </div>
         <canvas ref={chartRef}></canvas>

@@ -9,3 +9,26 @@ export const GET_USERS = gql(`
     }
   }
 `)
+
+export const GET_PAYMENTS = gql(`
+  query getPayments {
+    getPayments(pageSize:100){
+      items {
+        createdAt
+      }   
+    }
+  }
+`)
+
+export const GET_POSTS = gql(`
+  query getPosts {
+    getPosts(pageSize:600, endCursorPostId:0 ){
+      items {
+        createdAt
+        images {
+          fileSize
+        }
+      }
+    }
+  }
+`)
