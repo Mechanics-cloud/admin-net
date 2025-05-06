@@ -1,8 +1,7 @@
-export function getImageSizeByMonth(data) {
+export function getCurrentUsersPaid(data) {
   const now = new Date()
   const currentMonth = now.getMonth()
   const currentYear = now.getFullYear()
-
   const prevMonth = currentMonth === 0 ? 11 : currentMonth - 1
   const prevYear = currentMonth === 0 ? currentYear - 1 : currentYear
 
@@ -10,30 +9,26 @@ export function getImageSizeByMonth(data) {
   const prevMonthData = {}
 
   for (let day = 1; day <= 31; day++) {
-    currentMonthData[day] = 0
-    prevMonthData[day] = 0
+    currentMonthData[day] = new Set()
+    prevMonthData[day] = new Set()
   }
 
-  data.items.forEach((item) => {
-    const date = new Date(item.createdAt)
+  data.forEach(({ createdAt, userId }) => {
+    const date = new Date(createdAt)
     const day = date.getDate()
     const month = date.getMonth()
     const year = date.getFullYear()
 
-    const totalSize = item.images.reduce((sum, img) => sum + img.fileSize, 0)
-
     if (month === currentMonth && year === currentYear) {
-      currentMonthData[day] += totalSize
+      currentMonthData[day].add(userId)
     } else if (month === prevMonth && year === prevYear) {
-      prevMonthData[day] += totalSize
+      prevMonthData[day].add(userId)
     }
   })
 
-  const bytesToMB = (bytes) => parseFloat((bytes / (1024 * 1024)).toFixed(2))
-
   return {
     number: Object.keys(currentMonthData).map((day) => day.padStart(2, '0')),
-    currentMonth: Object.values(currentMonthData).map(bytesToMB),
-    prevMonth: Object.values(prevMonthData).map(bytesToMB),
+    currentMonth: Object.values(currentMonthData).map((set) => set.size),
+    prevMonth: Object.values(prevMonthData).map((set) => set.size),
   }
 }

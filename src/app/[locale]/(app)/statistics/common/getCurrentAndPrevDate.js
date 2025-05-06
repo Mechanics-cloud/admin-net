@@ -28,7 +28,7 @@ export function getDate(data) {
   })
 
   return {
-    number: Object.keys(currentMonthData),
+    number: Object.keys(currentMonthData).map((day) => day.padStart(2, '0')),
     currentMonth: Object.values(currentMonthData),
     prevMonth: Object.values(prevMonthData),
   }

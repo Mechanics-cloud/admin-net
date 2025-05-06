@@ -15,6 +15,7 @@ export const GET_PAYMENTS = gql(`
     getPayments(pageSize:100){
       items {
         createdAt
+        userId
       }   
     }
   }

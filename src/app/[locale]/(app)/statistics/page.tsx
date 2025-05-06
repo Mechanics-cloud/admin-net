@@ -1,13 +1,14 @@
 'use client'
 
 import { useQuery } from '@apollo/client'
-import NewUsersChart from './ui/NewUsersChart'
 import { GET_PAYMENTS, GET_POSTS, GET_USERS } from './api/request'
 import { getImageSizeByMonth } from './common/getDateAndSize'
-import { getDate } from './common/getCurrentAndPrevDate copy'
+import { getCurrentUsersPaid } from './common/getCurrentUsersPaid'
+import { getDate } from './common/getCurrentAndPrevDate'
 import { useState } from 'react'
 import { cn } from '@/src/shared'
 import { Button, Typography } from 'car-robots-library'
+import CustomChart from '@/src/widgets/chart/CustomChart'
 
 export default function Statistics() {
   const [activeTab, setActiveTab] = useState<'users' | 'photos'>('users')
@@ -22,7 +23,7 @@ export default function Statistics() {
 
   let datesPayments = null
   if (dataPayments) {
-    datesPayments = getDate(dataPayments.getPayments.items)
+    datesPayments = getCurrentUsersPaid(dataPayments.getPayments.items)
   }
 
   let datesPhotos = null
@@ -59,19 +60,19 @@ export default function Statistics() {
         </Button>
       </div>
       {datesUsers && activeTab === 'users' && (
-        <NewUsersChart
+        <CustomChart
           {...datesUsers}
           variant={'newUsers'}
         />
       )}
       {datesPayments && activeTab === 'users' && (
-        <NewUsersChart
+        <CustomChart
           {...datesPayments}
           variant={'paidAccounts'}
         />
       )}
       {datesPhotos && activeTab === 'photos' && (
-        <NewUsersChart
+        <CustomChart
           {...datesPhotos}
           variant={'uploadedPhotos'}
         />

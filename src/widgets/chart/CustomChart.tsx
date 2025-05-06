@@ -31,7 +31,7 @@ export const variantsChart = {
   },
 }
 
-export default function NewUsersChart({
+export default function CustomChart({
   number,
   currentMonth,
   prevMonth,
@@ -89,6 +89,7 @@ export default function NewUsersChart({
                 offset: true,
                 beginAtZero: true,
                 ticks: {
+                  precision: 0,
                   padding: 20,
                   callback: function (value) {
                     if (variant === 'uploadedPhotos') {
@@ -104,16 +105,6 @@ export default function NewUsersChart({
                   width: 1,
                   color: '#4C4C4C',
                   z: 1,
-                },
-                min: 1,
-                ticks: {
-                  callback: function (value) {
-                    let formattedValue = value
-                    if (String(value).length < 2) {
-                      formattedValue = '0' + value
-                    }
-                    return formattedValue
-                  },
                 },
               },
             },
@@ -135,36 +126,34 @@ export default function NewUsersChart({
   }, [number, currentMonth, prevMonth, variant])
 
   return (
-    <div className=''>
-      <div className='max-w-240 '>
-        <div className={'flex place-content-between items-center'}>
-          <Typography variant={'h1'}>{variantsChart[variant].title}</Typography>
-          <div className='flex gap-23 relative'>
-            <div className='flex gap-5'>
-              <div className='flex gap-2 items-center'>
-                <div
-                  className={`w-3 h-3 rounded-full ${variantsChart[variant].colorPrevMonth[0]}`}
-                ></div>
-                <Typography variant={'reg14'}>Last month</Typography>
-              </div>
-              <div className='flex gap-2 items-center'>
-                <div
-                  className={`w-3 h-3 rounded-full ${variantsChart[variant].colorCurrentMonth[0]}`}
-                ></div>
-                <Typography variant={'reg14'}>Current month</Typography>
-              </div>
+    <div className='max-w-240 '>
+      <div className={'flex place-content-between items-center'}>
+        <Typography variant={'h1'}>{variantsChart[variant].title}</Typography>
+        <div className='flex gap-23 relative'>
+          <div className='flex gap-5'>
+            <div className='flex gap-2 items-center'>
+              <div
+                className={`w-3 h-3 rounded-full ${variantsChart[variant].colorPrevMonth[0]}`}
+              ></div>
+              <Typography variant={'reg14'}>Last month</Typography>
             </div>
-            <div className='relative bottom-3'>
-              <DatePickerWithRange
-                label='Date range'
-                disabled={false}
-                mode='range'
-              />
+            <div className='flex gap-2 items-center'>
+              <div
+                className={`w-3 h-3 rounded-full ${variantsChart[variant].colorCurrentMonth[0]}`}
+              ></div>
+              <Typography variant={'reg14'}>Current month</Typography>
             </div>
           </div>
+          <div className='relative bottom-3'>
+            <DatePickerWithRange
+              label='Date range'
+              disabled={false}
+              mode='range'
+            />
+          </div>
         </div>
-        <canvas ref={chartRef}></canvas>
       </div>
+      <canvas ref={chartRef}></canvas>
     </div>
   )
 }
