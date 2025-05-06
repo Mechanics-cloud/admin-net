@@ -1,8 +1,12 @@
 {
-  "HomePage": {
-    "title": "Привет, мир!",
-    "label": "Выбери язык",
-    "locale": "{locale, select, ru {Русский} en {English} other {Неизвестно}}"
+  "StatisticsPage": {
+    "users": "Пользователи",
+    "photos": "Фотографии",
+    "newUsers": "Новые пользователи",
+    "paidAccounts": "Оплаченные аккаунты",
+    "uploadedPhotos": "Загруженные фотографии",
+    "lastMonth": "Прошедший месяц",
+    "currentMonth": "Текущий месяц"
   },
 
   "SignInPage": {

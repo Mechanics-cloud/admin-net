@@ -1,9 +1,14 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "label": "Change language",
-    "locale": "{locale, select, ru {Русский} en {English} other {Unknown}}"
+  "StatisticsPage": {
+    "users": "Users",
+    "photos": "Photos",
+    "newUsers": "New users",
+    "paidAccounts": "Paid accounts",
+    "uploadedPhotos": "Uploaded photos",
+    "lastMonth": "Last month",
+    "currentMonth": "Current month"
   },
+
   "SignInPage": {
     "signIn": {
       "errorResponse": "The email or password are incorrect.",

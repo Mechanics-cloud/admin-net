@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Chart from 'chart.js/auto'
 import { DatePickerWithRange, Typography } from 'car-robots-library'
+import { useTranslations } from 'next-intl'
 
 type variant = 'newUsers' | 'paidAccounts' | 'uploadedPhotos'
 
@@ -15,17 +16,14 @@ export type MonthStats = {
 
 export const variantsChart = {
   newUsers: {
-    title: 'New users',
     colorPrevMonth: ['bg-accent-900', '#234E99'],
     colorCurrentMonth: ['bg-accent-100', '#73A5FF'],
   },
   paidAccounts: {
-    title: 'Paid accounts',
     colorPrevMonth: ['bg-warning-900', '#664400'],
     colorCurrentMonth: ['bg-warning-100', '#FFD073'],
   },
   uploadedPhotos: {
-    title: 'Uploaded photos',
     colorPrevMonth: ['bg-success-900', '#0A6638'],
     colorCurrentMonth: ['bg-success-100', '#80FFBF'],
   },
@@ -39,6 +37,8 @@ export default function CustomChart({
 }: MonthStats) {
   const chartRef = useRef<HTMLCanvasElement>(null)
   const chartInstance = useRef<Chart>(null)
+
+  const t = useTranslations('StatisticsPage')
 
   Chart.defaults.color = '#fff'
   Chart.defaults.font.size = 14
@@ -128,20 +128,20 @@ export default function CustomChart({
   return (
     <div className='max-w-240 '>
       <div className={'flex place-content-between items-center'}>
-        <Typography variant={'h1'}>{variantsChart[variant].title}</Typography>
+        <Typography variant={'h1'}>{t(variant)}</Typography>
         <div className='flex gap-23 relative'>
           <div className='flex gap-5'>
             <div className='flex gap-2 items-center'>
               <div
                 className={`w-3 h-3 rounded-full ${variantsChart[variant].colorPrevMonth[0]}`}
               ></div>
-              <Typography variant={'reg14'}>Last month</Typography>
+              <Typography variant={'reg14'}>{t('lastMonth')}</Typography>
             </div>
             <div className='flex gap-2 items-center'>
               <div
                 className={`w-3 h-3 rounded-full ${variantsChart[variant].colorCurrentMonth[0]}`}
               ></div>
-              <Typography variant={'reg14'}>Current month</Typography>
+              <Typography variant={'reg14'}>{t('currentMonth')}</Typography>
             </div>
           </div>
           <div className='relative bottom-3'>

@@ -6,15 +6,23 @@ import { getImageSizeByMonth } from './common/getDateAndSize'
 import { getCurrentUsersPaid } from './common/getCurrentUsersPaid'
 import { getDate } from './common/getCurrentAndPrevDate'
 import { useState } from 'react'
-import { cn } from '@/src/shared'
+import { cn, responseErrorHandler } from '@/src/shared'
 import { Button, Typography } from 'car-robots-library'
 import CustomChart from '@/src/widgets/chart/CustomChart'
+import { useTranslations } from 'next-intl'
 
 export default function Statistics() {
   const [activeTab, setActiveTab] = useState<'users' | 'photos'>('users')
-  const { data: dataUser } = useQuery(GET_USERS)
-  const { data: dataPayments } = useQuery(GET_PAYMENTS)
-  const { data: dataPhotos } = useQuery(GET_POSTS)
+  const { data: dataUser, error: errorUsers } = useQuery(GET_USERS)
+  const { data: dataPayments, error: errorPayments } = useQuery(GET_PAYMENTS)
+  const { data: dataPhotos, error: errorPhotos } = useQuery(GET_POSTS)
+
+  const t = useTranslations('StatisticsPage')
+
+  if (errorUsers || errorPayments || errorPhotos) {
+    const error = errorUsers || errorPayments || errorPhotos
+    responseErrorHandler(error)
+  }
 
   let datesUsers = null
   if (dataUser) {
@@ -43,7 +51,7 @@ export default function Statistics() {
           )}
           onClick={() => setActiveTab('users')}
         >
-          <Typography variant={'h3'}>Users</Typography>
+          <Typography variant={'h3'}>{t('users')}</Typography>
         </Button>
         <Button
           variant={'text'}
@@ -56,7 +64,7 @@ export default function Statistics() {
           )}
           onClick={() => setActiveTab('photos')}
         >
-          <Typography variant={'h3'}>Photos</Typography>
+          <Typography variant={'h3'}>{t('photos')}</Typography>
         </Button>
       </div>
       {datesUsers && activeTab === 'users' && (
