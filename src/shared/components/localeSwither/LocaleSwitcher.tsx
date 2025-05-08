@@ -2,9 +2,9 @@
 
 import { Locale, useLocale, useTranslations } from 'next-intl'
 import React, { useTransition } from 'react'
-import { routing } from '@/src/i18n/routing'
+import { routing } from '@/src/shared/translate/i18n/routing'
 import { Select, SelectItem } from 'car-robots-library'
-import { usePathname, useRouter } from '@/src/i18n/navigation'
+import { usePathname, useRouter } from '@/src/shared/translate/i18n/navigation'
 import { useParams } from 'next/navigation'
 
 export default function LocaleSwitcher() {

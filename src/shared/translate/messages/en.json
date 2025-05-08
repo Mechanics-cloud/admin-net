@@ -1,0 +1,28 @@
+{
+  "HomePage": {
+    "title": "Hello world!",
+    "label": "Change language",
+    "locale": "{locale, select, ru {Русский} en {English} other {Unknown}}"
+  },
+  "SignInPage": {
+    "signIn": {
+      "errorResponse": "The email or password are incorrect.",
+      "labelEmail": "Email",
+      "labelPassword": "Password",
+      "placeholderPassword": "Enter your password",
+      "title": "Sign In"
+    },
+    "placeholders": {
+      "email": "Enter your email",
+      "password": "Enter your password"
+    },
+    "validation": {
+      "email": {
+        "composition": "The email must match the format example@example.com"
+      },
+      "password": {
+        "maxChar": "Maximum number of characters 20"
+      }
+    }
+  }
+}
