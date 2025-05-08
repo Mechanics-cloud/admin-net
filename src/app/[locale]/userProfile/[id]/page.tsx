@@ -4,5 +4,7 @@ export default async function Page({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  return <div className='m-40'>My Post: {id}</div>
+  return (
+    <div className='m-40 animate-bounce'>{`Uploaded photos userId ${id}`}</div>
+  )
 }

@@ -1,5 +1,3 @@
-'use client'
-
 import Sidebar from '@/src/widgets/sidebar/Sidebar'
 import React from 'react'
 
