@@ -3,5 +3,20 @@
     "title": "Привет, мир!",
     "label": "Выбери язык",
     "locale": "{locale, select, ru {Русский} en {English} other {Неизвестно}}"
+  },
+  "UsersPage": {
+    "userId": "ID Пользователя",
+    "userName": "Имя",
+    "profileLink": "Ссылка на профиль",
+    "dateAdded": "Дата добавления",
+    "show": "Показать",
+    "onPage": "на странице",
+    "deleteUser": "Удалить пользвателя",
+    "ban": "Заблокировать в системе",
+    "moreInfo": "Больше информации",
+    "notSelected": "Не выбрано",
+    "blocked": "Заблокированные",
+    "notBlocked": "Не заблокированные",
+    "search": "Поиск"
   }
 }

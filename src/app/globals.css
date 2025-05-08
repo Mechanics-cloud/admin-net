@@ -34,3 +34,7 @@ input[type='password']::-ms-clear {
     width: 100%;
   }
 }
+
+.custom-pagination button {
+  @apply text-light-100 hover:bg-blue-600;
+}
