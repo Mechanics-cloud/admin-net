@@ -2,14 +2,17 @@
 
 import { useQuery } from '@apollo/client'
 import { GET_PAYMENTS, GET_POSTS, GET_USERS } from './api/request'
-import { getImageSizeByMonth } from './common/getDateAndSize'
-import { getCurrentUsersPaid } from './common/getCurrentUsersPaid'
-import { getDate } from './common/getCurrentAndPrevDate'
 import { useState } from 'react'
 import { cn, responseErrorHandler } from '@/src/shared'
 import { Button, Typography } from 'car-robots-library'
 import CustomChart from '@/src/widgets/chart/CustomChart'
 import { useTranslations } from 'next-intl'
+import {
+  getDateForNewUsers,
+  getImageSizeByMonth,
+  getUsersPaid,
+} from './common/helper'
+import { UploadedPhotos, UsersPaid } from './common/types'
 
 export default function Statistics() {
   const [activeTab, setActiveTab] = useState<'users' | 'photos'>('users')
@@ -26,17 +29,19 @@ export default function Statistics() {
 
   let datesUsers = null
   if (dataUser) {
-    datesUsers = getDate(dataUser.getUsers.users)
+    datesUsers = getDateForNewUsers(dataUser.getUsers.users)
   }
 
   let datesPayments = null
-  if (dataPayments) {
-    datesPayments = getCurrentUsersPaid(dataPayments.getPayments.items)
+  if (dataPayments?.getPayments.items) {
+    datesPayments = getUsersPaid(dataPayments.getPayments.items as UsersPaid[])
   }
 
   let datesPhotos = null
-  if (dataPhotos) {
-    datesPhotos = getImageSizeByMonth(dataPhotos.getPosts)
+  if (dataPhotos?.getPosts.items) {
+    datesPhotos = getImageSizeByMonth(
+      dataPhotos.getPosts.items as UploadedPhotos[]
+    )
   }
 
   return (
