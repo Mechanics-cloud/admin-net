@@ -11,7 +11,6 @@ export default function FollowingPage({
 
   useEffect(() => {
     params.then((res) => {
-      console.log('FollowingPage', res)
       setState(res.id)
     })
   }, [params])

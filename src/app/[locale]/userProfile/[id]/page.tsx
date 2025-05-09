@@ -7,7 +7,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
   useEffect(() => {
     params.then((res) => {
-      console.log(res)
       setState(res.id)
     })
   }, [params])
