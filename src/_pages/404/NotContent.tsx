@@ -1,11 +1,13 @@
-import * as React from 'react'
+'use client'
+
 import notFound from '@/public/notFound.svg'
-import { useTranslations } from 'next-intl'
-import { useRouter } from '@/src/shared/translate/i18n/navigation'
+
 import Image from 'next/image'
 import { Button, Typography } from 'car-robots-library'
+import { useTranslations } from 'next-intl'
+import { useRouter } from '@/src/shared/translate/i18n/navigation'
 
-export function NotFound() {
+export default function NotContent() {
   const t = useTranslations('Basic')
   const router = useRouter()
   const onBackHandler = () => {

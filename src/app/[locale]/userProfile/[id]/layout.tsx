@@ -1,5 +1,5 @@
+import ProfileLayout from '@/src/widgets/profileLayout/ui/ProfileLayout'
 import React from 'react'
-import ProfileLayout from '../ui/ProfileLayout'
 
 export default async function SidebarLayout({
   children,

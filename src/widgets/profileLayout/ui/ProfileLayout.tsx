@@ -10,7 +10,7 @@ import Image from 'next/image'
 import { tabItems } from '../common/helper'
 import { ArrowBack } from '@/src/shared/assets/icons'
 import { useTranslations } from 'next-intl'
-import { NotFound } from '@/src/pages/404/NotFound'
+import NotContent from '@/src/_pages/404/NotContent'
 
 export default function ProfileLayout({
   paramsId,
@@ -31,7 +31,7 @@ export default function ProfileLayout({
   const basePath = `/userProfile/${paramsId}`
 
   if (error) {
-    return <NotFound />
+    return <NotContent />
   }
 
   return (
