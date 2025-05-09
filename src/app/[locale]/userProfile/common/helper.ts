@@ -17,19 +17,19 @@ export const formattedDate = (isoDate: string): string => {
 
 export const tabItems = [
   {
-    title: 'Uploaded photos',
+    title: 'uploadedPhotos' as const,
     href: ``,
   },
   {
-    title: 'Payments',
+    title: 'payments' as const,
     href: 'payments',
   },
   {
-    title: 'Followers',
+    title: 'followers' as const,
     href: 'followers',
   },
   {
-    title: 'Following',
+    title: 'following' as const,
     href: 'following',
   },
 ]

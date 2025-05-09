@@ -4,6 +4,7 @@
     "label": "Change language",
     "locale": "{locale, select, ru {Русский} en {English} other {Unknown}}"
   },
+
   "SignInPage": {
     "signIn": {
       "errorResponse": "The email or password are incorrect.",
@@ -24,5 +25,15 @@
         "maxChar": "Maximum number of characters 20"
       }
     }
+  },
+
+  "UserProfile": {
+    "backToUserList": "Back to Users List",
+    "userID": "UserID",
+    "profileCreationDate": "Profile Creation Date",
+    "uploadedPhotos": "Uploaded photos",
+    "payments": "Payments",
+    "followers": "Followers",
+    "following": "Following"
   }
 }

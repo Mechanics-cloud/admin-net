@@ -10,6 +10,7 @@ import { useGetUserProfile } from '../common/useGetUserProfile'
 import Image from 'next/image'
 import { tabItems } from '../common/helper'
 import { ArrowBack } from '@/src/shared/assets/icons'
+import { useTranslations } from 'next-intl'
 
 export default function ProfileLayout({
   paramsId,
@@ -20,6 +21,7 @@ export default function ProfileLayout({
 }) {
   const pathname = usePathname()
   const router = useRouter()
+  const t = useTranslations('UserProfile')
 
   const { fullName, linkUser, profileCreateDate, avatar, error } =
     useGetUserProfile(paramsId)
@@ -40,7 +42,7 @@ export default function ProfileLayout({
           className='inline-flex items-center hover:text-accent-300! mb-6 gap-2'
         >
           <ArrowBack className='h-5 w-5' />
-          <Typography variant={'reg14'}>Back to Users List</Typography>
+          <Typography variant={'reg14'}>{t('backToUserList')}</Typography>
         </Link>
         <div className='mb-8 flex gap-3'>
           <Image
@@ -71,7 +73,7 @@ export default function ProfileLayout({
               variant={'reg14'}
               className={'text-light-900'}
             >
-              UserID:
+              {t('userID')}:
             </Typography>
             <Typography variant={'reg16'}>{paramsId}</Typography>
           </div>
@@ -80,7 +82,7 @@ export default function ProfileLayout({
               variant={'reg14'}
               className={'text-light-900'}
             >
-              Profile Creation Date:
+              {t('profileCreationDate')}:
             </Typography>
             <Typography variant={'reg16'}>{profileCreateDate}</Typography>
           </div>
@@ -106,7 +108,7 @@ export default function ProfileLayout({
                     }`
                   )}
                 >
-                  {item.title}
+                  {t(item.title)}
                 </Button>
               )
             })}

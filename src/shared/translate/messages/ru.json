@@ -25,5 +25,15 @@
         "maxChar": "Максимальное количество символов 20"
       }
     }
+  },
+
+  "UserProfile": {
+    "backToUserList": "Назад к списку пользователей",
+    "userID": "ID пользователя",
+    "profileCreationDate": "Дата создания профиля",
+    "uploadedPhotos": "Загруженные фото",
+    "payments": "Платежи",
+    "followers": "Подписчики", 
+    "following": "Подписки"
   }
 }
