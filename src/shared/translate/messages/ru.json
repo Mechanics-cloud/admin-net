@@ -35,5 +35,12 @@
     "payments": "Платежи",
     "followers": "Подписчики", 
     "following": "Подписки"
+  },
+
+    "Basic": {
+    "notFoundTitle": "Страница не найдена",
+    "pagination": {
+      "goBack": "Вернуться назад"
+    }
   }
 }

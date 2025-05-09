@@ -35,5 +35,12 @@
     "payments": "Payments",
     "followers": "Followers",
     "following": "Following"
+  },
+
+  "Basic": {
+    "notFoundTitle": "notFoundTitle",
+    "pagination": {
+      "goBack": "goBack"
+    }
   }
 }

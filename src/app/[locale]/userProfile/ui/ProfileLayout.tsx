@@ -5,12 +5,12 @@ import { usePathname, useRouter } from '@/src/shared/translate/i18n/navigation'
 import { Button, Typography } from 'car-robots-library'
 import Link from 'next/link'
 import { ReactNode } from 'react'
-import { notFound } from 'next/navigation'
 import { useGetUserProfile } from '../common/useGetUserProfile'
 import Image from 'next/image'
 import { tabItems } from '../common/helper'
 import { ArrowBack } from '@/src/shared/assets/icons'
 import { useTranslations } from 'next-intl'
+import { NotFound } from '@/src/pages/404/NotFound'
 
 export default function ProfileLayout({
   paramsId,
@@ -31,7 +31,7 @@ export default function ProfileLayout({
   const basePath = `/userProfile/${paramsId}`
 
   if (error) {
-    notFound()
+    return <NotFound />
   }
 
   return (
