@@ -1,22 +1,27 @@
 'use client'
 
-import { MainPaths } from '@/src/shared'
+import { cn, MainPaths } from '@/src/shared'
+import { usePathname, useRouter } from '@/src/shared/translate/i18n/navigation'
+import { Button } from 'car-robots-library'
 import Link from 'next/link'
 import { ReactNode } from 'react'
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
 const tabItems = [
   {
     title: 'Uploaded photos',
+    href: ``,
   },
   {
-    title: 'payments',
+    title: 'Payments',
+    href: 'payments',
   },
   {
-    title: 'followers',
+    title: 'Followers',
+    href: 'followers',
   },
   {
-    title: 'following',
+    title: 'Following',
+    href: 'following',
   },
 ]
 
@@ -24,16 +29,17 @@ export default function ProfileLayout({
   paramsId,
   children,
 }: {
-  // params: Promise<{ id: string }>
-  children: ReactNode
   paramsId: string
+  children: ReactNode
 }) {
   const pathname = usePathname()
   const router = useRouter()
 
-  console.log('pathname', pathname)
-  console.log('router', router)
-  console.log('paramsId', paramsId)
+  const basePath = `/userProfile/${paramsId}`
+
+  // console.log('pathname', pathname)
+  // console.log('router', router)
+  // console.log('paramsId', paramsId)
 
   return (
     <div className='max-w-[972px] mx-auto mt-20'>
@@ -78,30 +84,32 @@ export default function ProfileLayout({
         </div>
       </div>
       <div>
-        <div className='grid grid-cols-1 md:grid-cols-4 gap-4 mt-10'>
+        <div className='grid grid-cols-1 md:grid-cols-4 mt-10'>
           {tabItems.map((item) => {
             return (
-              <div
+              <Button
                 key={item.title}
-                className='bg-blue-50 p-4 rounded-lg hover:bg-blue-100 transition cursor-pointer'
+                variant={'text'}
+                onClick={() => {
+                  router.replace(
+                    item.href ? `${basePath}/${item.href}` : basePath
+                  )
+                }}
+                className={cn(
+                  `pb-2.5 text-dark-100 focus-within:outline-0 border-b-2 border-dark-100 ${
+                    pathname === `${basePath}/${item.href}` ||
+                    (pathname === basePath && item.href === '')
+                      ? 'text-accent-700! border-accent-700!'
+                      : ''
+                  }`
+                )}
               >
-                <h3
-                  onClick={() => {
-                    router.push(`${pathname}/${item.title}`)
-                  }}
-                  className='font-medium text-blue-800 uppercase'
-                >
-                  {item.title}
-                </h3>
-              </div>
+                {item.title}
+              </Button>
             )
           })}
         </div>
       </div>
-
-      {/* Divider */}
-      <div className='border-t border-gray-200 my-6'></div>
-
       {children}
     </div>
   )

@@ -2,17 +2,19 @@
 
 import { useEffect, useState } from 'react'
 
-export default function Page({ params }: { params: Promise<{ id: string }> }) {
+export default function FollowingPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
   const [state, setState] = useState<null | string>(null)
 
   useEffect(() => {
     params.then((res) => {
-      console.log(res)
+      console.log('FollowingPage', res)
       setState(res.id)
     })
   }, [params])
 
-  return (
-    <div className='m-40 animate-bounce'>{`Uploaded photos userId ${state}`}</div>
-  )
+  return <div className='m-50 animate-bounce'>{`following id ${state}`}</div>
 }
