@@ -26,8 +26,6 @@ export default function ProfileLayout({
   const { fullName, linkUser, profileCreateDate, avatar, error } =
     useGetUserProfile(paramsId)
 
-  console.log(avatar)
-
   const basePath = `/userProfile/${paramsId}`
 
   if (error) {
