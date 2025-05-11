@@ -1,16 +1,15 @@
 'use client'
 
-import { cn, MainPaths } from '@/src/shared'
-import { usePathname, useRouter } from '@/src/shared/translate/i18n/navigation'
-import { Button, Typography } from 'car-robots-library'
+import { MainPaths } from '@/src/shared'
+import { Typography } from 'car-robots-library'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 import { useGetUserProfile } from '../common/useGetUserProfile'
 import Image from 'next/image'
-import { tabItems } from '../common/helper'
 import { ArrowBack } from '@/src/shared/assets/icons'
 import { useTranslations } from 'next-intl'
 import NotContent from '@/src/_pages/404/NotContent'
+import { ButtonsGroup } from './ButtonsGroup'
 
 export default function ProfileLayout({
   paramsId,
@@ -19,14 +18,10 @@ export default function ProfileLayout({
   paramsId: string
   children: ReactNode
 }) {
-  const pathname = usePathname()
-  const router = useRouter()
   const t = useTranslations('UserProfile')
 
   const { fullName, linkUser, profileCreateDate, avatar, error } =
     useGetUserProfile(paramsId)
-
-  const basePath = `/userProfile/${paramsId}`
 
   if (error) {
     return <NotContent />
@@ -86,31 +81,7 @@ export default function ProfileLayout({
           </div>
         </div>
         <div>
-          <div className='grid grid-cols-1 md:grid-cols-4 mt-10'>
-            {tabItems.map((item) => {
-              return (
-                <Button
-                  key={item.title}
-                  variant={'text'}
-                  onClick={() => {
-                    router.replace(
-                      item.href ? `${basePath}/${item.href}` : basePath
-                    )
-                  }}
-                  className={cn(
-                    `pb-2.5 text-dark-100 focus-within:outline-0 border-b-2 border-dark-100 ${
-                      pathname === `${basePath}/${item.href}` ||
-                      (pathname === basePath && item.href === '')
-                        ? 'text-accent-700! border-accent-700!'
-                        : ''
-                    }`
-                  )}
-                >
-                  {t(item.title)}
-                </Button>
-              )
-            })}
-          </div>
+          <ButtonsGroup paramsId={paramsId} />
         </div>
         {children}
       </div>
