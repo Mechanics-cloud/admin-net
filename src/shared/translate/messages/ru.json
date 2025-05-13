@@ -27,18 +27,18 @@
     }
   },
   "UsersPage": {
-    "userId": "User ID",
-    "userName": "Username",
-    "profileLink": "Profile link",
-    "dateAdded": "Date added",
-    "show": "Show",
-    "onPage": "on page",
-    "deleteUser": "Delete User",
-    "ban": "Ban in the system",
-    "moreInfo": "More information",
-    "notSelected": "Not selected",
-    "blocked": "Blocked",
-    "notBlocked": "Not Blocked",
-    "search": "Search"
+    "userId": "ID Пользователя",
+    "userName": "Имя пользователя",
+    "profileLink": "Ссылка на профиль",
+    "dateAdded": "Дата добавления",
+    "show": "Показать",
+    "onPage": "на страницe",
+    "deleteUser": "Удалить пользователя",
+    "ban": "Заблокировать в системе",
+    "moreInfo": "Больше информации",
+    "notSelected": "Не выбрано",
+    "blocked": "Заблокированные",
+    "notBlocked": "Не заблокированные",
+    "search": "Поиск"
   }
 }

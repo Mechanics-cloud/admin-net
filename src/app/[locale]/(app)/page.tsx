@@ -29,7 +29,7 @@ export default function UsersPage() {
         <TextField
           type={'search'}
           label={''}
-          placeholder={'Search'}
+          placeholder={t('search')}
           className={'w-full'}
         />
         <Select
@@ -37,10 +37,10 @@ export default function UsersPage() {
           className={'min-w-[234px] [&>button>span>p]:mt-0!'}
         >
           <SelectItem value={t('blocked')}>
-            <Typography variant={'reg16'}>Blocked</Typography>
+            <Typography variant={'reg16'}>{t('blocked')}</Typography>
           </SelectItem>
           <SelectItem value={t('notBlocked')}>
-            <Typography variant={'reg16'}>Not Blocked</Typography>
+            <Typography variant={'reg16'}>{t('notBlocked')}</Typography>
           </SelectItem>
         </Select>
       </div>
@@ -48,16 +48,16 @@ export default function UsersPage() {
         <thead className='bg-dark-500 h-[48px]'>
           <tr className='px-6'>
             <th className='px-6'>
-              <Typography variant={'bold14'}>User ID</Typography>
+              <Typography variant={'bold14'}>{t('userId')}</Typography>
             </th>
             <th className='px-6'>
-              <ToggleItem>Username</ToggleItem>
+              <ToggleItem>{t('userName')}</ToggleItem>
             </th>
             <th className='px-6'>
-              <Typography variant={'bold14'}>Profile link</Typography>
+              <Typography variant={'bold14'}>{t('profileLink')}</Typography>
             </th>
             <th className='px-6'>
-              <ToggleItem>Date added</ToggleItem>
+              <ToggleItem>{t('dateAdded')}</ToggleItem>
             </th>
           </tr>
         </thead>
