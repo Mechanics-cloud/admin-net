@@ -1,5 +1,6 @@
 import { useState, ReactNode, MouseEvent } from 'react'
 import { Typography } from 'car-robots-library'
+import { SortingArrow } from '@/src/features/user-list/ui/SortingArrow'
 
 type Props = {
   children: ReactNode
@@ -17,27 +18,16 @@ export const ToggleItem = ({ children }: Props) => {
     <div className='text-light-100 w-40 flex items-center justify-between cursor-pointer select-none'>
       <Typography variant='bold14'>{children}</Typography>
       <div className='flex flex-col ml-2'>
-        <svg
+        <SortingArrow
+          direction={'asc'}
+          active={sortDirection === 'asc'}
           onClick={toggleSort}
-          className={`w-2.5 h-2.5 mb-0.5 ${
-            sortDirection === 'asc' ? 'fill-white' : 'fill-gray-600'
-          } hover:fill-white`}
-          viewBox='0 0 10 6'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <polygon points='0,6 5,0 10,6' />
-        </svg>
-
-        <svg
+        />
+        <SortingArrow
+          direction={'desc'}
+          active={sortDirection === 'desc'}
           onClick={toggleSort}
-          className={`w-2.5 h-2.5 mt-0.5 ${
-            sortDirection === 'desc' ? 'fill-white' : 'fill-gray-600'
-          } hover:fill-white`}
-          viewBox='0 0 10 6'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <polygon points='0,0 5,6 10,0' />
-        </svg>
+        />
       </div>
     </div>
   )
