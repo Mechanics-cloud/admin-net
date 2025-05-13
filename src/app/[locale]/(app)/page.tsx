@@ -1,5 +1,5 @@
 'use client'
-import { Pagination, Select } from 'car-robots-library'
+import { Pagination, Select, SelectItem } from 'car-robots-library'
 import { useTranslations } from 'next-intl'
 import { TextField } from '@/src/shared'
 import { Typography } from 'car-robots-library'
@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { BlockedIcon } from '@/src/assets/icons/outlineIcons/BlockedIcon'
 import { ToggleItem } from '@/src/features/user-list/ui/ToggleItem'
+import * as React from 'react'
 
 export default function UsersPage() {
   const [currentPage, setCurrentPage] = useState<number>(1)
@@ -33,9 +34,14 @@ export default function UsersPage() {
         />
         <Select
           placeholder={t('notSelected')}
-          className={'min-w-[234px] h-9'}
+          className={'min-w-[234px] [&>button>span>p]:mt-0!'}
         >
-          children
+          <SelectItem value={t('blocked')}>
+            <Typography variant={'reg16'}>Blocked</Typography>
+          </SelectItem>
+          <SelectItem value={t('notBlocked')}>
+            <Typography variant={'reg16'}>Not Blocked</Typography>
+          </SelectItem>
         </Select>
       </div>
       <table className='w-full text-left'>
