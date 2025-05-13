@@ -6,6 +6,7 @@ import { Typography } from 'car-robots-library'
 import Link from 'next/link'
 import { useState } from 'react'
 import { BlockedIcon } from '@/src/assets/icons/outlineIcons/BlockedIcon'
+import { ToggleItem } from '@/src/features/user-list/ui/ToggleItem'
 
 export default function UsersPage() {
   const [currentPage, setCurrentPage] = useState<number>(1)
@@ -19,8 +20,6 @@ export default function UsersPage() {
   const onPageSize = (size: number) => {
     setPageSize(size)
   }
-
-  const isBlocked = true
 
   const t = useTranslations('UsersPage')
   return (
@@ -46,13 +45,13 @@ export default function UsersPage() {
               <Typography variant={'bold14'}>User ID</Typography>
             </th>
             <th className='px-6'>
-              <Typography variant={'bold14'}>Username</Typography>
+              <ToggleItem>Username</ToggleItem>
             </th>
             <th className='px-6'>
               <Typography variant={'bold14'}>Profile link</Typography>
             </th>
             <th className='px-6'>
-              <Typography variant={'bold14'}>Date added</Typography>
+              <ToggleItem>Date added</ToggleItem>
             </th>
           </tr>
         </thead>
@@ -60,13 +59,24 @@ export default function UsersPage() {
           <tr className='h-[48px] align-middle'>
             <td className='px-6'>
               <div className='flex items-center gap-3'>
-                {isBlocked && <BlockedIcon />}
+                <BlockedIcon />
                 21331QErQe21
               </div>
             </td>
             <td className='px-6'>Ivan Yakymenko</td>
             <td className='px-6'>
               <Link href='/profile'>Ivan.sr.yakimenko</Link>
+            </td>
+            <td className='px-6'>12.12.2022</td>
+          </tr>
+
+          <tr className='h-[48px] align-middle'>
+            <td className='px-6'>
+              <div className='flex items-center gap-3 pl-9'>21331QErQe22</div>
+            </td>
+            <td className='px-6'>Kirill Mikulich</td>
+            <td className='px-6'>
+              <Link href='/profile'>Kirill_Mikulich</Link>
             </td>
             <td className='px-6'>12.12.2022</td>
           </tr>

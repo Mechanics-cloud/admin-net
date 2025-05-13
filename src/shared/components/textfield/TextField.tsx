@@ -75,7 +75,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
           <input
             className={cn(
               cls.input,
-              type === 'search' && 'bg-transparent placeholder:pl-5!'
+              type === 'search' && 'bg-transparent pl-10!'
             )}
             disabled={disabled}
             onChange={onChange}
