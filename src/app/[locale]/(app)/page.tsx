@@ -8,7 +8,6 @@ import { useUserList } from '@/src/features/user-list/model/useUserFilter'
 export default function UsersPage() {
   const {
     users,
-    activeFilter,
     currentPage,
     onPageChange,
     onPageSize,
@@ -16,7 +15,6 @@ export default function UsersPage() {
     sortUsers,
     filterUsers,
   } = useUserList()
-  console.log(activeFilter)
 
   return (
     <div className={'text-light-100 pt-12 pr-16'}>

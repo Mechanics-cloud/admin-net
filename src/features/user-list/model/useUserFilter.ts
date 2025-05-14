@@ -69,17 +69,27 @@ export const useUserList = () => {
     setActiveFilter(filter)
   }
 
-  const filterUsers = (input: string) => {
-    const filteredItems = originalUsersRef?.current?.users.filter((user) =>
-      user.userName.toLowerCase().startsWith(input)
-    )
-    if (users && filteredItems) {
-      setUsers({ ...users, users: filteredItems })
-    }
+  const filterUsers = (input: string, select?: 'blocked' | 'notBlocked') => {
+    if (!originalUsersRef.current) return
 
-    if (!input) {
-      setUsers(originalUsersRef.current)
-    }
+    const filtered = originalUsersRef.current.users.filter((user) => {
+      const matchesInput = user.userName
+        .toLowerCase()
+        .startsWith(input.toLowerCase())
+      let matchesSelect = true
+
+      if (select === 'blocked') {
+        matchesSelect = user.userBan !== null
+      }
+
+      if (select === 'notBlocked') {
+        matchesSelect = user.userBan === null
+      }
+
+      return matchesInput && matchesSelect
+    })
+
+    setUsers({ ...originalUsersRef.current, users: filtered })
   }
 
   return {

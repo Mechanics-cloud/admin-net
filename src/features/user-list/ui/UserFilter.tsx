@@ -5,17 +5,26 @@ import { useTranslations } from 'next-intl'
 import { ChangeEvent, useState } from 'react'
 
 type Props = {
-  filterUsers: (input: string) => void
+  filterUsers: (input: string, select?: 'blocked' | 'notBlocked') => void
 }
 export const UserFilter = ({ filterUsers }: Props) => {
   const t = useTranslations('UsersPage')
-  const [value, setValue] = useState('')
+  const [inputValue, setInputValue] = useState('')
+  const [selectValue, setSelectValue] = useState<
+    'blocked' | 'notBlocked' | undefined
+  >(undefined)
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value)
-    filterUsers(e.currentTarget.value)
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.currentTarget.value)
+    filterUsers(e.currentTarget.value, selectValue)
   }
 
+  const onSelectChange = (value: 'blocked' | 'notBlocked') => {
+    setSelectValue(value)
+    filterUsers(inputValue, value)
+  }
+
+  console.log(selectValue, 'select')
   return (
     <div className={'flex gap-[94px]'}>
       <TextField
@@ -23,17 +32,21 @@ export const UserFilter = ({ filterUsers }: Props) => {
         label={''}
         placeholder={t('search')}
         className={'w-full'}
-        value={value}
-        onChange={onChange}
+        value={inputValue}
+        onChange={onInputChange}
       />
       <Select
         placeholder={t('notSelected')}
         className={'min-w-[234px] [&>button>span>p]:mt-0!'}
+        value={selectValue}
+        onValueChange={(value) =>
+          onSelectChange(value as 'blocked' | 'notBlocked')
+        }
       >
-        <SelectItem value={t('blocked')}>
+        <SelectItem value={'blocked'}>
           <Typography variant={'reg16'}>{t('blocked')}</Typography>
         </SelectItem>
-        <SelectItem value={t('notBlocked')}>
+        <SelectItem value={'notBlocked'}>
           <Typography variant={'reg16'}>{t('notBlocked')}</Typography>
         </SelectItem>
       </Select>
