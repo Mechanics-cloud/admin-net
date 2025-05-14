@@ -6,12 +6,17 @@ export const GET_USERS = gql(`
             users {
                 id
                 userName
+                createdAt
+                email
+                profile {
+                  id
+                  createdAt
+                  userName
+                }
                 userBan {
                     reason
                     createdAt
                 }
-                email
-                createdAt
             }
             pagination {
                 page

@@ -1,16 +1,20 @@
 import { useState, ReactNode, MouseEvent } from 'react'
 import { Typography } from 'car-robots-library'
 import { SortingArrow } from '@/src/features/user-list/ui/SortingArrow'
+import { Filter } from '../model/useUserFilter'
 
 type Props = {
   children: ReactNode
+  toggleSort: (filter: Filter, direction: 'asc' | 'desc') => void
+  activeFilter: Filter
 }
 
-export const ToggleItem = ({ children }: Props) => {
+export const ToggleItem = ({ children, toggleSort, activeFilter }: Props) => {
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc')
 
-  const toggleSort = (e: MouseEvent<SVGSVGElement>) => {
+  const onToggleSort = (e: MouseEvent<SVGSVGElement>) => {
     e.stopPropagation()
+    toggleSort(activeFilter, sortDirection)
     setSortDirection((prev) => (prev === 'desc' ? 'asc' : 'desc'))
   }
 
@@ -21,12 +25,12 @@ export const ToggleItem = ({ children }: Props) => {
         <SortingArrow
           direction={'asc'}
           active={sortDirection === 'asc'}
-          onClick={toggleSort}
+          onClick={onToggleSort}
         />
         <SortingArrow
           direction={'desc'}
           active={sortDirection === 'desc'}
-          onClick={toggleSort}
+          onClick={onToggleSort}
         />
       </div>
     </div>
