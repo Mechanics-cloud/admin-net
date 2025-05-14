@@ -2,9 +2,20 @@ import { TextField } from '@/src/shared'
 import { Select, SelectItem, Typography } from 'car-robots-library'
 import * as React from 'react'
 import { useTranslations } from 'next-intl'
+import { ChangeEvent, useState } from 'react'
 
-export const UserFilter = () => {
+type Props = {
+  filterUsers: (input: string) => void
+}
+export const UserFilter = ({ filterUsers }: Props) => {
   const t = useTranslations('UsersPage')
+  const [value, setValue] = useState('')
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value)
+    filterUsers(e.currentTarget.value)
+  }
+
   return (
     <div className={'flex gap-[94px]'}>
       <TextField
@@ -12,6 +23,8 @@ export const UserFilter = () => {
         label={''}
         placeholder={t('search')}
         className={'w-full'}
+        value={value}
+        onChange={onChange}
       />
       <Select
         placeholder={t('notSelected')}

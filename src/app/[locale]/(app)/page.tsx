@@ -14,12 +14,13 @@ export default function UsersPage() {
     onPageSize,
     pageSize,
     sortUsers,
+    filterUsers,
   } = useUserList()
   console.log(activeFilter)
 
   return (
     <div className={'text-light-100 pt-12 pr-16'}>
-      <UserFilter />
+      <UserFilter filterUsers={filterUsers} />
       <UsersTable
         users={users?.users}
         toggleSort={sortUsers}

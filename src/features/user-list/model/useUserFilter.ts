@@ -1,5 +1,5 @@
 import { GetUsersQuery } from '@/src/shared/apolloClient/__generated__/graphql'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import { GET_USERS } from '@/src/features/user-list/api/request'
 import { responseErrorHandler } from '@/src/shared'
@@ -8,7 +8,9 @@ export type Filter = 'userName' | 'date'
 
 export const useUserList = () => {
   const [activeFilter, setActiveFilter] = useState<Filter>('date')
-
+  const originalUsersRef = useRef<GetUsersQuery['getUsers'] | undefined>(
+    undefined
+  )
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(10)
   const [users, setUsers] = useState<GetUsersQuery['getUsers']>()
@@ -22,7 +24,10 @@ export const useUserList = () => {
 
   useEffect(() => {
     getUsers()
-      .then((res) => setUsers(res?.data?.getUsers))
+      .then((res) => {
+        setUsers(res?.data?.getUsers)
+        originalUsersRef.current = res?.data?.getUsers
+      })
       .catch((err) => {
         responseErrorHandler(err)
       })
@@ -64,6 +69,19 @@ export const useUserList = () => {
     setActiveFilter(filter)
   }
 
+  const filterUsers = (input: string) => {
+    const filteredItems = originalUsersRef?.current?.users.filter((user) =>
+      user.userName.toLowerCase().startsWith(input)
+    )
+    if (users && filteredItems) {
+      setUsers({ ...users, users: filteredItems })
+    }
+
+    if (!input) {
+      setUsers(originalUsersRef.current)
+    }
+  }
+
   return {
     sortUsers,
     activeFilter,
@@ -72,5 +90,6 @@ export const useUserList = () => {
     onPageSize,
     currentPage,
     pageSize,
+    filterUsers,
   }
 }
