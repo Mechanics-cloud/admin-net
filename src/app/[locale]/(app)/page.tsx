@@ -4,23 +4,34 @@ import { useTranslations } from 'next-intl'
 import { cn, TextField } from '@/src/shared'
 import { Typography } from 'car-robots-library'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BlockedIcon } from '@/src/assets/icons/outlineIcons/BlockedIcon'
 import { ToggleItem } from '@/src/features/user-list/ui/ToggleItem'
 import * as React from 'react'
-import { useQuery } from '@apollo/client'
-import {
-  GetUsersDocument,
-  GetUsersQuery,
-} from '@/src/shared/apolloClient/__generated__/graphql'
+import { useLazyQuery } from '@apollo/client'
+import { GET_USERS } from '@/src/features/user-list/api/request'
+import { GetUsersQuery } from '@/src/shared/apolloClient/__generated__/graphql'
 
 export default function UsersPage() {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(10)
   const t = useTranslations('UsersPage')
+  const [users, setUsers] = useState<GetUsersQuery['getUsers']>()
 
-  const { data } = useQuery<GetUsersQuery>(GetUsersDocument)
-  const users = data?.getUsers?.users || []
+  const [getUsers] = useLazyQuery(GET_USERS, {
+    variables: {
+      pageNumber: currentPage,
+      pageSize,
+    },
+  })
+
+  useEffect(() => {
+    getUsers()
+      .then((res) => setUsers(res?.data?.getUsers))
+      .catch((err) => {
+        console.error(err)
+      })
+  }, [currentPage, getUsers, pageSize])
 
   const onPageChange = (page: number) => {
     setCurrentPage(page)
@@ -69,7 +80,7 @@ export default function UsersPage() {
           </tr>
         </thead>
         <tbody>
-          {users?.map((user) => (
+          {users?.users?.map((user) => (
             <tr
               className='h-[48px] align-middle'
               key={user.id}
@@ -96,11 +107,11 @@ export default function UsersPage() {
       </table>
       <div className={'mt-9 custom-pagination'}>
         <Pagination
-          currentPage={currentPage || 1}
-          onPageChange={(page) => onPageChange(page)}
-          onPageSize={(pageSize) => onPageSize(pageSize)}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+          onPageSize={onPageSize}
           pageSize={pageSize}
-          totalItemsCount={data?.getUsers?.pagination.totalCount || 100}
+          totalItemsCount={users?.pagination.totalCount || 100}
         />
       </div>
     </div>
