@@ -1,7 +1,7 @@
 'use client'
 import { Pagination, Select, SelectItem } from 'car-robots-library'
 import { useTranslations } from 'next-intl'
-import { cn, TextField } from '@/src/shared'
+import { cn, formatDate, responseErrorHandler, TextField } from '@/src/shared'
 import { Typography } from 'car-robots-library'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -29,7 +29,7 @@ export default function UsersPage() {
     getUsers()
       .then((res) => setUsers(res?.data?.getUsers))
       .catch((err) => {
-        console.error(err)
+        responseErrorHandler(err)
       })
   }, [currentPage, getUsers, pageSize])
 
@@ -100,7 +100,7 @@ export default function UsersPage() {
               <td className='px-6'>
                 <Link href={`/profile/${user.id}`}>{user.email}</Link>
               </td>
-              <td className='px-6'>{user.createdAt}</td>
+              <td className='px-6'>{formatDate(user.createdAt)}</td>
             </tr>
           ))}
         </tbody>
