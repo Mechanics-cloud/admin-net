@@ -1,9 +1,8 @@
 import { Typography } from 'car-robots-library'
-import { ToggleItem } from '@/src/features/user-list/ui/ToggleItem'
+import { ToggleItem, UserPopover } from '@/src/features/user-list/ui'
 import { cn, formatDate } from '@/src/shared'
 import { BlockedIcon } from '@/src/assets/icons/outlineIcons/BlockedIcon'
 import Link from 'next/link'
-import * as React from 'react'
 import { useTranslations } from 'next-intl'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
 import { Filter } from '../model/useUserFilter'
@@ -15,6 +14,7 @@ type Props = {
 
 export const UsersTable = ({ users, toggleSort }: Props) => {
   const t = useTranslations('UsersPage')
+
   return (
     <table className='w-full text-left'>
       <thead className='bg-dark-500 h-[48px]'>
@@ -41,6 +41,7 @@ export const UsersTable = ({ users, toggleSort }: Props) => {
               {t('dateAdded')}
             </ToggleItem>
           </th>
+          <th className='px-6'></th>
         </tr>
       </thead>
       <tbody>
@@ -65,6 +66,9 @@ export const UsersTable = ({ users, toggleSort }: Props) => {
               <Link href={`/profile/${user.id}`}>{user.email}</Link>
             </td>
             <td className='px-6'>{formatDate(user.createdAt)}</td>
+            <td className='px-6'>
+              <UserPopover>Hello</UserPopover>
+            </td>
           </tr>
         ))}
       </tbody>

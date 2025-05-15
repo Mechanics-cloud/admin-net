@@ -24,7 +24,6 @@ export const UserFilter = ({ filterUsers }: Props) => {
     filterUsers(inputValue, value)
   }
 
-  console.log(selectValue, 'select')
   return (
     <div className={'flex gap-[94px]'}>
       <TextField
