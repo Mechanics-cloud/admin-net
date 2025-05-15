@@ -12,16 +12,12 @@ type Props = {
 }
 
 export default function UploadedFotos({ userId }: Props) {
-  const {
-    data: uploadedPhotos,
-    fetchMore,
-    loading,
-  } = useQuery(GET_USER_FOTOS, {
+  const { data: uploadedPhotos, fetchMore } = useQuery(GET_USER_FOTOS, {
     variables: { Id: +userId, endCursorId: 0 },
-    notifyOnNetworkStatusChange: true, // Важно для отслеживания loading при fetchMore
+    notifyOnNetworkStatusChange: true,
   })
 
-  const [ref, inView] = useInView()
+  const { ref, inView } = useInView()
 
   const handleLoadMore = useCallback(() => {
     const endCursorId = uploadedPhotos?.getPostsByUser?.items?.at(-1)?.id
@@ -33,17 +29,17 @@ export default function UploadedFotos({ userId }: Props) {
   }, [fetchMore, uploadedPhotos?.getPostsByUser?.items])
 
   useEffect(() => {
-    if (inView && !loading) {
+    if (inView) {
       handleLoadMore()
     }
-  }, [inView, handleLoadMore, loading])
+  }, [inView, handleLoadMore])
 
   return (
     <>
       {uploadedPhotos?.getPostsByUser?.items?.length ? (
         <div
           className={cn(
-            'mt-9 grid gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full h-full'
+            'mt-9 grid gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full h-full z-0'
           )}
         >
           {uploadedPhotos.getPostsByUser.items.map((item) => (
