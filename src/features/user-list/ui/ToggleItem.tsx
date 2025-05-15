@@ -19,7 +19,7 @@ export const ToggleItem = ({ children, toggleSort, activeFilter }: Props) => {
   }
 
   return (
-    <div className='text-light-100 w-40 flex items-center justify-between cursor-pointer select-none'>
+    <div className='text-light-100 w-40 flex items-center cursor-pointer select-none'>
       <Typography variant='bold14'>{children}</Typography>
       <div className='flex flex-col ml-2'>
         <SortingArrow

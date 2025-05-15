@@ -32,12 +32,14 @@
     "dateAdded": "Date added",
     "show": "Show",
     "onPage": "on page",
-    "deleteUser": "Delete User",
-    "ban": "Ban in the system",
-    "moreInfo": "More information",
     "notSelected": "Not selected",
     "blocked": "Blocked",
     "notBlocked": "Not Blocked",
-    "search": "Search"
+    "search": "Search",
+    "popover": {
+      "deleteUser": "Delete User",
+      "ban": "Ban in the system",
+      "moreInfo": "More information"
+    }
   }
 }

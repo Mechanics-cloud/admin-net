@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
 import { Filter } from '../model/useUserFilter'
+import { PopoverOptions } from '@/src/features/user-list/ui/PopoverOptions'
 
 type Props = {
   users: User[] | undefined
@@ -67,7 +68,9 @@ export const UsersTable = ({ users, toggleSort }: Props) => {
             </td>
             <td className='px-6'>{formatDate(user.createdAt)}</td>
             <td className='px-6'>
-              <UserPopover>Hello</UserPopover>
+              <UserPopover>
+                <PopoverOptions />
+              </UserPopover>
             </td>
           </tr>
         ))}
