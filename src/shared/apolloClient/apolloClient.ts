@@ -21,7 +21,24 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          getPostsByUser: {
+            keyArgs: ['Id'],
+            merge(existing = { items: [], pageInfo: {} }, incoming) {
+              return {
+                ...incoming,
+                items: [...existing.items, ...incoming.items],
+                pageInfo: incoming.pageInfo,
+              }
+            },
+          },
+        },
+      },
+    },
+  }),
 })
 
 export default client

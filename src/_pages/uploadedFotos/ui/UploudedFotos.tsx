@@ -4,17 +4,39 @@ import { useQuery } from '@apollo/client'
 import { GET_USER_FOTOS } from '../api/request'
 import Image from 'next/image'
 import { cn } from '@/src/shared'
+import { useInView } from 'react-intersection-observer'
+import { useCallback, useEffect } from 'react'
 
 type Props = {
   userId: string
 }
 
 export default function UploadedFotos({ userId }: Props) {
-  const { data: uploadedPhotos } = useQuery(GET_USER_FOTOS, {
+  const {
+    data: uploadedPhotos,
+    fetchMore,
+    loading,
+  } = useQuery(GET_USER_FOTOS, {
     variables: { Id: +userId, endCursorId: 0 },
+    notifyOnNetworkStatusChange: true, // Важно для отслеживания loading при fetchMore
   })
 
-  // console.log(uploadedPhotos)
+  const [ref, inView] = useInView()
+
+  const handleLoadMore = useCallback(() => {
+    const endCursorId = uploadedPhotos?.getPostsByUser?.items?.at(-1)?.id
+    if (!endCursorId) return
+
+    fetchMore({
+      variables: { endCursorId },
+    })
+  }, [fetchMore, uploadedPhotos?.getPostsByUser?.items])
+
+  useEffect(() => {
+    if (inView && !loading) {
+      handleLoadMore()
+    }
+  }, [inView, handleLoadMore, loading])
 
   return (
     <>
@@ -43,6 +65,10 @@ export default function UploadedFotos({ userId }: Props) {
       ) : (
         <div>Постов нет</div>
       )}
+      <div
+        className='w-full h-3 '
+        ref={ref}
+      ></div>
     </>
   )
 }
