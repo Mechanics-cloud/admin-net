@@ -1,12 +1,10 @@
-import { Typography } from 'car-robots-library'
-import { ToggleItem, UserPopover } from '@/src/features/user-list/ui'
-import { cn, formatDate } from '@/src/shared'
+import { cn, formatDate, Column, TableComp } from '@/src/shared'
 import { BlockedIcon } from '@/src/assets/icons/outlineIcons/BlockedIcon'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
 import { Filter } from '../model/useUserFilter'
-import { PopoverOptions } from '@/src/features/user-list/ui/PopoverOptions'
+import { UserPopover, PopoverOptions } from '@/src/features/user-list'
 
 type Props = {
   users: User[] | undefined
@@ -16,65 +14,49 @@ type Props = {
 export const UsersTable = ({ users, toggleSort }: Props) => {
   const t = useTranslations('UsersPage')
 
+  const columns: Column<User>[] = [
+    {
+      label: t('userId'),
+      key: 'userId',
+      render: (user) => (
+        <div className={cn('flex items-center gap-3', !user.userBan && 'pl-9')}>
+          {user.userBan?.reason && <BlockedIcon />}
+          {user.id}
+        </div>
+      ),
+    },
+    {
+      label: t('userName'),
+      key: 'userName',
+      sortable: true,
+      render: (user) => user.userName,
+    },
+    {
+      label: t('profileLink'),
+      key: 'profileLink',
+      render: (user) => <Link href={`/profile/${user.id}`}>{user.email}</Link>,
+    },
+    {
+      label: t('dateAdded'),
+      key: 'date',
+      sortable: true,
+      render: (user) => formatDate(user.createdAt),
+    },
+  ]
+
   return (
-    <table className='w-full text-left'>
-      <thead className='bg-dark-500 h-[48px]'>
-        <tr className='px-6'>
-          <th className='px-6'>
-            <Typography variant={'bold14'}>{t('userId')}</Typography>
-          </th>
-          <th className='px-6'>
-            <ToggleItem
-              toggleSort={toggleSort}
-              activeFilter={'userName'}
-            >
-              {t('userName')}
-            </ToggleItem>
-          </th>
-          <th className='px-6'>
-            <Typography variant={'bold14'}>{t('profileLink')}</Typography>
-          </th>
-          <th className='px-6'>
-            <ToggleItem
-              toggleSort={toggleSort}
-              activeFilter={'date'}
-            >
-              {t('dateAdded')}
-            </ToggleItem>
-          </th>
-          <th className='px-6'></th>
-        </tr>
-      </thead>
-      <tbody>
-        {users?.map((user) => (
-          <tr
-            className='h-[48px] align-middle'
-            key={user.id}
-          >
-            <td className='px-6'>
-              <div
-                className={cn(
-                  'flex items-center gap-3',
-                  !user.userBan && 'pl-9'
-                )}
-              >
-                {user.userBan?.reason && <BlockedIcon />}
-                {user.id}
-              </div>
-            </td>
-            <td className='px-6'>{user.userName}</td>
-            <td className='px-6'>
-              <Link href={`/profile/${user.id}`}>{user.email}</Link>
-            </td>
-            <td className='px-6'>{formatDate(user.createdAt)}</td>
-            <td className='px-6'>
-              <UserPopover>
-                <PopoverOptions />
-              </UserPopover>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    users && (
+      <TableComp
+        toggleSort={toggleSort}
+        data={users}
+        columns={columns}
+      >
+        <td className='px-6'>
+          <UserPopover>
+            <PopoverOptions />
+          </UserPopover>
+        </td>
+      </TableComp>
+    )
   )
 }
