@@ -39,7 +39,9 @@ export default async function LocaleLayout({
       <body className={`${inter.className} antialiased bg-dark-700`}>
         <NextIntlClientProvider locale={locale}>
           <Header />
-          <ClientProviders>{children}</ClientProviders>
+          <div className={'relative h-full max-w-[1280px] mx-auto'}>
+            <ClientProviders>{children}</ClientProviders>
+          </div>
           <ToastContainer />
         </NextIntlClientProvider>
       </body>
