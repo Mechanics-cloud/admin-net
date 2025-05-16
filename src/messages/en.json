@@ -1,7 +1,0 @@
-{
-  "HomePage": {
-    "title": "Hello world!",
-    "label": "Change language",
-    "locale": "{locale, select, ru {Русский} en {English} other {Unknown}}"
-  }
-}
