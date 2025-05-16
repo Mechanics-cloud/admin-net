@@ -1,7 +1,6 @@
 import { Pagination, Typography } from 'car-robots-library'
 import { ToggleItem } from '@/src/features/user-list'
-import { Filter } from '@/src/features/user-list/model/useUserList'
-import { ReactNode } from 'react'
+import { Filter } from '@/src/shared/hooks/useSortData'
 import * as React from 'react'
 import { Column, PageData } from '@/src/shared'
 
@@ -9,7 +8,6 @@ type Props<T> = {
   toggleSort?: (filter: Filter, direction: 'asc' | 'desc') => void
   data: T[]
   columns: Column<T>[]
-  children?: ReactNode
   pageData: PageData
 }
 
@@ -17,7 +15,6 @@ export const TableComp = <T,>({
   toggleSort,
   data,
   columns,
-  children,
   pageData,
 }: Props<T>) => {
   const { currentPage, totalCount, pageSize, onPageChange, onPageSize } =
@@ -44,7 +41,6 @@ export const TableComp = <T,>({
                 )}
               </th>
             ))}
-            <th className='px-6'></th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +57,6 @@ export const TableComp = <T,>({
                   {col.render(item)}
                 </td>
               ))}
-              {children}
             </tr>
           ))}
         </tbody>
