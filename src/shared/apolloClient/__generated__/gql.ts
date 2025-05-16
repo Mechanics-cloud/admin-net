@@ -16,10 +16,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 type Documents = {
     "\n  query getUser($Id:Int!) {\n    getUser(userId:$Id){\n      email\n      userName   \n  }\n}\n": typeof types.GetUserDocument,
     "\n  mutation Login($email: String!, $password: String!) {\n    loginAdmin(email: $email, password: $password) {\n      logged\n    }\n  }\n": typeof types.LoginDocument,
+    "\n    query GetUsers($pageNumber: Int!, $pageSize: Int!) {\n        getUsers(pageNumber: $pageNumber, pageSize: $pageSize) {\n            users {\n                id\n                userName\n                createdAt\n                email\n                profile {\n                  id\n                  createdAt\n                  userName\n                }\n                userBan {\n                    reason\n                    createdAt\n                }\n            }\n            pagination {\n                page\n                pageSize\n                pagesCount\n                totalCount\n            }\n        }\n    }\n": typeof types.GetUsersDocument,
 };
 const documents: Documents = {
     "\n  query getUser($Id:Int!) {\n    getUser(userId:$Id){\n      email\n      userName   \n  }\n}\n": types.GetUserDocument,
     "\n  mutation Login($email: String!, $password: String!) {\n    loginAdmin(email: $email, password: $password) {\n      logged\n    }\n  }\n": types.LoginDocument,
+    "\n    query GetUsers($pageNumber: Int!, $pageSize: Int!) {\n        getUsers(pageNumber: $pageNumber, pageSize: $pageSize) {\n            users {\n                id\n                userName\n                createdAt\n                email\n                profile {\n                  id\n                  createdAt\n                  userName\n                }\n                userBan {\n                    reason\n                    createdAt\n                }\n            }\n            pagination {\n                page\n                pageSize\n                pagesCount\n                totalCount\n            }\n        }\n    }\n": types.GetUsersDocument,
 };
 
 /**
@@ -44,6 +46,10 @@ export function gql(source: "\n  query getUser($Id:Int!) {\n    getUser(userId:$
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation Login($email: String!, $password: String!) {\n    loginAdmin(email: $email, password: $password) {\n      logged\n    }\n  }\n"): (typeof documents)["\n  mutation Login($email: String!, $password: String!) {\n    loginAdmin(email: $email, password: $password) {\n      logged\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n    query GetUsers($pageNumber: Int!, $pageSize: Int!) {\n        getUsers(pageNumber: $pageNumber, pageSize: $pageSize) {\n            users {\n                id\n                userName\n                createdAt\n                email\n                profile {\n                  id\n                  createdAt\n                  userName\n                }\n                userBan {\n                    reason\n                    createdAt\n                }\n            }\n            pagination {\n                page\n                pageSize\n                pagesCount\n                totalCount\n            }\n        }\n    }\n"): (typeof documents)["\n    query GetUsers($pageNumber: Int!, $pageSize: Int!) {\n        getUsers(pageNumber: $pageNumber, pageSize: $pageSize) {\n            users {\n                id\n                userName\n                createdAt\n                email\n                profile {\n                  id\n                  createdAt\n                  userName\n                }\n                userBan {\n                    reason\n                    createdAt\n                }\n            }\n            pagination {\n                page\n                pageSize\n                pagesCount\n                totalCount\n            }\n        }\n    }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
