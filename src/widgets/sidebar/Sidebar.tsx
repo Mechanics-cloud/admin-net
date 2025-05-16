@@ -22,8 +22,8 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
   ]
   return (
     <>
-      <aside className='fixed left-0 top-[60px] h-[calc(100vh-60px)] w-55 z-50 border-r border-dark-300 '>
-        <nav className='pt-18 pl-8'>
+      <aside className='absolute left-0 top-[60px] h-[calc(100vh-60px)] w-55 z-50 border-r border-dark-300 '>
+        <nav className='pt-18 pl-8 fixed'>
           <ul className='space-y-2'>
             {navLinks.map((link) => {
               const isActive = pathname === link.path
@@ -43,7 +43,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
           </ul>
         </nav>
       </aside>
-      <section className='ml-61 mt-[70px]'>{children}</section>
+      <section className='ml-61 pt-[70px]'>{children}</section>
     </>
   )
 }
