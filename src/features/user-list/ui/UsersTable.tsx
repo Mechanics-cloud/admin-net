@@ -1,17 +1,18 @@
-import { cn, formatDate, Column, TableComp } from '@/src/shared'
+import { cn, formatDate, Column, TableComp, PageData } from '@/src/shared'
 import { BlockedIcon } from '@/src/assets/icons/outlineIcons/BlockedIcon'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
-import { Filter } from '../model/useUserFilter'
+import { Filter } from '../model/useUserList'
 import { UserPopover, PopoverOptions } from '@/src/features/user-list'
 
 type Props = {
   users: User[] | undefined
   toggleSort: (filter: Filter, direction: 'asc' | 'desc') => void
+  pageData: PageData
 }
 
-export const UsersTable = ({ users, toggleSort }: Props) => {
+export const UsersTable = ({ users, toggleSort, pageData }: Props) => {
   const t = useTranslations('UsersPage')
 
   const columns: Column<User>[] = [
@@ -50,6 +51,7 @@ export const UsersTable = ({ users, toggleSort }: Props) => {
         toggleSort={toggleSort}
         data={users}
         columns={columns}
+        pageData={pageData}
       >
         <td className='px-6'>
           <UserPopover>

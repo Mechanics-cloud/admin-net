@@ -1,9 +1,8 @@
 'use client'
 
-import { Pagination } from 'car-robots-library'
 import * as React from 'react'
 import { UserFilter, UsersTable } from '@/src/features/user-list/ui'
-import { useUserList } from '@/src/features/user-list/model/useUserFilter'
+import { useUserList } from '@/src/features/user-list/model/useUserList'
 
 export default function UsersPage() {
   const {
@@ -14,24 +13,23 @@ export default function UsersPage() {
     pageSize,
     sortUsers,
     filterUsers,
+    totalCount,
   } = useUserList()
 
   return (
     <div className={'text-light-100 pt-12 pr-16'}>
       <UserFilter filterUsers={filterUsers} />
       <UsersTable
-        users={users?.users}
+        users={users}
         toggleSort={sortUsers}
+        pageData={{
+          currentPage,
+          onPageSize,
+          onPageChange,
+          pageSize,
+          totalCount,
+        }}
       />
-      <div className={'mt-9 custom-pagination'}>
-        <Pagination
-          currentPage={currentPage}
-          onPageChange={onPageChange}
-          onPageSize={onPageSize}
-          pageSize={pageSize}
-          totalItemsCount={users?.pagination.totalCount || 100}
-        />
-      </div>
     </div>
   )
 }
