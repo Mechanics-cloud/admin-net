@@ -13,4 +13,5 @@ export type PageData = {
   onPageChange: (page: number) => void
   onPageSize: (size: number) => void
   totalCount: number
+  loading: boolean
 }

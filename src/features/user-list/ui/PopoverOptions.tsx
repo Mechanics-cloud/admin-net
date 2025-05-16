@@ -6,40 +6,52 @@ import {
 } from 'car-robots-library'
 import { useTranslations } from 'next-intl'
 import { ReactNode } from 'react'
+import { UnblockIcon } from '@/src/assets/icons/outlineIcons/UnblockIcon'
 
 type Option = {
   id: number
   icon: ReactNode
-  key: 'popover.deleteUser' | 'popover.ban' | 'popover.moreInfo'
+  key:
+    | 'popover.deleteUser'
+    | 'popover.ban'
+    | 'popover.moreInfo'
+    | 'popover.unban'
 }
 
-const options: Option[] = [
-  {
-    id: 1,
-    icon: (
-      <PersonOutline
-        width={24}
-        height={24}
-      />
-    ),
-    key: 'popover.deleteUser',
-  },
-  { id: 2, icon: <BlockedIcon />, key: 'popover.ban' },
-  {
-    id: 3,
-    icon: (
-      <MoreHorizontalOutline
-        width={24}
-        height={24}
-      />
-    ),
-    key: 'popover.moreInfo',
-  },
-]
-export const PopoverOptions = () => {
+const getOptions = (isBanned: boolean): Option[] => {
+  return [
+    {
+      id: 1,
+      icon: (
+        <PersonOutline
+          width={24}
+          height={24}
+        />
+      ),
+      key: 'popover.deleteUser',
+    },
+    {
+      id: 2,
+      icon: isBanned ? <UnblockIcon /> : <BlockedIcon />,
+      key: isBanned ? 'popover.unban' : 'popover.ban',
+    },
+    {
+      id: 3,
+      icon: (
+        <MoreHorizontalOutline
+          width={24}
+          height={24}
+        />
+      ),
+      key: 'popover.moreInfo',
+    },
+  ]
+}
+
+export const PopoverOptions = ({ isBanned }: { isBanned: boolean }) => {
   const t = useTranslations('UsersPage')
 
-  return options.map((option) => (
+  return getOptions(isBanned).map((option) => (
     <div
       key={option.id}
       className={

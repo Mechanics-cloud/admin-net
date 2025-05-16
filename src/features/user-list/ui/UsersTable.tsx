@@ -52,9 +52,9 @@ export const UsersTable = ({ users, toggleSort, pageData }: Props) => {
       {
         label: '',
         key: 'more',
-        render: () => (
+        render: (user) => (
           <UserPopover>
-            <PopoverOptions />
+            <PopoverOptions isBanned={!!user.userBan} />
           </UserPopover>
         ),
       },

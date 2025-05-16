@@ -38,7 +38,8 @@
     "search": "Search",
     "popover": {
       "deleteUser": "Delete User",
-      "ban": "Ban in the system",
+      "ban": "Ban User",
+      "unban": "Unban User",
       "moreInfo": "More information"
     }
   }

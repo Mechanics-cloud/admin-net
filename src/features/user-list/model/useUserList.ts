@@ -17,7 +17,7 @@ export const useUserList = () => {
   const { activeFilter, sortUsers } = useSortData(users, setUsers)
   const originalUsersRef = useRef<GetUsersQuery['getUsers'] | null>(null)
 
-  const [getUsers] = useLazyQuery(GET_USERS, {
+  const [getUsers, { loading }] = useLazyQuery(GET_USERS, {
     variables: {
       pageNumber: currentPage,
       pageSize,
@@ -71,5 +71,6 @@ export const useUserList = () => {
     pageSize,
     filterUsers,
     totalCount,
+    loading,
   }
 }

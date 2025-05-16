@@ -1,4 +1,4 @@
-import { Pagination, Typography } from 'car-robots-library'
+import { Loader, Pagination, Typography } from 'car-robots-library'
 import { ToggleItem } from '@/src/features/user-list'
 import { Filter } from '@/src/shared/hooks/useSortData'
 import * as React from 'react'
@@ -17,8 +17,14 @@ export const TableComp = <T,>({
   columns,
   pageData,
 }: Props<T>) => {
-  const { currentPage, totalCount, pageSize, onPageChange, onPageSize } =
-    pageData
+  const {
+    currentPage,
+    totalCount,
+    pageSize,
+    onPageChange,
+    onPageSize,
+    loading,
+  } = pageData
   return (
     <>
       <table className='w-full text-left'>
@@ -61,6 +67,7 @@ export const TableComp = <T,>({
           ))}
         </tbody>
       </table>
+      {loading && <Loader />}
       <div className={'mt-9 custom-pagination'}>
         <Pagination
           currentPage={currentPage}

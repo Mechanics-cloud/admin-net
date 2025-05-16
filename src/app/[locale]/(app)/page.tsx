@@ -14,6 +14,7 @@ export default function UsersPage() {
     sortUsers,
     filterUsers,
     totalCount,
+    loading,
   } = useUserList()
 
   return (
@@ -28,6 +29,7 @@ export default function UsersPage() {
           onPageChange,
           pageSize,
           totalCount,
+          loading,
         }}
       />
     </div>
