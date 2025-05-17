@@ -40,3 +40,7 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
+.portal {
+  backdrop-filter: blur(4px);
+}

@@ -1,6 +1,6 @@
 import { useState, ReactNode, MouseEvent } from 'react'
 import { Typography } from 'car-robots-library'
-import { SortingArrow } from '@/src/features/user-list/ui/SortingArrow'
+import { SortingArrow } from '@/src/assets/icons/outlineIcons/SortingArrow'
 import { Filter } from '@/src/shared/hooks/useSortData'
 
 type Props = {
