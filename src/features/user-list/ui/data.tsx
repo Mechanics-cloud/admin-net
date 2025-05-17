@@ -11,6 +11,7 @@ export type Option = {
     | 'popover.ban'
     | 'popover.moreInfo'
     | 'popover.unban'
+  modalText?: 'modal.delete' | 'modal.ban' | 'modal.unban'
 }
 
 export const getOptions = (isBanned: boolean): Option[] => {
@@ -24,11 +25,13 @@ export const getOptions = (isBanned: boolean): Option[] => {
         />
       ),
       key: 'popover.deleteUser',
+      modalText: 'modal.delete',
     },
     {
       id: 2,
       icon: isBanned ? <UnblockIcon /> : <BlockedIcon />,
       key: isBanned ? 'popover.unban' : 'popover.ban',
+      modalText: isBanned ? 'modal.unban' : 'modal.ban',
     },
     {
       id: 3,

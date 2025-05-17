@@ -41,6 +41,11 @@
       "ban": "Ban User",
       "unban": "Unban User",
       "moreInfo": "More information"
+    },
+    "modal": {
+      "delete": "Are you sure you want to delete",
+      "ban": "Are you sure you want to ban",
+      "unban": "Are you sure you want to unban"
     }
   }
 }

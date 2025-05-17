@@ -1,18 +1,26 @@
+'use client'
 import { Typography } from 'car-robots-library'
 import { Option } from '@/src/features/user-list/ui/data'
 import { useToggle } from '@/src/shared/hooks/useToggle'
 import { Modal } from '@/src/shared/components/modal/Modal'
 import { useTranslations } from 'next-intl'
 import { MouseEvent } from 'react'
+import { useRouter } from 'next/navigation'
+import { User } from '@/src/shared/apolloClient/__generated__/graphql'
 
 type Props = {
   option: Option
+  user: User
 }
-export const OptionItem = ({ option }: Props) => {
+export const OptionItem = ({ option, user }: Props) => {
   const { state: isOpen, toggle } = useToggle()
   const t = useTranslations('UsersPage')
+  const router = useRouter()
 
-  const onClick = (e: MouseEvent<HTMLDivElement>) => {
+  const onClick = (e: MouseEvent) => {
+    if (option.key === 'popover.moreInfo') {
+      router.push(`/profile/${user.id}`)
+    }
     e.stopPropagation()
     toggle()
   }
@@ -26,11 +34,13 @@ export const OptionItem = ({ option }: Props) => {
     >
       {option.icon}
       <Typography variant={'reg14'}>{t(option.key)}</Typography>
-      {isOpen && (
+      {isOpen && option.key !== 'popover.moreInfo' && (
         <Modal
-          close={toggle}
-          title={'Hello Portal'}
-        />
+          close={onClick}
+          title={t(option.key)}
+        >
+          {option.modalText && t(option.modalText)} {user.userName}?
+        </Modal>
       )}
     </div>
   )
