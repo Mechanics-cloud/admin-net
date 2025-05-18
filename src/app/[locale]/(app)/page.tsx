@@ -12,14 +12,22 @@ export default function UsersPage() {
     onPageSize,
     pageSize,
     sortUsers,
-    filterUsers,
     totalCount,
     loading,
+    inputValue,
+    onInputChange,
+    selectValue,
+    onSelectChange,
   } = useUserList()
 
   return (
     <div className={'text-light-100 pt-12 pr-16'}>
-      <UserFilter filterUsers={filterUsers} />
+      <UserFilter
+        inputValue={inputValue}
+        onInputChange={onInputChange}
+        selectValue={selectValue}
+        onSelectChange={onSelectChange}
+      />
       <UsersTable
         users={users}
         toggleSort={sortUsers}

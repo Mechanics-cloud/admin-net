@@ -2,7 +2,7 @@ import {
   GetUsersQuery,
   User,
 } from '@/src/shared/apolloClient/__generated__/graphql'
-import { useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import { GET_USERS } from '@/src/features/user-list/api/request'
 import { responseErrorHandler } from '@/src/shared'
@@ -17,6 +17,11 @@ export const useUserList = () => {
   const { activeFilter, sortUsers } = useSortData(users, setUsers)
   const originalUsersRef = useRef<GetUsersQuery['getUsers'] | null>(null)
 
+  const [inputValue, setInputValue] = useState('')
+  const [selectValue, setSelectValue] = useState<
+    'blocked' | 'notBlocked' | undefined
+  >(undefined)
+
   const [getUsers, { loading }] = useLazyQuery(GET_USERS, {
     variables: {
       pageNumber: currentPage,
@@ -28,15 +33,20 @@ export const useUserList = () => {
     getUsers()
       .then((res) => {
         if (res?.data?.getUsers.users) {
-          setUsers(res?.data?.getUsers.users)
           originalUsersRef.current = res?.data?.getUsers
+          if (selectValue || inputValue) {
+            filterUsers(inputValue, selectValue)
+          } else {
+            setUsers(res?.data?.getUsers.users)
+          }
+
           setTotalCount(res.data.getUsers.pagination.totalCount)
         }
       })
       .catch((err) => {
         responseErrorHandler(err)
       })
-  }, [currentPage, getUsers, pageSize])
+  }, [currentPage, getUsers, inputValue, pageSize, selectValue])
 
   const filterUsers = (input: string, select?: 'blocked' | 'notBlocked') => {
     if (!originalUsersRef.current) return
@@ -61,6 +71,16 @@ export const useUserList = () => {
     setUsers(filteredUsers)
   }
 
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.currentTarget.value)
+    filterUsers(e.currentTarget.value, selectValue)
+  }
+
+  const onSelectChange = (value: 'blocked' | 'notBlocked') => {
+    setSelectValue(value)
+    filterUsers(inputValue, value)
+  }
+
   return {
     sortUsers,
     activeFilter,
@@ -72,5 +92,9 @@ export const useUserList = () => {
     filterUsers,
     totalCount,
     loading,
+    inputValue,
+    selectValue,
+    onInputChange,
+    onSelectChange,
   }
 }
