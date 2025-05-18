@@ -55,7 +55,7 @@ export const TableComp = <T,>({
         <tbody>
           {data?.map((item, index) => (
             <tr
-              className='h-[48px] align-middle'
+              className='h-[48px] align-middle border-b border-dark-500'
               key={`${Date.now()}/${index}`}
             >
               {columns.map((col) => (
