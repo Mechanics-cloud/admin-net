@@ -21,6 +21,7 @@ export const UserPopover = ({ children }: Props) => {
         <button
           title={'menu'}
           type={'button'}
+          /*className={'block mr-auto ml-auto'}*/
         >
           <MoreHorizontalOutline
             aria-label={'вызов настроек'}

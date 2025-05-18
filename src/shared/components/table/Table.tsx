@@ -2,7 +2,7 @@ import { Loader, Pagination, Typography } from 'car-robots-library'
 import { ToggleItem } from '@/src/features/user-list'
 import { Filter } from '@/src/shared/hooks/useSortData'
 import * as React from 'react'
-import { Column, PageData } from '@/src/shared'
+import { cn, Column, PageData } from '@/src/shared'
 
 type Props<T> = {
   toggleSort?: (filter: Filter, direction: 'asc' | 'desc') => void
@@ -33,7 +33,10 @@ export const TableComp = <T,>({
             {columns.map((col) => (
               <th
                 key={col.key as string}
-                className='px-6 w-[220px] break-words'
+                className={cn(
+                  'px-6 break-words',
+                  col.key === 'more' && 'w-[60px]'
+                )}
               >
                 {col.sortable && toggleSort ? (
                   <ToggleItem
@@ -58,7 +61,7 @@ export const TableComp = <T,>({
               {columns.map((col) => (
                 <td
                   key={col.key as string}
-                  className='px-6 break-words min-w-[220px]'
+                  className='px-6 break-words'
                 >
                   {col.render(item)}
                 </td>

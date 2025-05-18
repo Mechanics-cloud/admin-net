@@ -44,3 +44,7 @@ body {
 .portal {
   backdrop-filter: blur(4px);
 }
+
+.th {
+  width: 60px;
+}
