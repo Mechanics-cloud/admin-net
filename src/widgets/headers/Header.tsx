@@ -7,26 +7,32 @@ export const Header = () => {
   return (
     <div
       className={
-        'h-[var(--header-height)] fixed bg-dark-700 border-b border-dark-300 top-0 w-full flex gap-3 justify-between items-center px-15 max-sm:px-5 z-50'
+        'h-[var(--header-height)] fixed bg-dark-700 border-b border-dark-300 top-0 w-full z-30'
       }
     >
-      <Link href={'/'}>
-        <div className='flex items-end'>
-          <Typography
-            variant={'h1'}
-            className=''
-          >
-            Inctagram
-          </Typography>
-          <Typography
-            variant={'small'}
-            className='pb-1'
-          >
-            SuperAdmin
-          </Typography>
-        </div>
-      </Link>
-      <LangSelect />
+      <div
+        className={
+          'max-w-[1280px] h-full mx-auto flex gap-3 justify-between items-center px-15 max-sm:px-5 '
+        }
+      >
+        <Link href={'/'}>
+          <div className='flex items-end'>
+            <Typography
+              variant={'h1'}
+              className=''
+            >
+              Inctagram
+            </Typography>
+            <Typography
+              variant={'small'}
+              className='pb-1'
+            >
+              SuperAdmin
+            </Typography>
+          </div>
+        </Link>
+        <LangSelect />
+      </div>
     </div>
   )
 }
