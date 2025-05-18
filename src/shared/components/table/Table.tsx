@@ -27,13 +27,13 @@ export const TableComp = <T,>({
   } = pageData
   return (
     <>
-      <table className='w-full text-left'>
+      <table className='w-full text-left table-fixed'>
         <thead className='bg-dark-500 h-[48px]'>
           <tr className='px-6'>
             {columns.map((col) => (
               <th
                 key={col.key as string}
-                className='px-6'
+                className='px-6 w-[220px] break-words'
               >
                 {col.sortable && toggleSort ? (
                   <ToggleItem
@@ -58,7 +58,7 @@ export const TableComp = <T,>({
               {columns.map((col) => (
                 <td
                   key={col.key as string}
-                  className='px-6'
+                  className='px-6 break-words min-w-[220px]'
                 >
                   {col.render(item)}
                 </td>
