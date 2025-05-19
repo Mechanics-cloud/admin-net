@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <div
       className={
-        'h-[var(--header-height)] fixed bg-dark-700 border-b border-dark-300 top-0 w-full'
+        'h-[var(--header-height)] fixed bg-dark-700 border-b border-dark-300 top-0 w-full z-30'
       }
     >
       <div
