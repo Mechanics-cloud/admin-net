@@ -35,7 +35,7 @@ export const LangSelect = () => {
 
   return (
     <Select
-      className={'[&>button]:border-none focus-within:outline2'}
+      className={'[&>button]:border-none focus-within:outline2 z-100'}
       defaultValue={locale ?? 'ru'}
       disabled={isPending}
       onValueChange={onSelectChange}
