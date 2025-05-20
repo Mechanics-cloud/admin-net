@@ -10,7 +10,7 @@ export function ButtonsGroup({ paramsId }: { paramsId: string }) {
 
   const t = useTranslations('UserProfile')
 
-  const basePath = `/userProfile/${paramsId}`
+  const basePath = `/profile/${paramsId}`
 
   return (
     <div className='grid grid-cols-1 md:grid-cols-4 mt-10'>

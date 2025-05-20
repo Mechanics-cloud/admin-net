@@ -26,6 +26,29 @@
       }
     }
   },
+  "UsersPage": {
+    "userId": "User ID",
+    "userName": "Username",
+    "profileLink": "Profile link",
+    "dateAdded": "Date added",
+    "show": "Show",
+    "onPage": "on page",
+    "notSelected": "Not selected",
+    "blocked": "Blocked",
+    "notBlocked": "Not Blocked",
+    "search": "Search",
+    "popover": {
+      "deleteUser": "Delete User",
+      "ban": "Ban User",
+      "unban": "Unban User",
+      "moreInfo": "More information"
+    },
+    "modal": {
+      "delete": "Are you sure you want to delete",
+      "ban": "Are you sure you want to ban",
+      "unban": "Are you sure you want to unban"
+    }
+  },
 
   "UserProfile": {
     "backToUserList": "Back to Users List",

@@ -44,7 +44,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
     inputContainer: 'relative',
     label: disabled ? 'text-dark-100 mb-1' : 'text-light-900 mb-1',
     leftIcon:
-      'absolute -translate-y-1 top-1 stroke-width-1 fill-light-100 left-3',
+      'absolute -translate-y-1 top-2.5 stroke-width-1 fill-light-100 left-3 text-gray-400',
     rightIcon:
       'absolute -translate-y-1 top-1 stroke-width-1 fill-light-100 right-3 cursor-pointer',
     star: 'text-danger-500 ml-1',
@@ -73,7 +73,10 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
           title={error ?? ''}
         >
           <input
-            className={cn(cls.input, type === 'search' && 'bg-transparent')}
+            className={cn(
+              cls.input,
+              type === 'search' && 'bg-transparent pl-10!'
+            )}
             disabled={disabled}
             onChange={onChange}
             ref={ref}
