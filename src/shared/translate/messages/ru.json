@@ -48,5 +48,22 @@
       "ban": "Вы действительно хотите заблокировать",
       "unban": "Вы действительно хотите разблокировать"
     }
+  },
+
+  "UserProfile": {
+    "backToUserList": "Назад к списку пользователей",
+    "userID": "ID пользователя",
+    "profileCreationDate": "Дата создания профиля",
+    "uploadedPhotos": "Загруженные фото",
+    "payments": "Платежи",
+    "followers": "Подписчики", 
+    "following": "Подписки"
+  },
+
+    "Basic": {
+    "notFoundTitle": "Страница не найдена",
+    "pagination": {
+      "goBack": "Вернуться назад"
+    }
   }
 }
