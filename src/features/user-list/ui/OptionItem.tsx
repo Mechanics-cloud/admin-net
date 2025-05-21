@@ -1,12 +1,14 @@
 'use client'
-import { Typography } from 'car-robots-library'
+import { Select, SelectItem, Typography } from 'car-robots-library'
 import { Option } from '@/src/features/user-list/ui/data'
 import { useToggle } from '@/src/shared/hooks/useToggle'
 import { Modal } from '@/src/shared/components/modal/Modal'
 import { useTranslations } from 'next-intl'
-import { MouseEvent } from 'react'
+import { MouseEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
+import * as React from 'react'
+import { cn } from '@/src/shared'
 
 type Props = {
   option: Option
@@ -16,6 +18,7 @@ export const OptionItem = ({ option, user }: Props) => {
   const { state: isOpen, toggle } = useToggle()
   const t = useTranslations('UsersPage')
   const router = useRouter()
+  const [showButtons, setShowButtons] = useState(true)
 
   const onClick = (e: MouseEvent) => {
     if (option.key === 'popover.moreInfo') {
@@ -23,7 +26,9 @@ export const OptionItem = ({ option, user }: Props) => {
     }
     e.stopPropagation()
     toggle()
+    setShowButtons(true)
   }
+
   return (
     <div
       key={option.id}
@@ -38,8 +43,40 @@ export const OptionItem = ({ option, user }: Props) => {
         <Modal
           close={onClick}
           title={t(option.key)}
+          showButtons={showButtons}
+          setShowButtons={setShowButtons}
+          className={cn(!showButtons && 'min-h-[288px]')}
         >
-          {option.modalText && t(option.modalText)} {user.userName}?
+          <Typography variant={'reg16'}>
+            {option.modalText && t(option.modalText)} {user.userName}?
+          </Typography>
+          {!showButtons && option.key === 'popover.ban' && (
+            <div className={'relative z-99 mt-4.5'}>
+              <Select
+                placeholder={t('modal.reason.placeholder')}
+                className={'min-w-[234px] [&>button>span>p]:mt-0!'}
+              >
+                <SelectItem
+                  value={'behavior'}
+                  className={'z-80'}
+                >
+                  <Typography variant={'reg16'}>
+                    {t('modal.reason.behavior')}
+                  </Typography>
+                </SelectItem>
+                <SelectItem value={'advertising'}>
+                  <Typography variant={'reg16'}>
+                    {t('modal.reason.advertising')}
+                  </Typography>
+                </SelectItem>
+                <SelectItem value={'another'}>
+                  <Typography variant={'reg16'}>
+                    {t('modal.reason.another')}
+                  </Typography>
+                </SelectItem>
+              </Select>
+            </div>
+          )}
         </Modal>
       )}
     </div>

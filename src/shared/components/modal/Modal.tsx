@@ -1,24 +1,45 @@
 import { createPortal } from 'react-dom'
 import { Button, CloseOutline, Typography } from 'car-robots-library'
-import { MouseEvent, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, MouseEvent } from 'react'
+import { cn } from '@/src/shared'
 
 type Props = {
   close: (e: MouseEvent) => void
   title: string
-  children: ReactNode
-}
-export const Modal = ({ close, title, children }: Props) => {
+  showButtons?: boolean
+  setShowButtons?: (showButtons: boolean) => void
+} & ComponentPropsWithoutRef<'div'>
+
+export const Modal = ({
+  close,
+  title,
+  showButtons = true,
+  setShowButtons,
+  children,
+  className,
+  ...props
+}: Props) => {
   const body = document.querySelector('body')
+
+  const onConfirm = (e: MouseEvent<HTMLButtonElement>) => {
+    if (setShowButtons) {
+      e.stopPropagation()
+      setShowButtons(false)
+    }
+  }
 
   if (!body) return null
 
   return createPortal(
     <div
       className={
-        'absolute w-full h-full inset-0 flex items-center justify-center z-60 portal'
+        'absolute w-full h-full inset-0 flex items-center justify-center z-50 portal'
       }
     >
-      <div className={'min-w-[328px] bg-dark-100'}>
+      <div
+        className={cn('min-w-[328px] bg-dark-100', className)}
+        {...props}
+      >
         <div
           className={
             'px-6 py-3 flex justify-between gap-5 items-center w-full border-b border-b-dark-100'
@@ -32,21 +53,24 @@ export const Modal = ({ close, title, children }: Props) => {
           />
         </div>
         <div className={'px-6 py-[30px]'}>
-          <Typography variant={'reg16'}>{children}</Typography>
-          <div className={'flex gap-[70px] mt-[42px]'}>
-            <Button
-              variant={'primary'}
-              className={'w-full'}
-            >
-              No
-            </Button>
-            <Button
-              variant={'outline'}
-              className={'w-full'}
-            >
-              Yes
-            </Button>
-          </div>
+          <div>{children}</div>
+          {showButtons && (
+            <div className={'flex gap-[70px] mt-[42px]'}>
+              <Button
+                variant={'primary'}
+                className={'w-full'}
+              >
+                No
+              </Button>
+              <Button
+                variant={'outline'}
+                className={'w-full'}
+                onClick={onConfirm}
+              >
+                Yes
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>,
