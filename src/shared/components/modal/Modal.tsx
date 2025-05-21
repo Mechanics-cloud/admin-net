@@ -7,6 +7,7 @@ type Props = {
   close: (e: MouseEvent) => void
   title: string
   showButtons?: boolean
+  isToggleBan?: boolean
   setShowButtons?: (showButtons: boolean) => void
 } & ComponentPropsWithoutRef<'div'>
 
@@ -17,12 +18,13 @@ export const Modal = ({
   setShowButtons,
   children,
   className,
+  isToggleBan = false,
   ...props
 }: Props) => {
   const body = document.querySelector('body')
 
   const onConfirm = (e: MouseEvent<HTMLButtonElement>) => {
-    if (setShowButtons) {
+    if (setShowButtons && isToggleBan) {
       e.stopPropagation()
       setShowButtons(false)
     }
@@ -53,7 +55,7 @@ export const Modal = ({
           />
         </div>
         <div className={'px-6 py-[30px]'}>
-          <div>{children}</div>
+          {children}
           {showButtons && (
             <div className={'flex gap-[70px] mt-[42px]'}>
               <Button

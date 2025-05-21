@@ -46,6 +46,7 @@ export const OptionItem = ({ option, user }: Props) => {
           showButtons={showButtons}
           setShowButtons={setShowButtons}
           className={cn(!showButtons && 'min-h-[288px]')}
+          isToggleBan={option.key === 'popover.ban'}
         >
           <Typography variant={'reg16'}>
             {option.modalText && t(option.modalText)} {user.userName}?
