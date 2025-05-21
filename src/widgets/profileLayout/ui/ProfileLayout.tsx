@@ -1,7 +1,7 @@
 'use client'
 
-import { MainPaths } from '@/src/shared'
-import { Typography } from 'car-robots-library'
+import { MainPaths, responseErrorHandler } from '@/src/shared'
+import { Skeleton, Typography } from 'car-robots-library'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 import { useGetUserProfile } from '../common/useGetUserProfile'
@@ -20,10 +20,11 @@ export default function ProfileLayout({
 }) {
   const t = useTranslations('UserProfile')
 
-  const { fullName, linkUser, profileCreateDate, avatar, error } =
+  const { fullName, linkUser, profileCreateDate, avatar, error, loading } =
     useGetUserProfile(paramsId)
 
   if (error) {
+    responseErrorHandler(error)
     return <NotContent />
   }
 
@@ -38,26 +39,39 @@ export default function ProfileLayout({
           <Typography variant={'reg14'}>{t('backToUserList')}</Typography>
         </Link>
         <div className='mb-8 flex gap-3'>
-          <Image
-            alt={'avatar'}
-            className={'rounded-full lg:mr-4'}
-            height={60}
-            priority
-            src={avatar}
-            width={60}
-          />
+          {loading ? (
+            <Skeleton className='h-15 w-15 rounded-full lg:mr-4' />
+          ) : (
+            <Image
+              alt={'avatar'}
+              className={'rounded-full lg:mr-4'}
+              height={60}
+              priority
+              src={avatar}
+              width={60}
+            />
+          )}
           <div className='flex-col'>
-            <Typography variant={'h1'}>{fullName}</Typography>
-            <Typography variant={'reg14'}>
-              <Link
-                href={`https://car-robot.ru/profile/${paramsId}`}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='underline hover:text-accent-300!'
-              >
-                {linkUser}
-              </Link>
-            </Typography>
+            {loading ? (
+              <>
+                <Skeleton className='h-5 w-40 mb-1' />
+                <Skeleton className='h-5 w-40' />
+              </>
+            ) : (
+              <>
+                <Typography variant={'h1'}>{fullName}</Typography>
+                <Typography variant={'reg14'}>
+                  <Link
+                    href={`https://car-robot.ru/profile/${paramsId}`}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='underline hover:text-accent-300!'
+                  >
+                    {linkUser}
+                  </Link>
+                </Typography>
+              </>
+            )}
           </div>
         </div>
         <div className='flex gap-25'>
@@ -77,7 +91,11 @@ export default function ProfileLayout({
             >
               {t('profileCreationDate')}:
             </Typography>
-            <Typography variant={'reg16'}>{profileCreateDate}</Typography>
+            {loading ? (
+              <Skeleton className='h-5' />
+            ) : (
+              <Typography variant={'reg16'}>{profileCreateDate}</Typography>
+            )}
           </div>
         </div>
         <div>

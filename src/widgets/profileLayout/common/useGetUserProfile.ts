@@ -4,7 +4,11 @@ import { capitalize, formattedDate } from './helper'
 import avatarPlaceholder from '@/public/user-avatar-placeholder.jpg'
 
 export function useGetUserProfile(id: string) {
-  const { data: profileData, error } = useQuery(GET_USER_PROFILE, {
+  const {
+    data: profileData,
+    error,
+    loading,
+  } = useQuery(GET_USER_PROFILE, {
     variables: { Id: +id },
   })
 
@@ -31,5 +35,5 @@ export function useGetUserProfile(id: string) {
   const avatar =
     profileData?.getUser?.profile?.avatars?.[0]?.url ?? avatarPlaceholder
 
-  return { fullName, linkUser, profileCreateDate, avatar, error }
+  return { fullName, linkUser, profileCreateDate, avatar, error, loading }
 }
