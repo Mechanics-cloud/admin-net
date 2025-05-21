@@ -5,31 +5,69 @@ import { GET_USER_FOTOS } from '../api/request'
 import Image from 'next/image'
 import { cn } from '@/src/shared'
 import { useInView } from 'react-intersection-observer'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 type Props = {
   userId: string
 }
 
 export default function UploadedFotos({ userId }: Props) {
-  const { data: uploadedPhotos, fetchMore } = useQuery(GET_USER_FOTOS, {
+  // const [state, setState] = useState()
+  const refStop = useRef<boolean>(false)
+  const refEnd = useRef<number>(0)
+  const refPrevEnd = useRef<number>(0)
+
+  const {
+    data: uploadedPhotos,
+    fetchMore,
+    loading,
+    previousData,
+  } = useQuery(GET_USER_FOTOS, {
     variables: { Id: +userId, endCursorId: 0 },
     notifyOnNetworkStatusChange: true,
   })
 
-  const { ref, inView } = useInView()
+  if (uploadedPhotos?.getPostsByUser) {
+    if (
+      uploadedPhotos?.getPostsByUser.items?.length ===
+      uploadedPhotos?.getPostsByUser.totalCount
+    ) {
+      refStop.current = true
+    }
+  }
+
+  // console.log('loading', loading)
+  console.log('previousData', previousData)
+
+  const { ref, inView } = useInView({
+    delay: 1000,
+    initialInView: false,
+    threshold: 0.5,
+  })
+
+  // console.log('inView', inView)
 
   const handleLoadMore = useCallback(() => {
     const endCursorId = uploadedPhotos?.getPostsByUser?.items?.at(-1)?.id
     if (!endCursorId) return
 
-    fetchMore({
-      variables: { endCursorId },
-    })
-  }, [fetchMore, uploadedPhotos?.getPostsByUser?.items])
+    if (endCursorId == refPrevEnd.current) {
+      refStop.current = true
+    }
+
+    refEnd.current = endCursorId
+
+    if (!loading) {
+      fetchMore({
+        variables: { endCursorId },
+      }).then(() => {
+        refPrevEnd.current = refEnd.current
+      })
+    }
+  }, [fetchMore, uploadedPhotos?.getPostsByUser?.items, loading])
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !refStop.current) {
       handleLoadMore()
     }
   }, [inView, handleLoadMore])
@@ -42,10 +80,10 @@ export default function UploadedFotos({ userId }: Props) {
             'mt-9 grid gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full h-full z-0'
           )}
         >
-          {uploadedPhotos.getPostsByUser.items.map((item) => (
+          {uploadedPhotos.getPostsByUser.items.map((item, index) => (
             <div
               className='relative'
-              key={item.id}
+              key={`${item.id}${index}`}
             >
               <Image
                 alt='image'
@@ -57,14 +95,14 @@ export default function UploadedFotos({ userId }: Props) {
               />
             </div>
           ))}
+          <div
+            className='w-full h-30 '
+            ref={ref}
+          ></div>
         </div>
       ) : (
         <div>Постов нет</div>
       )}
-      <div
-        className='w-full h-3 '
-        ref={ref}
-      ></div>
     </>
   )
 }

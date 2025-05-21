@@ -26,7 +26,7 @@ const client = new ApolloClient({
       Query: {
         fields: {
           getPostsByUser: {
-            keyArgs: ['Id'],
+            keyArgs: ['userId'],
             merge(existing = { items: [], pageInfo: {} }, incoming) {
               return {
                 ...incoming,
