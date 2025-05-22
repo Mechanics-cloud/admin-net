@@ -11,9 +11,10 @@ type Props = {
   users: User[] | undefined
   toggleSort: (filter: Filter, direction: 'asc' | 'desc') => void
   pageData: PageData
+  banUser: (userId: number, banReason: string) => void
 }
 
-export const UsersTable = ({ users, toggleSort, pageData }: Props) => {
+export const UsersTable = ({ users, toggleSort, pageData, banUser }: Props) => {
   const t = useTranslations('UsersPage')
 
   const columns = useMemo((): Column<User>[] => {
@@ -57,12 +58,13 @@ export const UsersTable = ({ users, toggleSort, pageData }: Props) => {
             <PopoverOptions
               isBanned={!!user.userBan}
               user={user}
+              banUser={banUser}
             />
           </UserPopover>
         ),
       },
     ]
-  }, [t])
+  }, [t, banUser])
 
   return (
     users && (

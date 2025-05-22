@@ -16,8 +16,9 @@ import { BAN_USER } from '@/src/features/user-list/api/request'
 type Props = {
   option: Option
   user: User
+  onBan: (userId: number, banReason: string) => void
 }
-export const OptionItem = ({ option, user }: Props) => {
+export const OptionItem = ({ option, user, onBan }: Props) => {
   const { state: isOpen, toggle } = useToggle()
   const t = useTranslations('UsersPage')
   const router = useRouter()
@@ -44,6 +45,7 @@ export const OptionItem = ({ option, user }: Props) => {
 
   const onBanUser = async () => {
     await banUser()
+    onBan(user.id, selectValue)
     setSelectValue('')
   }
 

@@ -29,11 +29,15 @@ export const useUserList = () => {
     },
   })
 
+  console.log(users)
+
   useEffect(() => {
     getUsers()
       .then((res) => {
         if (res?.data?.getUsers.users) {
-          originalUsersRef.current = res?.data?.getUsers
+          originalUsersRef.current = JSON.parse(
+            JSON.stringify(res?.data?.getUsers)
+          ) //deep copy for updates
           if (selectValue || inputValue) {
             filterUsers(inputValue, selectValue)
           } else {
@@ -81,6 +85,26 @@ export const useUserList = () => {
     filterUsers(inputValue, value)
   }
 
+  const banUser = (userId: number, reason: string) => {
+    const now = new Date().toISOString()
+    const updateFn = (user: User) =>
+      user.id === userId
+        ? { ...user, userBan: { reason, createdAt: now } }
+        : user
+
+    setUsers((prev) => prev.map(updateFn))
+
+    if (originalUsersRef.current) {
+      originalUsersRef.current.users =
+        originalUsersRef.current.users.map(updateFn)
+    }
+
+    // if a filter is active
+    if (inputValue || selectValue) {
+      filterUsers(inputValue, selectValue)
+    }
+  }
+
   return {
     sortUsers,
     activeFilter,
@@ -96,5 +120,6 @@ export const useUserList = () => {
     selectValue,
     onInputChange,
     onSelectChange,
+    banUser,
   }
 }

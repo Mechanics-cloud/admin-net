@@ -18,6 +18,7 @@ export default function UsersPage() {
     onInputChange,
     selectValue,
     onSelectChange,
+    banUser,
   } = useUserList()
 
   return (
@@ -39,6 +40,7 @@ export default function UsersPage() {
           totalCount,
           loading,
         }}
+        banUser={banUser}
       />
     </div>
   )
