@@ -4,7 +4,7 @@ import { Option } from '@/src/features/user-list/ui/data'
 import { useToggle } from '@/src/shared/hooks/useToggle'
 import { Modal } from '@/src/shared/components/modal/Modal'
 import { useTranslations } from 'next-intl'
-import { MouseEvent, useState } from 'react'
+import { MouseEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
 import * as React from 'react'
@@ -18,7 +18,6 @@ export const OptionItem = ({ option, user }: Props) => {
   const { state: isOpen, toggle } = useToggle()
   const t = useTranslations('UsersPage')
   const router = useRouter()
-  const [showButtons, setShowButtons] = useState(true)
 
   const onClick = (e: MouseEvent) => {
     if (option.key === 'popover.moreInfo') {
@@ -26,7 +25,6 @@ export const OptionItem = ({ option, user }: Props) => {
     }
     e.stopPropagation()
     toggle()
-    setShowButtons(true)
   }
 
   return (
@@ -43,15 +41,12 @@ export const OptionItem = ({ option, user }: Props) => {
         <Modal
           close={onClick}
           title={t(option.key)}
-          showButtons={showButtons}
-          setShowButtons={setShowButtons}
-          className={cn(!showButtons && 'min-h-[288px]')}
-          isToggleBan={option.key === 'popover.ban'}
+          className={cn(option.key === 'popover.ban' && 'min-h-[288px]')}
         >
           <Typography variant={'reg16'}>
             {option.modalText && t(option.modalText)} {user.userName}?
           </Typography>
-          {!showButtons && option.key === 'popover.ban' && (
+          {option.key === 'popover.ban' && (
             <div className={'relative z-99 mt-4.5'}>
               <Select
                 placeholder={t('modal.reason.placeholder')}

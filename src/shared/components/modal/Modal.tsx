@@ -14,21 +14,11 @@ type Props = {
 export const Modal = ({
   close,
   title,
-  showButtons = true,
-  setShowButtons,
   children,
   className,
-  isToggleBan = false,
   ...props
 }: Props) => {
   const body = document.querySelector('body')
-
-  const onConfirm = (e: MouseEvent<HTMLButtonElement>) => {
-    if (setShowButtons && isToggleBan) {
-      e.stopPropagation()
-      setShowButtons(false)
-    }
-  }
 
   if (!body) return null
 
@@ -39,7 +29,7 @@ export const Modal = ({
       }
     >
       <div
-        className={cn('min-w-[328px] bg-dark-100', className)}
+        className={cn('min-w-[378px]  bg-dark-100 flex flex-col', className)}
         {...props}
       >
         <div
@@ -54,25 +44,24 @@ export const Modal = ({
             onClick={close}
           />
         </div>
-        <div className={'px-6 py-[30px]'}>
+        <div
+          className={'px-6 py-[30px] flex flex-col justify-between flex-grow'}
+        >
           {children}
-          {showButtons && (
-            <div className={'flex gap-[70px] mt-[42px]'}>
-              <Button
-                variant={'primary'}
-                className={'w-full'}
-              >
-                No
-              </Button>
-              <Button
-                variant={'outline'}
-                className={'w-full'}
-                onClick={onConfirm}
-              >
-                Yes
-              </Button>
-            </div>
-          )}
+          <div className={'flex gap-[70px] mt-[48px]'}>
+            <Button
+              variant={'primary'}
+              className={'w-full'}
+            >
+              No
+            </Button>
+            <Button
+              variant={'outline'}
+              className={'w-full'}
+            >
+              Yes
+            </Button>
+          </div>
         </div>
       </div>
     </div>,
