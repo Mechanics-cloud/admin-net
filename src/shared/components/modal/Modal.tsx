@@ -6,9 +6,8 @@ import { cn } from '@/src/shared'
 type Props = {
   close: (e: MouseEvent) => void
   title: string
-  showButtons?: boolean
-  isToggleBan?: boolean
-  setShowButtons?: (showButtons: boolean) => void
+  disabled?: boolean
+  onConfirm?: () => void
 } & ComponentPropsWithoutRef<'div'>
 
 export const Modal = ({
@@ -16,6 +15,8 @@ export const Modal = ({
   title,
   children,
   className,
+  disabled,
+  onConfirm,
   ...props
 }: Props) => {
   const body = document.querySelector('body')
@@ -58,6 +59,8 @@ export const Modal = ({
             <Button
               variant={'outline'}
               className={'w-full'}
+              disabled={disabled}
+              onClick={onConfirm}
             >
               Yes
             </Button>

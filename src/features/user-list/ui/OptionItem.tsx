@@ -1,14 +1,17 @@
 'use client'
-import { Select, SelectItem, Typography } from 'car-robots-library'
+import { Typography } from 'car-robots-library'
 import { Option } from '@/src/features/user-list/ui/data'
 import { useToggle } from '@/src/shared/hooks/useToggle'
 import { Modal } from '@/src/shared/components/modal/Modal'
 import { useTranslations } from 'next-intl'
-import { MouseEvent } from 'react'
+import { MouseEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
 import * as React from 'react'
 import { cn } from '@/src/shared'
+import { OptionItemSelect } from '@/src/features/user-list/ui/OptionItemSelect'
+import { useMutation } from '@apollo/client'
+import { BAN_USER } from '@/src/features/user-list/api/request'
 
 type Props = {
   option: Option
@@ -27,6 +30,23 @@ export const OptionItem = ({ option, user }: Props) => {
     toggle()
   }
 
+  const [selectValue, setSelectValue] = useState<string>('')
+  const onValueChange = (value: string) => {
+    setSelectValue(value)
+  }
+
+  const [banUser] = useMutation(BAN_USER, {
+    variables: {
+      userId: user.id,
+      banReason: selectValue,
+    },
+  })
+
+  const onBanUser = async () => {
+    await banUser()
+    setSelectValue('')
+  }
+
   return (
     <div
       key={option.id}
@@ -42,36 +62,18 @@ export const OptionItem = ({ option, user }: Props) => {
           close={onClick}
           title={t(option.key)}
           className={cn(option.key === 'popover.ban' && 'min-h-[288px]')}
+          disabled={!selectValue}
+          onConfirm={onBanUser}
         >
           <Typography variant={'reg16'}>
             {option.modalText && t(option.modalText)} {user.userName}?
           </Typography>
           {option.key === 'popover.ban' && (
-            <div className={'relative z-99 mt-4.5'}>
-              <Select
-                placeholder={t('modal.reason.placeholder')}
-                className={'min-w-[234px] [&>button>span>p]:mt-0!'}
-              >
-                <SelectItem
-                  value={'behavior'}
-                  className={'z-80'}
-                >
-                  <Typography variant={'reg16'}>
-                    {t('modal.reason.behavior')}
-                  </Typography>
-                </SelectItem>
-                <SelectItem value={'advertising'}>
-                  <Typography variant={'reg16'}>
-                    {t('modal.reason.advertising')}
-                  </Typography>
-                </SelectItem>
-                <SelectItem value={'another'}>
-                  <Typography variant={'reg16'}>
-                    {t('modal.reason.another')}
-                  </Typography>
-                </SelectItem>
-              </Select>
-            </div>
+            <OptionItemSelect
+              placeholder={t('modal.reason.placeholder')}
+              selectValue={selectValue}
+              onValueChange={onValueChange}
+            />
           )}
         </Modal>
       )}
