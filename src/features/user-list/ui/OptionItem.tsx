@@ -12,16 +12,18 @@ import { cn } from '@/src/shared'
 import { OptionItemSelect } from '@/src/features/user-list/ui/OptionItemSelect'
 import { useMutation } from '@apollo/client'
 import { BAN_USER } from '@/src/features/user-list/api/request'
+import { useUserListContext } from '@/src/features/user-list/model/useUserListContext'
 
 type Props = {
   option: Option
   user: User
-  onBan: (userId: number, banReason: string) => void
 }
-export const OptionItem = ({ option, user, onBan }: Props) => {
+export const OptionItem = ({ option, user }: Props) => {
   const { state: isOpen, toggle } = useToggle()
   const t = useTranslations('UsersPage')
   const router = useRouter()
+
+  const { banUser } = useUserListContext()
 
   const onClick = (e: MouseEvent) => {
     if (option.key === 'popover.moreInfo') {
@@ -36,7 +38,7 @@ export const OptionItem = ({ option, user, onBan }: Props) => {
     setSelectValue(value)
   }
 
-  const [banUser] = useMutation(BAN_USER, {
+  const [banUserById] = useMutation(BAN_USER, {
     variables: {
       userId: user.id,
       banReason: selectValue,
@@ -44,8 +46,8 @@ export const OptionItem = ({ option, user, onBan }: Props) => {
   })
 
   const onBanUser = async () => {
-    await banUser()
-    onBan(user.id, selectValue)
+    await banUserById()
+    banUser(user.id, selectValue)
     setSelectValue('')
   }
 

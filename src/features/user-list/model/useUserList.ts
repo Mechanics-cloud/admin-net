@@ -29,8 +29,6 @@ export const useUserList = () => {
     },
   })
 
-  console.log(users)
-
   useEffect(() => {
     getUsers()
       .then((res) => {
