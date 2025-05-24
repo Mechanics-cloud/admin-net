@@ -14,7 +14,15 @@ export interface UseUserList {
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
   selectValue: string | undefined
   onSelectChange: (value: 'blocked' | 'notBlocked') => void
-  banUser: (userId: number, reason: string) => void
+  toggleBanUser: ({
+    userId,
+    action,
+    reason,
+  }: {
+    userId: number
+    action: 'ban' | 'unban'
+    reason?: string
+  }) => void
   filterUsers: (input: string, select?: 'blocked' | 'notBlocked') => void
   sortUsers: (filter: Filter, direction: 'asc' | 'desc') => void
 }

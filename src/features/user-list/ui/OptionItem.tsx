@@ -8,10 +8,10 @@ import { MouseEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
 import * as React from 'react'
-import { cn } from '@/src/shared'
+import { cn, responseErrorHandler } from '@/src/shared'
 import { OptionItemSelect } from '@/src/features/user-list/ui/OptionItemSelect'
 import { useMutation } from '@apollo/client'
-import { BAN_USER } from '@/src/features/user-list/api/request'
+import { BAN_USER, UNBAN_USER } from '@/src/features/user-list/api/request'
 import { useUserListContext } from '@/src/features/user-list/model/useUserListContext'
 
 type Props = {
@@ -23,7 +23,7 @@ export const OptionItem = ({ option, user }: Props) => {
   const t = useTranslations('UsersPage')
   const router = useRouter()
 
-  const { banUser } = useUserListContext()
+  const { toggleBanUser } = useUserListContext()
 
   const onClick = (e: MouseEvent) => {
     if (option.key === 'popover.moreInfo') {
@@ -38,17 +38,37 @@ export const OptionItem = ({ option, user }: Props) => {
     setSelectValue(value)
   }
 
-  const [banUserById] = useMutation(BAN_USER, {
+  const [banUserById, { loading }] = useMutation(BAN_USER, {
     variables: {
       userId: user.id,
       banReason: selectValue,
     },
+    onError: (error) => {
+      setSelectValue('')
+      responseErrorHandler(error)
+    },
   })
 
-  const onBanUser = async () => {
-    await banUserById()
-    banUser(user.id, selectValue)
-    setSelectValue('')
+  const [unbanUserById] = useMutation(UNBAN_USER, {
+    variables: {
+      userId: user.id,
+    },
+    onError: (error) => {
+      responseErrorHandler(error)
+    },
+  })
+
+  const toggleBan = async () => {
+    const action = option.key === 'popover.ban' ? 'ban' : 'unban'
+    const reason = action === 'ban' ? selectValue : ''
+
+    if (action === 'ban') {
+      await banUserById()
+      setSelectValue('')
+    } else {
+      await unbanUserById()
+    }
+    toggleBanUser({ userId: user.id, action, reason })
   }
 
   return (
@@ -66,8 +86,8 @@ export const OptionItem = ({ option, user }: Props) => {
           close={onClick}
           title={t(option.key)}
           className={cn(option.key === 'popover.ban' && 'min-h-[288px]')}
-          disabled={!selectValue}
-          onConfirm={onBanUser}
+          disabled={(option.key === 'popover.ban' && !selectValue) || loading}
+          onConfirm={toggleBan}
         >
           <Typography variant={'reg16'}>
             {option.modalText && t(option.modalText)} {user.userName}?

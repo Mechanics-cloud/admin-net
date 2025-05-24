@@ -83,11 +83,25 @@ export const useUserList = () => {
     filterUsers(inputValue, value)
   }
 
-  const banUser = (userId: number, reason: string) => {
+  const toggleBanUser = ({
+    userId,
+    action,
+    reason,
+  }: {
+    userId: number
+    action: 'ban' | 'unban'
+    reason?: string
+  }) => {
     const now = new Date().toISOString()
     const updateFn = (user: User) =>
       user.id === userId
-        ? { ...user, userBan: { reason, createdAt: now } }
+        ? {
+            ...user,
+            userBan:
+              action === 'ban'
+                ? { reason: reason || '', createdAt: now }
+                : null,
+          }
         : user
 
     setUsers((prev) => prev.map(updateFn))
@@ -118,6 +132,6 @@ export const useUserList = () => {
     selectValue,
     onInputChange,
     onSelectChange,
-    banUser,
+    toggleBanUser,
   }
 }
