@@ -1,11 +1,10 @@
 import { cn, formatDate, Column, TableComp } from '@/src/shared'
-import { BlockedIcon } from '@/src/assets/icons/outlineIcons/BlockedIcon'
+import { BlockedIcon } from '@/src/assets'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
-import { UserPopover, PopoverOptions } from '@/src/features/user-list'
+import { UserPopover, PopoverOptions, useUserListContext } from '@/src/features'
 import { useMemo } from 'react'
-import { useUserListContext } from '@/src/features/user-list/model/useUserListContext'
 
 export const UsersTable = () => {
   const t = useTranslations('UsersPage')

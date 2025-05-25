@@ -2,7 +2,7 @@ import { TextField } from '@/src/shared'
 import { Select, SelectItem, Typography } from 'car-robots-library'
 import * as React from 'react'
 import { useTranslations } from 'next-intl'
-import { useUserListContext } from '@/src/features/user-list/model/useUserListContext'
+import { useUserListContext } from '@/src/features'
 
 export const UserFilter = () => {
   const t = useTranslations('UsersPage')

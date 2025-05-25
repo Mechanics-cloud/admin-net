@@ -1,18 +1,19 @@
 'use client'
 import { Typography } from 'car-robots-library'
-import { Option } from '@/src/features/user-list/ui/data'
-import { useToggle } from '@/src/shared/hooks/useToggle'
-import { Modal } from '@/src/shared/components/modal/Modal'
+import {
+  Option,
+  OptionItemSelect,
+  useUserListContext,
+  BAN_USER,
+  UNBAN_USER,
+} from '@/src/features'
 import { useTranslations } from 'next-intl'
 import { MouseEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
 import * as React from 'react'
-import { cn, responseErrorHandler } from '@/src/shared'
-import { OptionItemSelect } from '@/src/features/user-list/ui/OptionItemSelect'
+import { cn, responseErrorHandler, useToggle, Modal } from '@/src/shared'
 import { useMutation } from '@apollo/client'
-import { BAN_USER, UNBAN_USER } from '@/src/features/user-list/api/request'
-import { useUserListContext } from '@/src/features/user-list/model/useUserListContext'
 
 type Props = {
   option: Option

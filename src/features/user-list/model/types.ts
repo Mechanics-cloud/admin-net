@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
-import { Filter } from '@/src/shared/hooks/useSortData'
+import { Filter } from '@/src/shared'
 
 export interface UseUserList {
   users: User[]

@@ -4,10 +4,8 @@ import {
 } from '@/src/shared/apolloClient/__generated__/graphql'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
-import { GET_USERS } from '@/src/features/user-list/api/request'
-import { responseErrorHandler } from '@/src/shared'
-import { usePagination } from '@/src/shared/hooks/usePagination'
-import { useSortData } from '@/src/shared/hooks/useSortData'
+import { GET_USERS } from '@/src/features'
+import { responseErrorHandler, usePagination, useSortData } from '@/src/shared'
 
 export const useUserList = () => {
   const [users, setUsers] = useState<User[]>([])

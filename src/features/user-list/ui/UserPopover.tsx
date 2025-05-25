@@ -5,7 +5,7 @@ import {
   PopoverTrigger,
 } from 'car-robots-library'
 import { ReactNode } from 'react'
-import { useToggle } from '@/src/shared/hooks/useToggle'
+import { useToggle } from '@/src/shared'
 
 type Props = {
   children: ReactNode

@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext } from 'react'
 import { useUserList } from './useUserList'
-import { UseUserList } from '@/src/features/user-list/model/types'
+import { UseUserList } from '@/src/features'
 
 const UserListContext = createContext<UseUserList | null>(null)
 
