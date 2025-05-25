@@ -1,7 +1,7 @@
 'use client'
 
 import { MainPaths, responseErrorHandler } from '@/src/shared'
-import { Skeleton, Typography } from 'car-robots-library'
+import { Loader, Skeleton, Typography } from 'car-robots-library'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 import { useGetUserProfile } from '../common/useGetUserProfile'
@@ -40,7 +40,10 @@ export default function ProfileLayout({
         </Link>
         <div className='mb-8 flex gap-3'>
           {loading ? (
-            <Skeleton className='h-15 w-15 rounded-full lg:mr-4' />
+            <>
+              <Skeleton className='h-15 w-15 rounded-full lg:mr-4' />
+              <Loader />
+            </>
           ) : (
             <Image
               alt={'avatar'}
