@@ -62,8 +62,16 @@
 
   "Basic": {
     "notFoundTitle": "notFoundTitle",
+    "defaultAltImage": "post photo",
+    "defaultStubImage": "image stub",
+    "emptyImages": "Failed to display post photos. Please contact support or try again later!",
     "pagination": {
       "goBack": "goBack"
     }
+  },
+
+  "NoPost": {
+    "alt": "No user post image",
+    "defaultText": "The user has not published any posts yet"
   }
 }
