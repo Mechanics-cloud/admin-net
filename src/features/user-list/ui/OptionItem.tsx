@@ -6,6 +6,7 @@ import {
   useUserListContext,
   BAN_USER,
   UNBAN_USER,
+  REMOVE_USER,
 } from '@/src/features'
 import { useTranslations } from 'next-intl'
 import { MouseEvent, useState } from 'react'
@@ -24,7 +25,7 @@ export const OptionItem = ({ option, user }: Props) => {
   const t = useTranslations('UsersPage')
   const router = useRouter()
 
-  const { toggleBanUser } = useUserListContext()
+  const { toggleBanUser, deleteUser } = useUserListContext()
 
   const onClick = (e: MouseEvent) => {
     if (option.key === 'popover.moreInfo') {
@@ -59,6 +60,15 @@ export const OptionItem = ({ option, user }: Props) => {
     },
   })
 
+  const [removeUserById] = useMutation(REMOVE_USER, {
+    variables: {
+      userId: user.id,
+    },
+    onError: (error) => {
+      responseErrorHandler(error)
+    },
+  })
+
   const toggleBan = async () => {
     const action = option.key === 'popover.ban' ? 'ban' : 'unban'
     const reason = action === 'ban' ? selectValue : ''
@@ -70,6 +80,19 @@ export const OptionItem = ({ option, user }: Props) => {
       await unbanUserById()
     }
     toggleBanUser({ userId: user.id, action, reason })
+  }
+
+  const removeUser = async () => {
+    await removeUserById()
+    deleteUser(user.id)
+  }
+
+  const onConfirm = async () => {
+    if (option.key === 'popover.ban' || option.key === 'popover.unban') {
+      await toggleBan()
+    } else {
+      await removeUser()
+    }
   }
 
   return (
@@ -88,7 +111,7 @@ export const OptionItem = ({ option, user }: Props) => {
           title={t(option.key)}
           className={cn(option.key === 'popover.ban' && 'min-h-[288px]')}
           disabled={(option.key === 'popover.ban' && !selectValue) || loading}
-          onConfirm={toggleBan}
+          onConfirm={onConfirm}
         >
           <Typography variant={'reg16'}>
             {option.modalText && t(option.modalText)} {user.userName}?
