@@ -1,13 +1,24 @@
 import { createPortal } from 'react-dom'
 import { Button, CloseOutline, Typography } from 'car-robots-library'
-import { MouseEvent, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, MouseEvent } from 'react'
+import { cn } from '@/src/shared'
 
 type Props = {
   close: (e: MouseEvent) => void
   title: string
-  children: ReactNode
-}
-export const Modal = ({ close, title, children }: Props) => {
+  disabled?: boolean
+  onConfirm?: () => void
+} & ComponentPropsWithoutRef<'div'>
+
+export const Modal = ({
+  close,
+  title,
+  children,
+  className,
+  disabled,
+  onConfirm,
+  ...props
+}: Props) => {
   const body = document.querySelector('body')
 
   if (!body) return null
@@ -15,10 +26,13 @@ export const Modal = ({ close, title, children }: Props) => {
   return createPortal(
     <div
       className={
-        'absolute w-full h-full inset-0 flex items-center justify-center z-60 portal'
+        'absolute w-full h-full inset-0 flex items-center justify-center z-50 portal'
       }
     >
-      <div className={'min-w-[328px] bg-dark-100'}>
+      <div
+        className={cn('min-w-[378px]  bg-dark-100 flex flex-col', className)}
+        {...props}
+      >
         <div
           className={
             'px-6 py-3 flex justify-between gap-5 items-center w-full border-b border-b-dark-100'
@@ -31,9 +45,11 @@ export const Modal = ({ close, title, children }: Props) => {
             onClick={close}
           />
         </div>
-        <div className={'px-6 py-[30px]'}>
-          <Typography variant={'reg16'}>{children}</Typography>
-          <div className={'flex gap-[70px] mt-[42px]'}>
+        <div
+          className={'px-6 py-[30px] flex flex-col justify-between flex-grow'}
+        >
+          {children}
+          <div className={'flex gap-[70px] mt-[48px]'}>
             <Button
               variant={'primary'}
               className={'w-full'}
@@ -43,6 +59,8 @@ export const Modal = ({ close, title, children }: Props) => {
             <Button
               variant={'outline'}
               className={'w-full'}
+              disabled={disabled}
+              onClick={onConfirm}
             >
               Yes
             </Button>

@@ -1,7 +1,7 @@
 import { useState, ReactNode, MouseEvent } from 'react'
 import { Typography } from 'car-robots-library'
-import { SortingArrow } from '@/src/assets/icons/outlineIcons/SortingArrow'
-import { Filter } from '@/src/shared/hooks/useSortData'
+import { SortingArrow } from '@/src/assets'
+import { Filter } from '@/src/shared'
 
 type Props = {
   children: ReactNode

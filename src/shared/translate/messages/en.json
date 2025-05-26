@@ -46,7 +46,13 @@
     "modal": {
       "delete": "Are you sure you want to delete",
       "ban": "Are you sure you want to ban",
-      "unban": "Are you sure you want to unban"
+      "unban": "Are you sure you want to unban",
+      "reason": {
+        "placeholder": "Reason for ban",
+        "behavior": "Bad behavior",
+        "advertising": "Advertising placement",
+        "another": "Another reason"
+      }
     }
   },
 
