@@ -2,21 +2,12 @@ import { TextField } from '@/src/shared'
 import { Select, SelectItem, Typography } from 'car-robots-library'
 import * as React from 'react'
 import { useTranslations } from 'next-intl'
-import { ChangeEvent } from 'react'
+import { useUserListContext } from '@/src/features'
 
-type Props = {
-  inputValue: string
-  onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
-  selectValue: 'blocked' | 'notBlocked' | undefined
-  onSelectChange: (value: 'blocked' | 'notBlocked') => void
-}
-export const UserFilter = ({
-  inputValue,
-  selectValue,
-  onSelectChange,
-  onInputChange,
-}: Props) => {
+export const UserFilter = () => {
   const t = useTranslations('UsersPage')
+  const { inputValue, selectValue, onSelectChange, onInputChange } =
+    useUserListContext()
 
   return (
     <div className={'flex gap-[94px]'}>

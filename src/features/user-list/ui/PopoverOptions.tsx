@@ -1,5 +1,4 @@
-import { getOptions } from '@/src/features/user-list/ui/data'
-import { OptionItem } from '@/src/features/user-list/ui/OptionItem'
+import { getOptions, OptionItem } from '@/src/features'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
 
 type Props = {

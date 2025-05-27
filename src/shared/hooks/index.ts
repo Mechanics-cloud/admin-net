@@ -1,3 +1,3 @@
 export * from './useToggle'
-export * from './usePagination'
 export * from './useSortData'
+export * from './usePagination'

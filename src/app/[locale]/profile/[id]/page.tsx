@@ -1,17 +1,15 @@
-'use client'
+import UploadedFotos from '@/src/_pages/uploadedFotos/ui/UploudedFotos'
 
-import { useEffect, useState } from 'react'
-
-export default function Page({ params }: { params: Promise<{ id: string }> }) {
-  const [state, setState] = useState<null | string>(null)
-
-  useEffect(() => {
-    params.then((res) => {
-      setState(res.id)
-    })
-  }, [params])
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id: userId } = await params
 
   return (
-    <div className='m-40 animate-bounce'>{`Uploaded photos userId ${state}`}</div>
+    <>
+      <UploadedFotos userId={userId} />
+    </>
   )
 }
