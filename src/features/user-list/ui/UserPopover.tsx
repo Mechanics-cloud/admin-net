@@ -5,7 +5,7 @@ import {
   PopoverTrigger,
 } from 'car-robots-library'
 import { ReactNode } from 'react'
-import { useToggle } from '@/src/shared/hooks/useToggle'
+import { useToggle } from '@/src/shared'
 
 type Props = {
   children: ReactNode
@@ -21,7 +21,6 @@ export const UserPopover = ({ children }: Props) => {
         <button
           title={'menu'}
           type={'button'}
-          /*className={'block mr-auto ml-auto'}*/
         >
           <MoreHorizontalOutline
             aria-label={'вызов настроек'}

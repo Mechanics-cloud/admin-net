@@ -4,10 +4,8 @@ import {
 } from '@/src/shared/apolloClient/__generated__/graphql'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
-import { GET_USERS } from '@/src/features/user-list/api/request'
-import { responseErrorHandler } from '@/src/shared'
-import { usePagination } from '@/src/shared/hooks/usePagination'
-import { useSortData } from '@/src/shared/hooks/useSortData'
+import { GET_USERS } from '@/src/features'
+import { responseErrorHandler, usePagination, useSortData } from '@/src/shared'
 
 export const useUserList = () => {
   const [users, setUsers] = useState<User[]>([])
@@ -33,7 +31,9 @@ export const useUserList = () => {
     getUsers()
       .then((res) => {
         if (res?.data?.getUsers.users) {
-          originalUsersRef.current = res?.data?.getUsers
+          originalUsersRef.current = JSON.parse(
+            JSON.stringify(res?.data?.getUsers)
+          ) //deep copy for updates
           if (selectValue || inputValue) {
             filterUsers(inputValue, selectValue)
           } else {
@@ -81,6 +81,40 @@ export const useUserList = () => {
     filterUsers(inputValue, value)
   }
 
+  const toggleBanUser = ({
+    userId,
+    action,
+    reason,
+  }: {
+    userId: number
+    action: 'ban' | 'unban'
+    reason?: string
+  }) => {
+    const now = new Date().toISOString()
+    const updateFn = (user: User) =>
+      user.id === userId
+        ? {
+            ...user,
+            userBan:
+              action === 'ban'
+                ? { reason: reason || '', createdAt: now }
+                : null,
+          }
+        : user
+
+    setUsers((prev) => prev.map(updateFn))
+
+    if (originalUsersRef.current) {
+      originalUsersRef.current.users =
+        originalUsersRef.current.users.map(updateFn)
+    }
+
+    // if a filter is active
+    if (inputValue || selectValue) {
+      filterUsers(inputValue, selectValue)
+    }
+  }
+
   return {
     sortUsers,
     activeFilter,
@@ -96,5 +130,6 @@ export const useUserList = () => {
     selectValue,
     onInputChange,
     onSelectChange,
+    toggleBanUser,
   }
 }

@@ -12,7 +12,7 @@ export const Header = () => {
     >
       <div
         className={
-          'max-w-[1280px] h-full mx-auto flex gap-3 justify-between items-center px-15 max-sm:px-5'
+          'max-w-[1280px] h-full mx-auto flex gap-3 justify-between items-center px-15 max-sm:px-5 '
         }
       >
         <Link href={'/'}>
