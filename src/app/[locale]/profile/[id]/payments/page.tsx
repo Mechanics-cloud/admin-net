@@ -1,3 +1,5 @@
+import { Payments } from '@/src/features/payments'
+
 export default function HomePage() {
-  return <div className='m-50 animate-bounce'>Payments</div>
+  return <Payments />
 }
