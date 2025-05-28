@@ -43,7 +43,9 @@ export const UsersTable = () => {
         label: t('profileLink'),
         key: 'profileLink',
         render: (user) => (
-          <Link href={`/profile/${user.id}`}>{user.email}</Link>
+          <Link href={`/profile/${user.id}?tab=uploadedPhotos`}>
+            {user.email}
+          </Link>
         ),
       },
       {

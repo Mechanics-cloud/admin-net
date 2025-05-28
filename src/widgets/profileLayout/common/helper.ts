@@ -6,19 +6,17 @@ export const capitalize = (str?: string | null): string => {
 export const formattedDate = (isoDate: string): string => {
   const date = new Date(isoDate)
 
-  const formattedDate = [
+  return [
     date.getDate().toString().padStart(2, '0'),
     (date.getMonth() + 1).toString().padStart(2, '0'),
     date.getFullYear(),
   ].join('.')
-
-  return formattedDate
 }
 
 export const tabItems = [
   {
     title: 'uploadedPhotos' as const,
-    href: ``,
+    href: 'uploadedPhotos',
   },
   {
     title: 'payments' as const,
