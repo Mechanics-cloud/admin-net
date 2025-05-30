@@ -43,21 +43,25 @@ export default function FollowersTable({ userId }: Props) {
 
   if (loading) return <Loader />
 
-  return users && users.length ? (
-    <TableComp
-      data={users}
-      columns={getFollowersColumns()}
-      toggleSort={sortUsers}
-      pageData={{
-        currentPage,
-        pageSize,
-        onPageChange,
-        onPageSize,
-        loading,
-        totalCount,
-      }}
-    />
-  ) : (
-    <Typography variant={'bold16'}>This user has no followers</Typography>
+  return (
+    <div className={'mt-9'}>
+      {users && users.length ? (
+        <TableComp
+          data={users}
+          columns={getFollowersColumns()}
+          toggleSort={sortUsers}
+          pageData={{
+            currentPage,
+            pageSize,
+            onPageChange,
+            onPageSize,
+            loading,
+            totalCount,
+          }}
+        />
+      ) : (
+        <Typography variant={'bold16'}>This user has no followers</Typography>
+      )}
+    </div>
   )
 }
