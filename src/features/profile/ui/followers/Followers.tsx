@@ -3,15 +3,14 @@
 import { useLazyQuery } from '@apollo/client'
 import { GET_FOLLOWERS, Follower } from '@/src/features'
 import {
-  cn,
-  Column,
-  formatDate,
   responseErrorHandler,
   TableComp,
   usePagination,
   useSortData,
 } from '@/src/shared'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { getFollowersColumns } from './getFollowersColumns'
+import { Loader, Typography } from 'car-robots-library'
 
 type Props = {
   userId: number
@@ -42,54 +41,23 @@ export default function FollowersTable({ userId }: Props) {
       .catch((error) => responseErrorHandler(error))
   }, [getFollowers, userId, currentPage, pageSize])
 
-  const columns = useMemo((): Column<Follower>[] => {
-    return [
-      {
-        label: 'userId',
-        key: 'userId',
-        render: (user) => (
-          <div className={cn('flex items-center gap-3')}>{user.id}</div>
-        ),
-      },
-      {
-        label: 'userName',
-        key: 'userName',
-        sortable: true,
-        render: (user) => user.userName,
-      },
-      {
-        label: 'profileLink',
-        key: 'profileLink',
-        //todo: wrap into Link - to the user profile
-        render: (user) =>
-          user.firstName && user.lastName
-            ? `${user.firstName} ${user.lastName}`
-            : user.userName,
-      },
-      {
-        label: 'dateAdded',
-        key: 'date',
-        sortable: true,
-        render: (user) => formatDate(user.createdAt),
-      },
-    ]
-  }, [])
+  if (loading) return <Loader />
 
-  return (
-    users && (
-      <TableComp
-        data={users}
-        columns={columns}
-        toggleSort={sortUsers}
-        pageData={{
-          currentPage,
-          pageSize,
-          onPageChange,
-          onPageSize,
-          loading,
-          totalCount,
-        }}
-      />
-    )
+  return users && users.length ? (
+    <TableComp
+      data={users}
+      columns={getFollowersColumns()}
+      toggleSort={sortUsers}
+      pageData={{
+        currentPage,
+        pageSize,
+        onPageChange,
+        onPageSize,
+        loading,
+        totalCount,
+      }}
+    />
+  ) : (
+    <Typography variant={'bold16'}>This user has no followers</Typography>
   )
 }

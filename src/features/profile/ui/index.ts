@@ -1,1 +1,1 @@
-export * from './followers'
+export * from './getTabs'

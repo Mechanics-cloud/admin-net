@@ -5,4 +5,5 @@ export type Follower = {
   firstName?: string | null
   lastName?: string | null
   createdAt: string
+  userId: number
 }

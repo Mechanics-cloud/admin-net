@@ -9,6 +9,7 @@ export const GET_FOLLOWERS = gql(`
                 firstName
                 lastName
                 createdAt
+                userId
                
             }
                 totalCount, 
