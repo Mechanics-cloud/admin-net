@@ -1,13 +1,14 @@
 import UploadedFotos from '@/src/_pages/uploadedFotos/ui/UploudedFotos'
 import { redirect } from 'next/navigation'
 import { ReactNode } from 'react'
+import FollowersTable from '@/src/features/profile/ui/followers/Followers'
 
 type SearchParams = 'uploadedPhotos' | 'payments' | 'followers' | 'following'
-const tabComponents = (userId: string): Record<SearchParams, ReactNode> => {
+const getTabs = (userId: string): Record<SearchParams, ReactNode> => {
   return {
     uploadedPhotos: <UploadedFotos userId={userId} />,
     payments: <div>Payments</div>,
-    followers: <div>Followers</div>,
+    followers: <FollowersTable userId={+userId} />,
     following: <div>Following</div>,
   }
 }
@@ -23,8 +24,8 @@ export default async function Page({
   const { tab } = await searchParams
 
   if (!tab) {
-    redirect(`/en/profile/${userId}?tab=uploadedPhotos`)
+    redirect(`/profile/${userId}?tab=uploadedPhotos`)
   }
 
-  return tabComponents(userId)[tab] ?? <UploadedFotos userId={userId} />
+  return getTabs(userId)[tab] ?? <UploadedFotos userId={userId} />
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import { createContext, ReactNode, useContext } from 'react'
 import { useUserList } from './useUserList'
 import { UseUserList } from '@/src/features'

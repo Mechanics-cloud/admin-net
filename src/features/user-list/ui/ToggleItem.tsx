@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, ReactNode, MouseEvent } from 'react'
 import { Typography } from 'car-robots-library'
 import { SortingArrow } from '@/src/assets'
