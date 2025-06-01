@@ -1,17 +1,17 @@
-import { GetPaymentsByUserQuery } from '@/src/shared/apolloClient/__generated__/graphql'
 import { useEffect, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
 
 import { responseErrorHandler, usePagination } from '@/src/shared'
 import { GET_PAYMENTS } from '../api/request'
+import { PaymentItems } from './type'
 
 export const usePaymentsList = (userId: string) => {
-  const [payments, setPayments] = useState<GetPaymentsByUserQuery>()
+  const [payments, setPayments] = useState<PaymentItems>()
   const [totalCount, setTotalCount] = useState<number>(0)
 
   const { currentPage, pageSize, onPageSize, onPageChange } = usePagination()
 
-  const [gePayments, { loading, data }] = useLazyQuery(GET_PAYMENTS, {
+  const [gePayments, { loading }] = useLazyQuery(GET_PAYMENTS, {
     variables: {
       pageNumber: currentPage,
       pageSize,
@@ -23,7 +23,7 @@ export const usePaymentsList = (userId: string) => {
     gePayments()
       .then((res) => {
         if (res?.data?.getPaymentsByUser) {
-          setPayments(res.data)
+          setPayments(res.data.getPaymentsByUser.items)
           setTotalCount(res.data.getPaymentsByUser.totalCount)
         }
       })

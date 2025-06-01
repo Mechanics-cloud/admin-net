@@ -1,35 +1,16 @@
 'use client'
 
 import * as React from 'react'
-import { UsersTable } from '@/src/features/user-list/ui'
-import { useUserList } from '@/src/features/user-list/model/useUserList'
+import { PaymentsTable } from './PaymentsTable'
 
-export function Payments() {
-  const {
-    users,
-    currentPage,
-    onPageChange,
-    onPageSize,
-    pageSize,
-    sortUsers,
-    totalCount,
-    loading,
-  } = useUserList()
+type Props = {
+  userId: string
+}
 
+export function Payments(props: Props) {
   return (
-    <div className={'text-light-100 pt-12 pr-16'}>
-      <UsersTable
-        users={users}
-        toggleSort={sortUsers}
-        pageData={{
-          currentPage,
-          onPageSize,
-          onPageChange,
-          pageSize,
-          totalCount,
-          loading,
-        }}
-      />
+    <div className={'text-light-100 pt-12'}>
+      <PaymentsTable {...props} />
     </div>
   )
 }
