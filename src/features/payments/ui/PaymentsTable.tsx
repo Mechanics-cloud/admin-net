@@ -3,7 +3,7 @@
 import { TableComp } from '@/src/shared'
 import { usePaymentsList } from '../common/usePaymentsList'
 import { Loader, Typography } from 'car-robots-library'
-import { useGetFollowersColumns } from '../common/useGetPaymensColumns'
+import { useGetFollowersColumns } from '../common/useGetPaymentsColumns'
 import { useTranslations } from 'next-intl'
 
 export const PaymentsTable = ({ userId }: { userId: string }) => {
