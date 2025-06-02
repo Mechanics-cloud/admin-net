@@ -1,23 +1,26 @@
 import { cn, Column, formatDate } from '@/src/shared'
 import { Follower } from '@/src/features'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
-export const getFollowersColumns = (): Column<Follower>[] => [
+export const getTabColumns = (
+  t: ReturnType<typeof useTranslations>
+): Column<Follower>[] => [
   {
-    label: 'userId',
+    label: t('userId'),
     key: 'userId',
     render: (user) => (
       <div className={cn('flex items-center gap-3')}>{user.userId}</div>
     ),
   },
   {
-    label: 'userName',
+    label: t('userName'),
     key: 'userName',
     sortable: true,
     render: (user) => user.userName,
   },
   {
-    label: 'profileLink',
+    label: t('profileLink'),
     key: 'profileLink',
     render: (user) => (
       <Link href={`/profile/${user.userId}?tab=followers`}>
@@ -28,7 +31,7 @@ export const getFollowersColumns = (): Column<Follower>[] => [
     ),
   },
   {
-    label: 'dateAdded',
+    label: t('subscriptionDate'),
     key: 'date',
     sortable: true,
     render: (user) => formatDate(user.createdAt),

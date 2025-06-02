@@ -3,14 +3,15 @@
 import { useLazyQuery } from '@apollo/client'
 import { GET_FOLLOWERS, Follower } from '@/src/features'
 import {
+  getTabColumns,
   responseErrorHandler,
   TableComp,
   usePagination,
   useSortData,
 } from '@/src/shared'
 import { useEffect, useState } from 'react'
-import { getFollowersColumns } from './getFollowersColumns'
 import { Loader, Typography } from 'car-robots-library'
+import { useTranslations } from 'next-intl'
 
 type Props = {
   userId: number
@@ -21,6 +22,7 @@ export default function FollowersTable({ userId }: Props) {
   const [totalCount, setTotalCount] = useState<number>(0)
   const { currentPage, pageSize, onPageSize, onPageChange } = usePagination()
   const { sortUsers } = useSortData(users, setUsers)
+  const t = useTranslations('UserProfile')
 
   const [getFollowers, { loading }] = useLazyQuery(GET_FOLLOWERS)
 
@@ -48,7 +50,7 @@ export default function FollowersTable({ userId }: Props) {
       {users && users.length ? (
         <TableComp
           data={users}
-          columns={getFollowersColumns()}
+          columns={getTabColumns(t)}
           toggleSort={sortUsers}
           pageData={{
             currentPage,

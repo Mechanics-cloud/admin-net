@@ -63,7 +63,11 @@
     "uploadedPhotos": "Загруженные фото",
     "payments": "Платежи",
     "followers": "Подписчики", 
-    "following": "Подписки"
+    "following": "Подписки",
+    "userId": "ID Пользователя",
+    "userName": "Имя пользователя",
+    "profileLink": "Ссылка на профиль",
+    "subscriptionDate": "Дата подписки"
   },
 
     "Basic": {

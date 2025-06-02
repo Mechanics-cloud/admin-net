@@ -63,7 +63,11 @@
     "uploadedPhotos": "Uploaded photos",
     "payments": "Payments",
     "followers": "Followers",
-    "following": "Following"
+    "following": "Following",
+    "userId": "User ID",
+    "userName": "Username",
+    "profileLink": "Profile link",
+    "subscriptionDate": "Subscription date"
   },
 
   "Basic": {
