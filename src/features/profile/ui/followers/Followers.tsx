@@ -10,7 +10,7 @@ import {
   useSortData,
 } from '@/src/shared'
 import { useEffect, useState } from 'react'
-import { Loader, Typography } from 'car-robots-library'
+import { Loader } from 'car-robots-library'
 import { useTranslations } from 'next-intl'
 
 type Props = {
@@ -47,23 +47,22 @@ export default function FollowersTable({ userId }: Props) {
 
   return (
     <div className={'mt-9'}>
-      {users && users.length ? (
-        <TableComp
-          data={users}
-          columns={getTabColumns(t)}
-          toggleSort={sortUsers}
-          pageData={{
-            currentPage,
-            pageSize,
-            onPageChange,
-            onPageSize,
-            loading,
-            totalCount,
-          }}
-        />
-      ) : (
-        <Typography variant={'bold16'}>This user has no followers</Typography>
-      )}
+      <TableComp
+        data={users}
+        columns={getTabColumns(t)}
+        toggleSort={sortUsers}
+        pageData={{
+          currentPage,
+          pageSize,
+          onPageChange,
+          onPageSize,
+          loading,
+          totalCount,
+        }}
+        isData={!!users.length}
+      >
+        {t('noFollowers')}
+      </TableComp>
     </div>
   )
 }

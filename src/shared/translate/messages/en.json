@@ -67,7 +67,8 @@
     "userId": "User ID",
     "userName": "Username",
     "profileLink": "Profile link",
-    "subscriptionDate": "Subscription date"
+    "subscriptionDate": "Subscription date",
+    "noFollowers": "This user has no followers"
   },
 
   "Basic": {

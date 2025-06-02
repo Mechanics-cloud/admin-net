@@ -16,20 +16,18 @@ export const UsersTable = () => {
   } = useUserListContext()
 
   return (
-    users && (
-      <TableComp
-        toggleSort={sortUsers}
-        data={users}
-        columns={getColumns(t)}
-        pageData={{
-          currentPage,
-          pageSize,
-          onPageChange,
-          onPageSize,
-          totalCount,
-          loading,
-        }}
-      />
-    )
+    <TableComp
+      toggleSort={sortUsers}
+      data={users}
+      columns={getColumns(t)}
+      pageData={{
+        currentPage,
+        pageSize,
+        onPageChange,
+        onPageSize,
+        totalCount,
+        loading,
+      }}
+    />
   )
 }
