@@ -1,76 +1,17 @@
 'use client'
 import { Typography } from 'car-robots-library'
-import {
-  Option,
-  OptionItemSelect,
-  useUserListContext,
-  BAN_USER,
-  UNBAN_USER,
-} from '@/src/features'
-import { useTranslations } from 'next-intl'
-import { MouseEvent, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { Option, OptionItemSelect, useOptionItem } from '@/src/features'
 import { User } from '@/src/shared/apolloClient/__generated__/graphql'
 import * as React from 'react'
-import { cn, responseErrorHandler, useToggle, Modal } from '@/src/shared'
-import { useMutation } from '@apollo/client'
+import { cn, Modal } from '@/src/shared'
 
 type Props = {
   option: Option
   user: User
 }
 export const OptionItem = ({ option, user }: Props) => {
-  const { state: isOpen, toggle } = useToggle()
-  const t = useTranslations('UsersPage')
-  const router = useRouter()
-
-  const { toggleBanUser } = useUserListContext()
-
-  const onClick = (e: MouseEvent) => {
-    if (option.key === 'popover.moreInfo') {
-      router.push(`/profile/${user.id}`)
-    }
-    e.stopPropagation()
-    toggle()
-  }
-
-  const [selectValue, setSelectValue] = useState<string>('')
-  const onValueChange = (value: string) => {
-    setSelectValue(value)
-  }
-
-  const [banUserById, { loading }] = useMutation(BAN_USER, {
-    variables: {
-      userId: user.id,
-      banReason: selectValue,
-    },
-    onError: (error) => {
-      setSelectValue('')
-      responseErrorHandler(error)
-    },
-  })
-
-  const [unbanUserById] = useMutation(UNBAN_USER, {
-    variables: {
-      userId: user.id,
-    },
-    onError: (error) => {
-      responseErrorHandler(error)
-    },
-  })
-
-  const toggleBan = async () => {
-    const action = option.key === 'popover.ban' ? 'ban' : 'unban'
-    const reason = action === 'ban' ? selectValue : ''
-
-    if (action === 'ban') {
-      await banUserById()
-      setSelectValue('')
-    } else {
-      await unbanUserById()
-    }
-    toggleBanUser({ userId: user.id, action, reason })
-  }
+  const { onClick, isOpen, t, selectValue, loading, onConfirm, onValueChange } =
+    useOptionItem(option, user.id)
 
   return (
     <div
@@ -88,7 +29,7 @@ export const OptionItem = ({ option, user }: Props) => {
           title={t(option.key)}
           className={cn(option.key === 'popover.ban' && 'min-h-[288px]')}
           disabled={(option.key === 'popover.ban' && !selectValue) || loading}
-          onConfirm={toggleBan}
+          onConfirm={onConfirm}
         >
           <Typography variant={'reg16'}>
             {option.modalText && t(option.modalText)} {user.userName}?

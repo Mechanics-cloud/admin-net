@@ -1,7 +1,11 @@
 import { ReactNode } from 'react'
 import { MoreHorizontalOutline, PersonOutline } from 'car-robots-library'
-import { UnblockIcon } from '@/src/assets/icons/outlineIcons/UnblockIcon'
-import { BlockedIcon } from '@/src/assets/icons/outlineIcons/BlockedIcon'
+import { UnblockIcon, BlockedIcon } from '@/src/assets'
+import { cn, Column, formatDate } from '@/src/shared'
+import { User } from '@/src/shared/apolloClient/__generated__/graphql'
+import Link from 'next/link'
+import { PopoverOptions, UserPopover } from '@/src/features'
+import { useTranslations } from 'next-intl'
 
 export type Option = {
   id: number
@@ -42,6 +46,52 @@ export const getOptions = (isBanned: boolean): Option[] => {
         />
       ),
       key: 'popover.moreInfo',
+    },
+  ]
+}
+
+export const getColumns = (
+  t: ReturnType<typeof useTranslations>
+): Column<User>[] => {
+  return [
+    {
+      label: t('userId'),
+      key: 'userId',
+      render: (user) => (
+        <div className={cn('flex items-center gap-3', !user.userBan && 'pl-9')}>
+          {user.userBan?.reason && <BlockedIcon />}
+          {user.id}
+        </div>
+      ),
+    },
+    {
+      label: t('userName'),
+      key: 'userName',
+      sortable: true,
+      render: (user) => user.userName,
+    },
+    {
+      label: t('profileLink'),
+      key: 'profileLink',
+      render: (user) => <Link href={`/profile/${user.id}`}>{user.email}</Link>,
+    },
+    {
+      label: t('dateAdded'),
+      key: 'date',
+      sortable: true,
+      render: (user) => formatDate(user.createdAt),
+    },
+    {
+      label: '',
+      key: 'more',
+      render: (user) => (
+        <UserPopover>
+          <PopoverOptions
+            isBanned={!!user.userBan}
+            user={user}
+          />
+        </UserPopover>
+      ),
     },
   ]
 }

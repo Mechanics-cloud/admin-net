@@ -115,6 +115,15 @@ export const useUserList = () => {
     }
   }
 
+  const deleteUser = (userId: number) => {
+    if (!originalUsersRef.current) return
+    const updatedUsers = originalUsersRef.current.users.filter(
+      (user) => user.id !== userId
+    )
+    originalUsersRef.current.users = updatedUsers
+    setUsers(updatedUsers)
+  }
+
   return {
     sortUsers,
     activeFilter,
@@ -131,5 +140,6 @@ export const useUserList = () => {
     onInputChange,
     onSelectChange,
     toggleBanUser,
+    deleteUser,
   }
 }
