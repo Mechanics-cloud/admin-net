@@ -56,7 +56,6 @@ export default function FollowersTable({ userId }: Props) {
           pageSize,
           onPageChange,
           onPageSize,
-          loading,
           totalCount,
         }}
         isData={!!users.length}

@@ -1,6 +1,7 @@
 import { TableComp } from '@/src/shared'
 import { useTranslations } from 'next-intl'
 import { useUserListContext, getColumns } from '@/src/features'
+import { Loader } from 'car-robots-library'
 
 export const UsersTable = () => {
   const t = useTranslations('UsersPage')
@@ -15,6 +16,8 @@ export const UsersTable = () => {
     loading,
   } = useUserListContext()
 
+  if (loading) return <Loader />
+
   return (
     <TableComp
       toggleSort={sortUsers}
@@ -26,7 +29,6 @@ export const UsersTable = () => {
         onPageChange,
         onPageSize,
         totalCount,
-        loading,
       }}
     />
   )
