@@ -25,4 +25,5 @@ export interface UseUserList {
   }) => void
   filterUsers: (input: string, select?: 'blocked' | 'notBlocked') => void
   sortUsers: (filter: Filter, direction: 'asc' | 'desc') => void
+  deleteUser: (userId: number) => void
 }
