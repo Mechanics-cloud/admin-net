@@ -1,6 +1,6 @@
 'use client'
 
-import { MainPaths, responseErrorHandler } from '@/src/shared'
+import { MainPaths } from '@/src/shared'
 import { Loader, Skeleton, Typography } from 'car-robots-library'
 import Link from 'next/link'
 import { ReactNode } from 'react'
@@ -24,7 +24,6 @@ export default function ProfileLayout({
     useGetUserProfile(paramsId)
 
   if (error) {
-    responseErrorHandler(error)
     return <NotContent />
   }
 

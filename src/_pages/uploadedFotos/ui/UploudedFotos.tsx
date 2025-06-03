@@ -1,12 +1,12 @@
 'use client'
 
 import { cn, responseErrorHandler } from '@/src/shared'
-import NotContent from '../../404/NotContent'
 import { Stub } from '@/src/shared/components/stub'
 import { CircleLoader } from 'car-robots-library'
 import { useTranslations } from 'next-intl'
 import { FallbackImage } from '@/src/shared/components/fallbackImage'
 import { useGetFotos } from '../common/useGetFotos'
+import { useEffect } from 'react'
 
 type Props = {
   userId: string
@@ -17,10 +17,11 @@ export default function UploadedFotos({ userId }: Props) {
 
   const { uploadedPhotos, loading, error, ref } = useGetFotos(userId)
 
-  if (error) {
-    responseErrorHandler(error)
-    return <NotContent />
-  }
+  useEffect(() => {
+    if (error) {
+      responseErrorHandler(error)
+    }
+  }, [error])
 
   return (
     <>

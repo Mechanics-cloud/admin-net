@@ -63,16 +63,29 @@
     "uploadedPhotos": "Uploaded photos",
     "payments": "Payments",
     "followers": "Followers",
-    "following": "Following"
+    "following": "Following",
+    "paymentsTable": {
+      "dateOfPayment": "Date of Payment",
+      "endDateOfSubscription": "End date of subscription",
+      "priceUSD": "Amount, $",
+      "subscriptionType": "Subscription Type",
+      "paymentType": "Payment Type",
+      "noPaymentsText": "This user has no payments"
+    }
   },
 
   "Basic": {
-    "notFoundTitle": "notFoundTitle",
+    "notFoundTitle": "Page Not Found",
     "defaultAltImage": "post photo",
     "defaultStubImage": "image stub",
     "emptyImages": "Failed to display post photos. Please contact support or try again later!",
     "pagination": {
       "goBack": "goBack"
+    },
+    "time": {
+      "DAY": "day", 
+      "WEEKLY": "week", 
+      "MONTHLY": "month"
     }
   },
 
