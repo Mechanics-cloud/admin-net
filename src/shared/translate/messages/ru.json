@@ -62,8 +62,16 @@
     "profileCreationDate": "Дата создания профиля",
     "uploadedPhotos": "Загруженные фото",
     "payments": "Платежи",
-    "followers": "Подписчики", 
+    "followers": "Подписчики",
     "following": "Подписки",
+    "paymentsTable": {
+      "dateOfPayment": "Дата платежа",
+      "endDateOfSubscription": "Дата окончания подписки",
+      "priceUSD": "Сумма, $",
+      "subscriptionType": "Тип подписки",
+      "paymentType": "Способ оплаты",
+      "noPaymentsText": "У этого пользователя нет платежей"
+    },
     "userId": "ID Пользователя",
     "userName": "Имя пользователя",
     "profileLink": "Ссылка на профиль",
@@ -71,18 +79,23 @@
     "noFollowers": "У этого пользователя нет подписчиков"
   },
 
-    "Basic": {
+  "Basic": {
     "notFoundTitle": "Страница не найдена",
     "defaultAltImage": "Фото поста",
     "defaultStubImage": "изображение заглушка",
     "emptyImages": "Не удалось отобразить фотографии поста. Пожайлуста обратитесь в поддержку или повторите попытку позже!",
     "pagination": {
       "goBack": "Вернуться назад"
+    },
+    "time": {
+      "DAY": "день",
+      "WEEKLY": "неделя",
+      "MONTHLY": "месяц"
     }
   },
 
-    "NoPost": {
-      "alt": "Нет постов пользователя",
-      "defaultText": "Пользователь еще не опубликовал ни одного поста"
-    }
+  "NoPost": {
+    "alt": "Нет постов пользователя",
+    "defaultText": "Пользователь еще не опубликовал ни одного поста"
+  }
 }
