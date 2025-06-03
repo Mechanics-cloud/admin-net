@@ -71,7 +71,12 @@
       "subscriptionType": "Subscription Type",
       "paymentType": "Payment Type",
       "noPaymentsText": "This user has no payments"
-    }
+    },
+    "userId": "User ID",
+    "userName": "Username",
+    "profileLink": "Profile link",
+    "subscriptionDate": "Subscription date",
+    "noFollowers": "This user has no followers"
   },
 
   "Basic": {
@@ -83,8 +88,8 @@
       "goBack": "goBack"
     },
     "time": {
-      "DAY": "day", 
-      "WEEKLY": "week", 
+      "DAY": "day",
+      "WEEKLY": "week",
       "MONTHLY": "month"
     }
   },

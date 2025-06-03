@@ -1,14 +1,17 @@
-import { Loader, Pagination, Typography } from 'car-robots-library'
+import { Pagination, Typography } from 'car-robots-library'
 import { ToggleItem } from '@/src/features/user-list'
 import { Filter } from '@/src/shared/hooks/useSortData'
 import * as React from 'react'
 import { cn, Column, PageData } from '@/src/shared'
+import { ReactNode } from 'react'
 
 type Props<T> = {
   toggleSort?: (filter: Filter, direction: 'asc' | 'desc') => void
   data: T[]
   columns: Column<T>[]
   pageData: PageData
+  isData?: boolean
+  children?: ReactNode
 }
 
 export const TableComp = <T,>({
@@ -16,15 +19,11 @@ export const TableComp = <T,>({
   data,
   columns,
   pageData,
+  isData = true,
+  children,
 }: Props<T>) => {
-  const {
-    currentPage,
-    totalCount,
-    pageSize,
-    onPageChange,
-    onPageSize,
-    loading,
-  } = pageData
+  const { currentPage, totalCount, pageSize, onPageChange, onPageSize } =
+    pageData
   return (
     <>
       <table className='w-full text-left table-fixed'>
@@ -70,7 +69,6 @@ export const TableComp = <T,>({
           ))}
         </tbody>
       </table>
-      {loading && <Loader />}
       <div className={'mt-9 custom-pagination'}>
         <Pagination
           currentPage={currentPage}
@@ -80,6 +78,7 @@ export const TableComp = <T,>({
           totalItemsCount={totalCount}
         />
       </div>
+      {!isData && <Typography variant={'bold16'}>{children}</Typography>}
     </>
   )
 }

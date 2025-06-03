@@ -71,7 +71,12 @@
       "subscriptionType": "Тип подписки",
       "paymentType": "Способ оплаты",
       "noPaymentsText": "У этого пользователя нет платежей"
-    }
+    },
+    "userId": "ID Пользователя",
+    "userName": "Имя пользователя",
+    "profileLink": "Ссылка на профиль",
+    "subscriptionDate": "Дата подписки",
+    "noFollowers": "У этого пользователя нет подписчиков"
   },
 
   "Basic": {

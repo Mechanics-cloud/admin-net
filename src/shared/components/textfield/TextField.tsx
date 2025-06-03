@@ -1,3 +1,4 @@
+'use client'
 import React, { ElementType, forwardRef, useState } from 'react'
 import { PolymorphicRef, TextFieldProps } from './TextField.types'
 import { getInputClasses } from './helper'
