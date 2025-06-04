@@ -5,7 +5,7 @@ import { Stub } from '@/src/shared/components/stub'
 import { CircleLoader } from 'car-robots-library'
 import { useTranslations } from 'next-intl'
 import { FallbackImage } from '@/src/shared/components/fallbackImage'
-import { useGetFotos } from '../common/useGetFotos'
+import { useGetFotos } from '@/src/features/profile'
 import { useEffect } from 'react'
 
 type Props = {

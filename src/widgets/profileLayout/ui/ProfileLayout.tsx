@@ -8,7 +8,7 @@ import { useGetUserProfile } from '../common/useGetUserProfile'
 import Image from 'next/image'
 import { ArrowBack } from '@/src/shared/assets/icons'
 import { useTranslations } from 'next-intl'
-import NotContent from '@/src/_pages/404/NotContent'
+import NotContent from '@/src/features/404/NotContent'
 import { ButtonsGroup } from './ButtonsGroup'
 
 export default function ProfileLayout({

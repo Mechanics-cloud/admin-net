@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
-import UploadedFotos from '@/src/_pages/uploadedFotos/ui/UploudedFotos'
+import UploadedFotos from '@/src/features/profile/ui/uploadedFotos/UploudedFotos'
 import FollowersTable from '@/src/features/profile/ui/followers/Followers'
+import { PaymentsTable } from './payments'
 
 export type SearchParams =
   | 'uploadedPhotos'
@@ -12,7 +13,7 @@ export default function getTabs(
 ): Record<SearchParams, ReactNode> {
   return {
     uploadedPhotos: <UploadedFotos userId={userId} />,
-    payments: <div>Payments</div>,
+    payments: <PaymentsTable userId={userId} />,
     followers: <FollowersTable userId={+userId} />,
     following: <div>Following</div>,
   }

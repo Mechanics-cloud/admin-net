@@ -1,6 +1,6 @@
 import { Column, formatDate } from '@/src/shared'
-import { PaymentItem } from './type'
 import { useTranslations } from 'next-intl'
+import { PaymentItem } from './types'
 
 export const useGetFollowersColumns = (): Column<PaymentItem>[] => {
   const t = useTranslations('UserProfile.paymentsTable')
