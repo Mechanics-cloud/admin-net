@@ -1,0 +1,39 @@
+import { TextField } from '@/src/shared'
+import { Select, SelectItem, Typography } from 'car-robots-library'
+import * as React from 'react'
+import { useTranslations } from 'next-intl'
+import { useUserListContext } from '@/src/features'
+
+export const UserFilter = () => {
+  const t = useTranslations('UsersPage')
+  const { inputValue, selectValue, onSelectChange, onInputChange } =
+    useUserListContext()
+
+  return (
+    <div className={'flex gap-[94px]'}>
+      <TextField
+        type={'search'}
+        label={''}
+        placeholder={t('search')}
+        className={'w-full'}
+        value={inputValue}
+        onChange={onInputChange}
+      />
+      <Select
+        placeholder={t('notSelected')}
+        className={'min-w-[234px] [&>button>span>p]:mt-0!'}
+        value={selectValue}
+        onValueChange={(value) =>
+          onSelectChange(value as 'blocked' | 'notBlocked')
+        }
+      >
+        <SelectItem value={'blocked'}>
+          <Typography variant={'reg16'}>{t('blocked')}</Typography>
+        </SelectItem>
+        <SelectItem value={'notBlocked'}>
+          <Typography variant={'reg16'}>{t('notBlocked')}</Typography>
+        </SelectItem>
+      </Select>
+    </div>
+  )
+}

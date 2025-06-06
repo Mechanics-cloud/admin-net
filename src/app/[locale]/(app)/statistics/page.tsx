@@ -1,7 +1,11 @@
 'use client'
 
 import { useQuery } from '@apollo/client'
-import { GET_PAYMENTS, GET_POSTS, GET_USERS } from './api/request'
+import {
+  GET_PAYMENTS_STATISTIC,
+  GET_POSTS_STATISTIC,
+  GET_USERS_STATISTIC,
+} from './api/request'
 import { useState } from 'react'
 import { cn, responseErrorHandler } from '@/src/shared'
 import { Button, Typography } from 'car-robots-library'
@@ -16,9 +20,11 @@ import { UploadedPhotos, UsersPaid } from './common/types'
 
 export default function Statistics() {
   const [activeTab, setActiveTab] = useState<'users' | 'photos'>('users')
-  const { data: dataUser, error: errorUsers } = useQuery(GET_USERS)
-  const { data: dataPayments, error: errorPayments } = useQuery(GET_PAYMENTS)
-  const { data: dataPhotos, error: errorPhotos } = useQuery(GET_POSTS)
+  const { data: dataUser, error: errorUsers } = useQuery(GET_USERS_STATISTIC)
+  const { data: dataPayments, error: errorPayments } = useQuery(
+    GET_PAYMENTS_STATISTIC
+  )
+  const { data: dataPhotos, error: errorPhotos } = useQuery(GET_POSTS_STATISTIC)
 
   const t = useTranslations('StatisticsPage')
 

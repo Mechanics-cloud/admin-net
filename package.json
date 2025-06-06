@@ -22,7 +22,7 @@
     "@apollo/client": "^3.13.4",
     "@hookform/resolvers": "^5.0.1",
     "@parcel/watcher": "^2.5.1",
-    "car-robots-library": "^0.1.31",
+    "car-robots-library": "0.1.31",
     "chart.js": "^4.4.9",
     "clsx": "^2.1.1",
     "graphql": "^16.10.0",
@@ -31,6 +31,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.55.0",
+    "react-intersection-observer": "^9.16.0",
     "react-toastify": "^11.0.5",
     "tailwind-merge": "^3.0.2",
     "zod": "^3.24.2"

@@ -29,6 +29,10 @@ export const variantsChart = {
   },
 }
 
+Chart.defaults.color = '#fff'
+Chart.defaults.font.size = 14
+Chart.defaults.font.family = 'Inter'
+
 export default function CustomChart({
   number,
   currentMonth,
@@ -39,10 +43,6 @@ export default function CustomChart({
   const chartInstance = useRef<Chart>(null)
 
   const t = useTranslations('StatisticsPage')
-
-  Chart.defaults.color = '#fff'
-  Chart.defaults.font.size = 14
-  Chart.defaults.font.family = 'Inter'
 
   useEffect(() => {
     if (chartRef.current) {
