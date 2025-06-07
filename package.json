@@ -18,7 +18,7 @@
     "lint-staged": "lint-staged",
     "generate": "graphql-codegen",
     "genwatch": "graphql-codegen --watch",
-    "test": "jest -u"
+    "test": "jest --passWithNoTests"
   },
   "dependencies": {
     "@apollo/client": "^3.13.4",
