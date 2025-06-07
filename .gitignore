@@ -31,7 +31,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+*.local
 
 # vercel
 .vercel
@@ -41,6 +41,6 @@ yarn-error.log*
 next-env.d.ts
 
 # apolloClient
-/src/shared/apolloClient/__generated__
+#/src/shared/apolloClient/__generated__
 
 .idea
