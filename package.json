@@ -48,6 +48,7 @@
     "@graphql-typed-document-node/core": "^3.2.0",
     "@next/eslint-plugin-next": "^15.2.2",
     "@tailwindcss/postcss": "^4",
+    "@types/jest": "^29.5.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -73,6 +74,8 @@
     "stylelint-config-standard-scss": "^14.0.0",
     "stylelint-prettier": "^5.0.3",
     "tailwindcss": "^4",
+    "ts-jest": "^29.3.4",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5",
     "typescript-eslint": "^8.26.1"
   },
