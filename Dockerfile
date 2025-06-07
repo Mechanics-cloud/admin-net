@@ -2,7 +2,7 @@
 FROM node:20.11-alpine as dependencies
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 #Билдим приложение
 #Кэширование зависимостей — если файлы в проекте изменились,
