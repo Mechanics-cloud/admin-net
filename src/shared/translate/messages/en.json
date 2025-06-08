@@ -76,7 +76,8 @@
     "userName": "Username",
     "profileLink": "Profile link",
     "subscriptionDate": "Subscription date",
-    "noFollowers": "This user has no followers"
+    "noFollowers": "This user has no followers",
+    "noFollowing": "This user has no following"
   },
 
   "Basic": {

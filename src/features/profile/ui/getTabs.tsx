@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import UploadedFotos from '@/src/features/profile/ui/uploadedFotos/UploudedFotos'
 import FollowersTable from '@/src/features/profile/ui/followers/Followers'
 import { PaymentsTable } from './payments'
+import FollowingTable from './following/Following'
 
 export type SearchParams =
   | 'uploadedPhotos'
@@ -15,6 +16,6 @@ export default function getTabs(
     uploadedPhotos: <UploadedFotos userId={userId} />,
     payments: <PaymentsTable userId={userId} />,
     followers: <FollowersTable userId={+userId} />,
-    following: <div>Following</div>,
+    following: <FollowingTable userId={+userId} />,
   }
 }
