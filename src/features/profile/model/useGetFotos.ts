@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { useQuery } from '@apollo/client'
-import { GET_USER_FOTOS } from '../api/request'
 import { useInView } from 'react-intersection-observer'
+import { GET_USER_FOTOS } from '../api'
 
 export const useGetFotos = (userId: string) => {
   const refStop = useRef<boolean>(false)

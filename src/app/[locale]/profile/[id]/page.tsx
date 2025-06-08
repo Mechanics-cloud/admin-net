@@ -1,4 +1,4 @@
-import UploadedFotos from '@/src/_pages/uploadedFotos/ui/UploudedFotos'
+import UploadedFotos from '@/src/features/profile/ui/uploadedFotos/UploudedFotos'
 import { redirect } from 'next/navigation'
 import { SearchParams } from '@/src/features'
 import getTabs from '@/src/features/profile/ui/getTabs'
