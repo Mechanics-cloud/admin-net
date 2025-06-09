@@ -1,0 +1,112 @@
+{
+  "StatisticsPage": {
+    "users": "Users",
+    "photos": "Photos",
+    "newUsers": "New users",
+    "paidAccounts": "Paid accounts",
+    "uploadedPhotos": "Uploaded photos",
+    "lastMonth": "Last month",
+    "currentMonth": "Current month"
+  },
+
+  "HomePage": {
+    "title": "Hello world!",
+    "label": "Change language",
+    "locale": "{locale, select, ru {Русский} en {English} other {Unknown}}"
+  },
+
+  "SignInPage": {
+    "signIn": {
+      "errorResponse": "The email or password are incorrect.",
+      "labelEmail": "Email",
+      "labelPassword": "Password",
+      "placeholderPassword": "Enter your password",
+      "title": "Sign In"
+    },
+    "placeholders": {
+      "email": "Enter your email",
+      "password": "Enter your password"
+    },
+    "validation": {
+      "email": {
+        "composition": "The email must match the format example@example.com"
+      },
+      "password": {
+        "maxChar": "Maximum number of characters 20"
+      }
+    }
+  },
+  "UsersPage": {
+    "userId": "User ID",
+    "userName": "Username",
+    "profileLink": "Profile link",
+    "dateAdded": "Date added",
+    "show": "Show",
+    "onPage": "on page",
+    "notSelected": "Not selected",
+    "blocked": "Blocked",
+    "notBlocked": "Not Blocked",
+    "search": "Search",
+    "popover": {
+      "deleteUser": "Delete User",
+      "ban": "Ban User",
+      "unban": "Unban User",
+      "moreInfo": "More information"
+    },
+    "modal": {
+      "delete": "Are you sure you want to delete",
+      "ban": "Are you sure you want to ban",
+      "unban": "Are you sure you want to unban",
+      "reason": {
+        "placeholder": "Reason for ban",
+        "behavior": "Bad behavior",
+        "advertising": "Advertising placement",
+        "another": "Another reason"
+      }
+    }
+  },
+
+  "UserProfile": {
+    "backToUserList": "Back to Users List",
+    "userID": "UserID",
+    "profileCreationDate": "Profile Creation Date",
+    "uploadedPhotos": "Uploaded photos",
+    "payments": "Payments",
+    "followers": "Followers",
+    "following": "Following",
+    "paymentsTable": {
+      "dateOfPayment": "Date of Payment",
+      "endDateOfSubscription": "End date of subscription",
+      "priceUSD": "Amount, $",
+      "subscriptionType": "Subscription Type",
+      "paymentType": "Payment Type",
+      "noPaymentsText": "This user has no payments"
+    },
+    "userId": "User ID",
+    "userName": "Username",
+    "profileLink": "Profile link",
+    "subscriptionDate": "Subscription date",
+    "noFollowers": "This user has no followers",
+    "noFollowing": "This user has no following"
+  },
+
+  "Basic": {
+    "notFoundTitle": "Page Not Found",
+    "defaultAltImage": "post photo",
+    "defaultStubImage": "image stub",
+    "emptyImages": "Failed to display post photos. Please contact support or try again later!",
+    "pagination": {
+      "goBack": "goBack"
+    },
+    "time": {
+      "DAY": "day",
+      "WEEKLY": "week",
+      "MONTHLY": "month"
+    }
+  },
+
+  "NoPost": {
+    "alt": "No user post image",
+    "defaultText": "The user has not published any posts yet"
+  }
+}
