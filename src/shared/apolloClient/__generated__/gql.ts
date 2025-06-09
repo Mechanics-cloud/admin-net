@@ -14,8 +14,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+  '\n  query getUsersStatistic {\n    getUsers(pageSize: 100){\n      users{\n        createdAt\n      }\n    }\n  }\n': typeof types.GetUsersStatisticDocument
+  '\n  query getPaymentsStatistic {\n    getPayments(pageSize:100){\n      items {\n        createdAt\n        userId\n      }   \n    }\n  }\n': typeof types.GetPaymentsStatisticDocument
+  '\n  query getPostsStatistic {\n    getPosts(pageSize:600, endCursorPostId:0 ){\n      items {\n        createdAt\n        images {\n          fileSize\n        }\n      }\n    }\n  }\n': typeof types.GetPostsStatisticDocument
   '\n  mutation Login($email: String!, $password: String!) {\n    loginAdmin(email: $email, password: $password) {\n      logged\n    }\n  }\n': typeof types.LoginDocument
   '\n    query GetFollowers($userId: Int!, $pageNumber: Int!, $pageSize: Int!) {\n        getFollowers(userId: $userId, pageNumber: $pageNumber, pageSize: $pageSize) {\n            items {\n                id\n                userName\n                firstName\n                lastName\n                createdAt\n                userId\n            }\n            totalCount, \n            pageSize, \n            page, \n            pagesCount\n        }\n    }\n': typeof types.GetFollowersDocument
+  '\n    query GetFollowing($userId: Int!, $pageNumber: Int!, $pageSize: Int!) {\n        getFollowing(userId: $userId, pageNumber: $pageNumber, pageSize: $pageSize) {\n            items {\n                id\n                userName\n                firstName\n                lastName\n                createdAt\n                userId\n            }\n            totalCount, \n            pageSize, \n            page, \n            pagesCount\n        }\n    }\n': typeof types.GetFollowingDocument
   '\n    query getPaymentsByUser($pageNumber: Int!, $pageSize: Int!, $Id: Int!,) {\n        getPaymentsByUser(pageNumber: $pageNumber, pageSize: $pageSize, userId: $Id,) {\n            pagesCount\n            page\n            pageSize\n            totalCount\n            items {\n                dateOfPayment\n                endDate\n                price \n                paymentType\n                type\n            }\n        }\n    }\n': typeof types.GetPaymentsByUserDocument
   '\n    query getUserFotos($Id:Int!, $endCursorId: Int!) {\n        getPostsByUser(userId:$Id, endCursorId:$endCursorId){\n            pagesCount\n            pageSize\n            totalCount\n            items {\n                id\n                url\n            }\n        }\n    }\n': typeof types.GetUserFotosDocument
   '\n    query GetUsers($pageNumber: Int!, $pageSize: Int!) {\n        getUsers(pageNumber: $pageNumber, pageSize: $pageSize) {\n            users {\n                id\n                userName\n                createdAt\n                email\n                profile {\n                  id\n                  createdAt\n                  userName\n                }\n                userBan {\n                    reason\n                    createdAt\n                }\n            }\n            pagination {\n                page\n                pageSize\n                pagesCount\n                totalCount\n            }\n        }\n    }\n': typeof types.GetUsersDocument
@@ -25,10 +29,18 @@ type Documents = {
   '\n  query getUserProfile($Id:Int!) {\n    getUser(userId:$Id){\n    createdAt\n      userName\n      id\n      profile{\n        firstName\n        lastName\n        avatars{\n          url\n        }\n      }\n    }\n  }\n': typeof types.GetUserProfileDocument
 }
 const documents: Documents = {
+  '\n  query getUsersStatistic {\n    getUsers(pageSize: 100){\n      users{\n        createdAt\n      }\n    }\n  }\n':
+    types.GetUsersStatisticDocument,
+  '\n  query getPaymentsStatistic {\n    getPayments(pageSize:100){\n      items {\n        createdAt\n        userId\n      }   \n    }\n  }\n':
+    types.GetPaymentsStatisticDocument,
+  '\n  query getPostsStatistic {\n    getPosts(pageSize:600, endCursorPostId:0 ){\n      items {\n        createdAt\n        images {\n          fileSize\n        }\n      }\n    }\n  }\n':
+    types.GetPostsStatisticDocument,
   '\n  mutation Login($email: String!, $password: String!) {\n    loginAdmin(email: $email, password: $password) {\n      logged\n    }\n  }\n':
     types.LoginDocument,
   '\n    query GetFollowers($userId: Int!, $pageNumber: Int!, $pageSize: Int!) {\n        getFollowers(userId: $userId, pageNumber: $pageNumber, pageSize: $pageSize) {\n            items {\n                id\n                userName\n                firstName\n                lastName\n                createdAt\n                userId\n            }\n            totalCount, \n            pageSize, \n            page, \n            pagesCount\n        }\n    }\n':
     types.GetFollowersDocument,
+  '\n    query GetFollowing($userId: Int!, $pageNumber: Int!, $pageSize: Int!) {\n        getFollowing(userId: $userId, pageNumber: $pageNumber, pageSize: $pageSize) {\n            items {\n                id\n                userName\n                firstName\n                lastName\n                createdAt\n                userId\n            }\n            totalCount, \n            pageSize, \n            page, \n            pagesCount\n        }\n    }\n':
+    types.GetFollowingDocument,
   '\n    query getPaymentsByUser($pageNumber: Int!, $pageSize: Int!, $Id: Int!,) {\n        getPaymentsByUser(pageNumber: $pageNumber, pageSize: $pageSize, userId: $Id,) {\n            pagesCount\n            page\n            pageSize\n            totalCount\n            items {\n                dateOfPayment\n                endDate\n                price \n                paymentType\n                type\n            }\n        }\n    }\n':
     types.GetPaymentsByUserDocument,
   '\n    query getUserFotos($Id:Int!, $endCursorId: Int!) {\n        getPostsByUser(userId:$Id, endCursorId:$endCursorId){\n            pagesCount\n            pageSize\n            totalCount\n            items {\n                id\n                url\n            }\n        }\n    }\n':
@@ -63,6 +75,24 @@ export function gql(source: string): unknown
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
+  source: '\n  query getUsersStatistic {\n    getUsers(pageSize: 100){\n      users{\n        createdAt\n      }\n    }\n  }\n'
+): (typeof documents)['\n  query getUsersStatistic {\n    getUsers(pageSize: 100){\n      users{\n        createdAt\n      }\n    }\n  }\n']
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n  query getPaymentsStatistic {\n    getPayments(pageSize:100){\n      items {\n        createdAt\n        userId\n      }   \n    }\n  }\n'
+): (typeof documents)['\n  query getPaymentsStatistic {\n    getPayments(pageSize:100){\n      items {\n        createdAt\n        userId\n      }   \n    }\n  }\n']
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n  query getPostsStatistic {\n    getPosts(pageSize:600, endCursorPostId:0 ){\n      items {\n        createdAt\n        images {\n          fileSize\n        }\n      }\n    }\n  }\n'
+): (typeof documents)['\n  query getPostsStatistic {\n    getPosts(pageSize:600, endCursorPostId:0 ){\n      items {\n        createdAt\n        images {\n          fileSize\n        }\n      }\n    }\n  }\n']
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
   source: '\n  mutation Login($email: String!, $password: String!) {\n    loginAdmin(email: $email, password: $password) {\n      logged\n    }\n  }\n'
 ): (typeof documents)['\n  mutation Login($email: String!, $password: String!) {\n    loginAdmin(email: $email, password: $password) {\n      logged\n    }\n  }\n']
 /**
@@ -71,6 +101,12 @@ export function gql(
 export function gql(
   source: '\n    query GetFollowers($userId: Int!, $pageNumber: Int!, $pageSize: Int!) {\n        getFollowers(userId: $userId, pageNumber: $pageNumber, pageSize: $pageSize) {\n            items {\n                id\n                userName\n                firstName\n                lastName\n                createdAt\n                userId\n            }\n            totalCount, \n            pageSize, \n            page, \n            pagesCount\n        }\n    }\n'
 ): (typeof documents)['\n    query GetFollowers($userId: Int!, $pageNumber: Int!, $pageSize: Int!) {\n        getFollowers(userId: $userId, pageNumber: $pageNumber, pageSize: $pageSize) {\n            items {\n                id\n                userName\n                firstName\n                lastName\n                createdAt\n                userId\n            }\n            totalCount, \n            pageSize, \n            page, \n            pagesCount\n        }\n    }\n']
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n    query GetFollowing($userId: Int!, $pageNumber: Int!, $pageSize: Int!) {\n        getFollowing(userId: $userId, pageNumber: $pageNumber, pageSize: $pageSize) {\n            items {\n                id\n                userName\n                firstName\n                lastName\n                createdAt\n                userId\n            }\n            totalCount, \n            pageSize, \n            page, \n            pagesCount\n        }\n    }\n'
+): (typeof documents)['\n    query GetFollowing($userId: Int!, $pageNumber: Int!, $pageSize: Int!) {\n        getFollowing(userId: $userId, pageNumber: $pageNumber, pageSize: $pageSize) {\n            items {\n                id\n                userName\n                firstName\n                lastName\n                createdAt\n                userId\n            }\n            totalCount, \n            pageSize, \n            page, \n            pagesCount\n        }\n    }\n']
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
