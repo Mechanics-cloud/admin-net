@@ -7,6 +7,7 @@
     "predev": "graphql-codegen",
     "dev": "next dev",
     "build": "next build",
+    "build:production": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -16,7 +17,8 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "generate": "graphql-codegen",
-    "genwatch": "graphql-codegen --watch"
+    "genwatch": "graphql-codegen --watch",
+    "test": "jest --passWithNoTests"
   },
   "dependencies": {
     "@apollo/client": "^3.13.4",
@@ -46,6 +48,10 @@
     "@graphql-typed-document-node/core": "^3.2.0",
     "@next/eslint-plugin-next": "^15.2.2",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^29.5.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -60,6 +66,8 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^16.0.0",
     "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "30.0.0-beta.3",
     "lint-staged": "^15.5.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
@@ -70,6 +78,8 @@
     "stylelint-config-standard-scss": "^14.0.0",
     "stylelint-prettier": "^5.0.3",
     "tailwindcss": "^4",
+    "ts-jest": "^29.3.4",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5",
     "typescript-eslint": "^8.26.1"
   },
