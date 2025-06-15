@@ -45,7 +45,6 @@ export const AllPaymentsListTable = () => {
         ref={inputRef}
         type={'search'}
         label={''}
-        // placeholder={t('noPaymentsText')}
         placeholder={'search'}
         className={'w-full'}
         value={inputValue}
@@ -63,7 +62,6 @@ export const AllPaymentsListTable = () => {
           totalCount,
         }}
         isData={!!paymentsAll.length}
-        // isData={true}
       >
         {t('noPaymentsText')}
       </TableComp>

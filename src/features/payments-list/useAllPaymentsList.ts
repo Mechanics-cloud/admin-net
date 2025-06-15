@@ -33,18 +33,7 @@ export const useAllPaymentsList = () => {
     },
   })
 
-  // if(inputValueDebounce.length > 0) inputRef.current.focus
-
   useEffect(() => {
-    // if(inputValue.length > 0 && inputRef.current) {
-    //   inputRef.current.onfocus()
-    //   console.log(inputValue)
-    // }
-
-    // console.log('inputValueDebounce')
-    // console.log(inputValue)
-    console.log('sortType', sortType)
-    console.log('sortDirection', sortDirection)
     getPayments()
       .then((res) => {
         if (res?.data?.getPayments) {

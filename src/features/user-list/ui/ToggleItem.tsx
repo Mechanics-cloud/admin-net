@@ -35,12 +35,10 @@ export const ToggleItem = ({ children, toggleSort, activeFilter }: Props) => {
         <SortingArrow
           direction={'asc'}
           active={sortDirection === SortDirection.Asc}
-          // onClick={onToggleSort}
         />
         <SortingArrow
           direction={'desc'}
           active={sortDirection === SortDirection.Desc}
-          // onClick={onToggleSort}
         />
       </div>
     </div>

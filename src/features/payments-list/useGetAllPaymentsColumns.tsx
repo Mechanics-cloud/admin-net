@@ -10,7 +10,6 @@ export const useGetAllPaymentsColumns = (): Column<AllPaymentItem>[] => {
 
   return [
     {
-      // label: t('dateOfPayment'),
       label: 'User Name',
       key: 'userName',
       sortable: true,
@@ -31,7 +30,6 @@ export const useGetAllPaymentsColumns = (): Column<AllPaymentItem>[] => {
       },
     },
     {
-      // label: t('endDateOfSubscription'),
       label: 'Date added',
       key: 'createdAt',
       sortable: true,
@@ -44,7 +42,6 @@ export const useGetAllPaymentsColumns = (): Column<AllPaymentItem>[] => {
       render: (data) => data.currency,
     },
     {
-      // label: t('subscriptionType'),
       label: 'Subscription',
       key: 'subscriptionType',
       render: (data) => {
@@ -52,7 +49,6 @@ export const useGetAllPaymentsColumns = (): Column<AllPaymentItem>[] => {
       },
     },
     {
-      // label: t('paymentType'),
       label: 'Payment Metod',
       key: 'paymentMethod',
       sortable: true,
