@@ -400,47 +400,12 @@ export type LoginMutation = {
   loginAdmin: { __typename?: 'LoginAdmin'; logged: boolean }
 }
 
-export type GetUsersQueryVariables = Exact<{
-  pageNumber: Scalars['Int']['input']
-  pageSize: Scalars['Int']['input']
-}>
-
-export type GetUsersQuery = {
-  __typename?: 'Query'
-  getUsers: {
-    __typename?: 'UsersPaginationModel'
-    users: Array<{
-      __typename?: 'User'
-      id: number
-      userName: string
-      createdAt: any
-      email: string
-      profile: {
-        __typename?: 'Profile'
-        id: number
-        createdAt: any
-        userName?: string | null
-      }
-      userBan?: {
-        __typename?: 'UserBan'
-        reason: string
-        createdAt: any
-      } | null
-    }>
-    pagination: {
-      __typename?: 'PaginationModel'
-      page: number
-      pageSize: number
-      pagesCount: number
-      totalCount: number
-    }
-  }
-}
-
 export type GetAllPaymentsQueryVariables = Exact<{
   pageNumber: Scalars['Int']['input']
   pageSize: Scalars['Int']['input']
   searchTerm: Scalars['String']['input']
+  sortBy: Scalars['String']['input']
+  sortDirection?: InputMaybe<SortDirection>
 }>
 
 export type GetAllPaymentsQuery = {
@@ -565,6 +530,43 @@ export type GetUserFotosQuery = {
       id?: number | null
       url?: string | null
     }> | null
+  }
+}
+
+export type GetUsersQueryVariables = Exact<{
+  pageNumber: Scalars['Int']['input']
+  pageSize: Scalars['Int']['input']
+}>
+
+export type GetUsersQuery = {
+  __typename?: 'Query'
+  getUsers: {
+    __typename?: 'UsersPaginationModel'
+    users: Array<{
+      __typename?: 'User'
+      id: number
+      userName: string
+      createdAt: any
+      email: string
+      profile: {
+        __typename?: 'Profile'
+        id: number
+        createdAt: any
+        userName?: string | null
+      }
+      userBan?: {
+        __typename?: 'UserBan'
+        reason: string
+        createdAt: any
+      } | null
+    }>
+    pagination: {
+      __typename?: 'PaginationModel'
+      page: number
+      pageSize: number
+      pagesCount: number
+      totalCount: number
+    }
   }
 }
 
@@ -846,151 +848,6 @@ export const LoginDocument = {
     },
   ],
 } as unknown as DocumentNode<LoginMutation, LoginMutationVariables>
-export const GetUsersDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetUsers' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'pageNumber' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-          },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'pageSize' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getUsers' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'pageNumber' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'pageNumber' },
-                },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'pageSize' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'pageSize' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'users' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'userName' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'createdAt' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'profile' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'createdAt' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'userName' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'userBan' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'reason' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'createdAt' },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'pagination' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'page' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'pageSize' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'pagesCount' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'totalCount' },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>
 export const GetAllPaymentsDocument = {
   kind: 'Document',
   definitions: [
@@ -1035,6 +892,31 @@ export const GetAllPaymentsDocument = {
             },
           },
         },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'sortBy' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'sortDirection' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'SortDirection' },
+          },
+        },
       ],
       selectionSet: {
         kind: 'SelectionSet',
@@ -1065,6 +947,22 @@ export const GetAllPaymentsDocument = {
                 value: {
                   kind: 'Variable',
                   name: { kind: 'Name', value: 'searchTerm' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'sortBy' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'sortBy' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'sortDirection' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'sortDirection' },
                 },
               },
             ],
@@ -1566,6 +1464,151 @@ export const GetUserFotosDocument = {
     },
   ],
 } as unknown as DocumentNode<GetUserFotosQuery, GetUserFotosQueryVariables>
+export const GetUsersDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetUsers' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'pageNumber' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'pageSize' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'getUsers' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'pageNumber' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'pageNumber' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'pageSize' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'pageSize' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'users' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'userName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'createdAt' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'profile' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'createdAt' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'userName' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'userBan' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'reason' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'createdAt' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'pagination' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'page' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'pageSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'pagesCount' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'totalCount' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>
 export const BanUserDocument = {
   kind: 'Document',
   definitions: [

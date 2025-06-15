@@ -5,11 +5,18 @@ import { responseErrorHandler, usePagination } from '@/src/shared'
 import { GET_ALL_PAYMENTS } from './request'
 import { AllPaymentItems } from './types'
 import { useDebounce } from './useDebounce'
+import { SortDirection } from '@/src/shared/apolloClient/__generated__/graphql'
 
 export const useAllPaymentsList = () => {
   const [paymentsAll, setPaymentsAll] = useState<AllPaymentItems>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [inputValue, setInputValue] = useState<string>('')
+
+  const [sortType, setSortType] = useState<string>('')
+  const [sortDirection, setSortDirection] = useState<SortDirection>(
+    SortDirection.Desc
+  )
+
   const inputRef = useRef<HTMLInputElement>(null)
 
   const { currentPage, pageSize, onPageSize, onPageChange } = usePagination()
@@ -21,6 +28,8 @@ export const useAllPaymentsList = () => {
       pageNumber: currentPage,
       pageSize,
       searchTerm: inputValueDebounce,
+      sortBy: sortType,
+      sortDirection: sortDirection,
     },
   })
 
@@ -34,7 +43,8 @@ export const useAllPaymentsList = () => {
 
     // console.log('inputValueDebounce')
     // console.log(inputValue)
-    console.log(inputRef)
+    console.log('sortType', sortType)
+    console.log('sortDirection', sortDirection)
     getPayments()
       .then((res) => {
         if (res?.data?.getPayments) {
@@ -43,7 +53,14 @@ export const useAllPaymentsList = () => {
         }
       })
       .catch(responseErrorHandler)
-  }, [currentPage, getPayments, pageSize, inputValueDebounce])
+  }, [
+    currentPage,
+    getPayments,
+    pageSize,
+    inputValueDebounce,
+    sortType,
+    sortDirection,
+  ])
 
   useEffect(() => {
     if (inputValue.length > 0 && inputRef.current) {
@@ -63,5 +80,7 @@ export const useAllPaymentsList = () => {
     inputValue,
     setInputValue,
     inputRef,
+    setSortType,
+    setSortDirection,
   }
 }

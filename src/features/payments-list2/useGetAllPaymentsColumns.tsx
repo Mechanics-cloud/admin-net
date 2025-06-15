@@ -12,10 +12,11 @@ export const useGetAllPaymentsColumns = (): Column<AllPaymentItem>[] => {
     {
       // label: t('dateOfPayment'),
       label: 'User Name',
-      key: 'dateOfPayment',
+      key: 'userName',
+      sortable: true,
       render: (data) => {
         return (
-          <div className='flex gap-3 items-center my-2.5'>
+          <div className='flex gap-3 items-center my-2.5 truncate'>
             <Image
               alt='avatar'
               src={data.avatars?.[0]?.url ?? avatarPlaceholder}
@@ -31,18 +32,20 @@ export const useGetAllPaymentsColumns = (): Column<AllPaymentItem>[] => {
     },
     {
       // label: t('endDateOfSubscription'),
-      label: 'Date Add',
-      key: 'endDate',
+      label: 'Date added',
+      key: 'createdAt',
+      sortable: true,
       render: (data) => formatDate(data.createdAt),
     },
     {
       label: t('priceUSD'),
-      key: 'price',
+      key: 'currency',
+      sortable: true,
       render: (data) => data.currency,
     },
     {
       // label: t('subscriptionType'),
-      label: 'subscription',
+      label: 'Subscription',
       key: 'subscriptionType',
       render: (data) => {
         return `1 ${time(data.type)}`
@@ -51,7 +54,8 @@ export const useGetAllPaymentsColumns = (): Column<AllPaymentItem>[] => {
     {
       // label: t('paymentType'),
       label: 'Payment Metod',
-      key: 'paymentType',
+      key: 'paymentMethod',
+      sortable: true,
       render: (data) => data.paymentMethod,
     },
   ]

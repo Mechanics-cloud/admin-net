@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { useAllPaymentsList } from './useAllPaymentsList'
 import { useGetAllPaymentsColumns } from './useGetAllPaymentsColumns'
 import { ChangeEvent } from 'react'
+import { SortDirection } from '@/src/shared/apolloClient/__generated__/graphql'
 
 export const AllPaymentsListTable = () => {
   const t = useTranslations('UserProfile.paymentsTable')
@@ -21,13 +22,19 @@ export const AllPaymentsListTable = () => {
     inputValue,
     setInputValue,
     inputRef,
+    setSortType,
+    setSortDirection,
   } = useAllPaymentsList()
 
   const columns = useGetAllPaymentsColumns()
 
   const handlerChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
-    // console.log(e.target.value)
+  }
+
+  const handlerToggle = (param: string, sortDirection: SortDirection) => {
+    setSortType(param)
+    setSortDirection(sortDirection)
   }
 
   if (loading) return <Loader />
@@ -38,12 +45,14 @@ export const AllPaymentsListTable = () => {
         ref={inputRef}
         type={'search'}
         label={''}
-        placeholder={t('noPaymentsText')}
+        // placeholder={t('noPaymentsText')}
+        placeholder={'search'}
         className={'w-full'}
         value={inputValue}
         onChange={handlerChangeValue}
       />
       <TableComp
+        toggleSort={handlerToggle}
         data={paymentsAll}
         columns={columns}
         pageData={{
@@ -53,8 +62,8 @@ export const AllPaymentsListTable = () => {
           onPageSize,
           totalCount,
         }}
-        // isData={!!paymentsAll.length}
-        isData={true}
+        isData={!!paymentsAll.length}
+        // isData={true}
       >
         {t('noPaymentsText')}
       </TableComp>
