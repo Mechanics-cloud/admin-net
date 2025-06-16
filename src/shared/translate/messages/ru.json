@@ -90,6 +90,12 @@
     "locale": "{locale, select, ru {Русский} en {English} other {Неизвестно}}"
   },
 
+  "PaymentsList": {
+    "subscription": "Тип подписки",
+    "paymentMethod": "Способ оплаты",
+    "notFoundUser": "Не найдено пользователей с таким именем!"
+  },
+
   "Basic": {
     "notFoundTitle": "Страница не найдена",
     "defaultAltImage": "Фото поста",

@@ -1,15 +1,16 @@
 'use client'
 
 import { TableComp, TextField } from '@/src/shared'
-import { Loader } from 'car-robots-library'
 import { useTranslations } from 'next-intl'
 import { useAllPaymentsList } from '@/src/features/payments-list'
 import { useGetAllPaymentsColumns } from '@/src/features/payments-list'
 import { ChangeEvent } from 'react'
 import { SortDirection } from '@/src/shared/apolloClient/__generated__/graphql'
+import { CircleLoader } from 'car-robots-library'
 
 export const AllPaymentsListTable = () => {
-  const t = useTranslations('UserProfile.paymentsTable')
+  const usersTranslations = useTranslations('UsersPage')
+  const paymentsListTranslation = useTranslations('PaymentsList')
 
   const {
     payments: paymentsAll,
@@ -37,34 +38,38 @@ export const AllPaymentsListTable = () => {
     setSortDirection(sortDirection)
   }
 
-  if (loading) return <Loader />
-
   return (
     <div className={'flex-col gap-[94px]'}>
       <TextField
         ref={inputRef}
         type={'search'}
         label={''}
-        placeholder={'search'}
+        placeholder={usersTranslations('search')}
         className={'w-full'}
         value={searchQuery}
         onChange={handlerChangeValue}
       />
-      <TableComp
-        toggleSort={handlerToggle}
-        data={paymentsAll}
-        columns={columns}
-        pageData={{
-          currentPage,
-          pageSize,
-          onPageChange,
-          onPageSize,
-          totalCount,
-        }}
-        isData={!!paymentsAll.length}
-      >
-        {t('noPaymentsText')}
-      </TableComp>
+      {loading ? (
+        <CircleLoader
+          className={'w-full h-[114px] flex justify-center items-center'}
+        />
+      ) : (
+        <TableComp
+          toggleSort={handlerToggle}
+          data={paymentsAll}
+          columns={columns}
+          pageData={{
+            currentPage,
+            pageSize,
+            onPageChange,
+            onPageSize,
+            totalCount,
+          }}
+          isData={!!paymentsAll.length}
+        >
+          {paymentsListTranslation('notFoundUser')}
+        </TableComp>
+      )}
     </div>
   )
 }

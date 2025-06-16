@@ -5,12 +5,14 @@ import Image from 'next/image'
 import avatarPlaceholder from '@/public/user-avatar-placeholder.jpg'
 
 export const useGetAllPaymentsColumns = (): Column<AllPaymentItem>[] => {
-  const t = useTranslations('UserProfile.paymentsTable')
-  const time = useTranslations('Basic.time')
+  const userProfileTranslation = useTranslations('UserProfile')
+  const timeTranslation = useTranslations('Basic.time')
+  const usersPageTranslation = useTranslations('UsersPage')
+  const paymentsListTranslation = useTranslations('PaymentsList')
 
   return [
     {
-      label: 'User Name',
+      label: userProfileTranslation('userName'),
       key: 'userName',
       sortable: true,
       render: (data) => {
@@ -30,26 +32,26 @@ export const useGetAllPaymentsColumns = (): Column<AllPaymentItem>[] => {
       },
     },
     {
-      label: 'Date added',
+      label: usersPageTranslation('dateAdded'),
       key: 'createdAt',
       sortable: true,
       render: (data) => formatDate(data.createdAt),
     },
     {
-      label: t('priceUSD'),
+      label: userProfileTranslation('paymentsTable.priceUSD'),
       key: 'currency',
       sortable: true,
-      render: (data) => data.currency,
+      render: (data) => data.amount,
     },
     {
-      label: 'Subscription',
+      label: paymentsListTranslation('subscription'),
       key: 'subscriptionType',
       render: (data) => {
-        return `1 ${time(data.type)}`
+        return `1 ${timeTranslation(data.type)}`
       },
     },
     {
-      label: 'Payment Metod',
+      label: paymentsListTranslation('paymentMethod'),
       key: 'paymentMethod',
       sortable: true,
       render: (data) => data.paymentMethod,
