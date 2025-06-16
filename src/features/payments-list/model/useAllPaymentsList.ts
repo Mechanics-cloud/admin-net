@@ -1,18 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
 
-import { responseErrorHandler, usePagination } from '@/src/shared'
-import { GET_ALL_PAYMENTS } from './request'
+import { responseErrorHandler, useDebounce, usePagination } from '@/src/shared'
+import { GET_ALL_PAYMENTS } from '@/src/features/payments-list'
 import { AllPaymentItems } from './types'
-import { useDebounce } from './useDebounce'
 import { SortDirection } from '@/src/shared/apolloClient/__generated__/graphql'
 
 export const useAllPaymentsList = () => {
-  const [paymentsAll, setPaymentsAll] = useState<AllPaymentItems>([])
-  const [totalCount, setTotalCount] = useState<number>(0)
-  const [inputValue, setInputValue] = useState<string>('')
+  const [payments, setPayments] = useState<AllPaymentItems>([])
+  const [totalPaymentsCount, setTotalPaymentsCount] = useState<number>(0)
+  const [searchQuery, setSearchQuery] = useState<string>('')
 
-  const [sortType, setSortType] = useState<string>('')
+  const [sortField, setSortField] = useState<string>('')
   const [sortDirection, setSortDirection] = useState<SortDirection>(
     SortDirection.Desc
   )
@@ -21,14 +20,14 @@ export const useAllPaymentsList = () => {
 
   const { currentPage, pageSize, onPageSize, onPageChange } = usePagination()
 
-  const inputValueDebounce = useDebounce(inputValue)
+  const inputValueDebounce = useDebounce(searchQuery)
 
   const [getPayments, { loading }] = useLazyQuery(GET_ALL_PAYMENTS, {
     variables: {
       pageNumber: currentPage,
       pageSize,
       searchTerm: inputValueDebounce,
-      sortBy: sortType,
+      sortBy: sortField,
       sortDirection: sortDirection,
     },
   })
@@ -37,8 +36,8 @@ export const useAllPaymentsList = () => {
     getPayments()
       .then((res) => {
         if (res?.data?.getPayments) {
-          setPaymentsAll(res.data.getPayments.items)
-          setTotalCount(res.data.getPayments.totalCount)
+          setPayments(res.data.getPayments.items)
+          setTotalPaymentsCount(res.data.getPayments.totalCount)
         }
       })
       .catch(responseErrorHandler)
@@ -47,29 +46,28 @@ export const useAllPaymentsList = () => {
     getPayments,
     pageSize,
     inputValueDebounce,
-    sortType,
+    sortField,
     sortDirection,
   ])
 
   useEffect(() => {
-    if (inputValue.length > 0 && inputRef.current) {
+    if (searchQuery.length > 0 && inputRef.current) {
       inputRef.current.focus()
-      console.log(inputValue)
     }
-  }, [inputValue, paymentsAll])
+  }, [searchQuery, payments])
 
   return {
-    paymentsAll,
+    payments,
     onPageChange,
     onPageSize,
     currentPage,
     pageSize,
-    totalCount,
+    totalCount: totalPaymentsCount,
     loading,
-    inputValue,
-    setInputValue,
+    searchQuery,
+    setSearchQuery,
     inputRef,
-    setSortType,
+    setSortField,
     setSortDirection,
   }
 }

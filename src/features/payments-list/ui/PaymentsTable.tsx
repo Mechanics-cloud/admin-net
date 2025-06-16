@@ -3,8 +3,8 @@
 import { TableComp, TextField } from '@/src/shared'
 import { Loader } from 'car-robots-library'
 import { useTranslations } from 'next-intl'
-import { useAllPaymentsList } from './useAllPaymentsList'
-import { useGetAllPaymentsColumns } from './useGetAllPaymentsColumns'
+import { useAllPaymentsList } from '@/src/features/payments-list'
+import { useGetAllPaymentsColumns } from '@/src/features/payments-list'
 import { ChangeEvent } from 'react'
 import { SortDirection } from '@/src/shared/apolloClient/__generated__/graphql'
 
@@ -12,28 +12,28 @@ export const AllPaymentsListTable = () => {
   const t = useTranslations('UserProfile.paymentsTable')
 
   const {
-    paymentsAll,
+    payments: paymentsAll,
     onPageChange,
     onPageSize,
     currentPage,
     pageSize,
     totalCount,
     loading,
-    inputValue,
-    setInputValue,
+    searchQuery,
+    setSearchQuery,
     inputRef,
-    setSortType,
+    setSortField,
     setSortDirection,
   } = useAllPaymentsList()
 
   const columns = useGetAllPaymentsColumns()
 
   const handlerChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value)
+    setSearchQuery(e.target.value)
   }
 
   const handlerToggle = (param: string, sortDirection: SortDirection) => {
-    setSortType(param)
+    setSortField(param)
     setSortDirection(sortDirection)
   }
 
@@ -47,7 +47,7 @@ export const AllPaymentsListTable = () => {
         label={''}
         placeholder={'search'}
         className={'w-full'}
-        value={inputValue}
+        value={searchQuery}
         onChange={handlerChangeValue}
       />
       <TableComp

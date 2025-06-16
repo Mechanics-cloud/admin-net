@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 
-import { AllPaymentsListTable } from '@/src/features/payments-list/PaymentsTable'
+import { AllPaymentsListTable } from '@/src/features/payments-list/ui/PaymentsTable'
 
 export default function UsersPage() {
   return (
