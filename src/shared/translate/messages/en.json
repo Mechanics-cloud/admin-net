@@ -90,6 +90,12 @@
     "noFollowing": "This user has no following"
   },
 
+  "PaymentsList": {
+    "subscription": "Subscription",
+    "paymentMethod": "Payment Method",
+    "notFoundUser": "No users found with this name!"
+  },
+
   "Basic": {
     "notFoundTitle": "Page Not Found",
     "defaultAltImage": "post photo",

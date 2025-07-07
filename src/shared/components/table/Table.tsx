@@ -4,9 +4,10 @@ import { Filter } from '@/src/shared/hooks/useSortData'
 import * as React from 'react'
 import { cn, Column, PageData } from '@/src/shared'
 import { ReactNode } from 'react'
+import { SortDirection } from '@/src/shared/apolloClient/__generated__/graphql'
 
 type Props<T> = {
-  toggleSort?: (filter: Filter, direction: 'asc' | 'desc') => void
+  toggleSort?: (filter: Filter, direction: SortDirection) => void
   data: T[]
   columns: Column<T>[]
   pageData: PageData

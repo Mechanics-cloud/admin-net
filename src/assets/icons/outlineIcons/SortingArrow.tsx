@@ -3,7 +3,7 @@ import { MouseEvent } from 'react'
 type Props = {
   direction: 'asc' | 'desc'
   active: boolean
-  onClick: (e: MouseEvent<SVGSVGElement>) => void
+  onClick?: (e: MouseEvent<SVGSVGElement>) => void
 }
 export const SortingArrow = ({ direction, active, onClick }: Props) => {
   const rotation = direction === 'asc' ? 'rotate-0' : 'rotate-180'
